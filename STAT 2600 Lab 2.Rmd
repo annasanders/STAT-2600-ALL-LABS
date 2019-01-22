@@ -35,9 +35,13 @@ Type text here
 ### About Me
 ![A decent photo of myself](https://scontent-ort2-2.xx.fbcdn.net/v/t31.0-8/20543582_1451098261626153_5115894972998174498_o.jpg?_nc_cat=102&_nc_ht=scontent-ort2-2.xx&oh=8b77befaaf424e55cedf8bd1a362ccc0&oe=5CCB0068)
 I would like to answer the question of how large communities (or fandoms) can impact a company or brand's overall value.
+
 Six months out of graduation, I would like to have a job that pays above minimum wage. Five years after graduation, I would like to have a job that pays better than the one I had six months out of college.
+
 I hope my greatest career acomplisment would be that I never gave up on a project.
+
 I hope to learn R so I can apply and be competivie for internships/careers in Data Science and Economics (or even Finance)
+
 A fun fact about myself is that I love Animal Crossing and cannot wait until Nintendo Announces anything on their upcoming project...
 ![Me right now](https://i.kinja-img.com/gawker-media/image/upload/s--Nrzh5cpt--/c_scale,f_auto,fl_progressive,q_80,w_800/w4cdsyzwdqzjn59w1bzg.png)
 
