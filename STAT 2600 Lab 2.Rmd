@@ -1,0 +1,38 @@
+---
+title: "STAT 2600 Lab 2"
+author: "Anna Sanders"
+date: "January 22, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Lab 2
+### DataMePls(ssssss)
+Our goal for the semester is...
+
+## Chris
+### About Me
+Type text here
+
+### Feedback
+
+## Amanda
+### About Me
+Type text here
+
+### Feedback
+
+## James
+### About Me
+Type text here
+
+### Feedback
+
+## Anna
+### About Me
+Type text here
+
+### Feedback
