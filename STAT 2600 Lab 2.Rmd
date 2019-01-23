@@ -21,7 +21,19 @@ Type text here
 
 ## Amanda
 ### About Me
-Type text here
+
+![me 4 years ago](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/13494758_902519519892798_1748535062047686485_n.jpg?_nc_cat=109&_nc_ht=scontent-ort2-2.xx&oh=f0c839e233004b5366dd36c3267ce6df&oe=5CBFE6DB)
+
+Question: How much does lottery of birth and the economic status that people are born into relate to a person’s probability of going to college?
+
+Six months after graduation, I want to treat myself to a vacation somewhere out of the country with a group of friends from college and never work. 
+But realistically, hopefully I can get a job that relates economics, data science, and statistics in a way that makes me happy in my work environment. 
+Following that, in five years, I want to feel pretty settled in a career, with genuine friends around me, and I want to be happy and fiscally independent more than anything else.
+
+In my future career, I don’t really have any specific accomplishment because I have absolutely no idea what I want my future to be like, but I feel like I will find passions once I am in the field more. 
+Really, I just hope that I find a career that breeds eternal curiosity, maybe in research dealing with big data. I think learning how to code in a language that is widely used in the data science and statistics field will be very beneficial, and I am hoping to be comfortable with R by the end of this course. 
+
+![my favorite meme](https://i.pinimg.com/236x/3f/94/28/3f9428dd23609d79b635c5542a71fe28.jpg)
 
 ### Feedback
 
