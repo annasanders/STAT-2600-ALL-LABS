@@ -27,8 +27,15 @@ Type text here
 
 ## James
 ### About Me
-Type text here
+One question that I'm interested in that can be answered with data is, is there a correlation between height and back problems. 
 
+In six months, I plan on going to graduate school for applied math. Five years after that, I want to have a high paying job doing something math related. 
+
+I'm not completely certain of what I want my greatest career accomplishment to be. I guess I want to be successful and thrive in the career I choose. 
+
+I hope to get some exposure to data science and to learn R in this class. I'm hoping that this class will give me some clarity on what I will focus on in graduate school. 
+
+Something interesting about myself is that I play a lot of basketball and have done so most of my life. 
 ### Feedback
 
 ## Anna
