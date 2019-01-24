@@ -16,6 +16,8 @@ Our goal for the semester is to learn r programming.
 __Hey look it's us__
 ![team photo](Picture/squad.jpg)
 
+---
+
 ## Chris
 ![super old photo of me and my sister](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/12112295_10101361245575172_7827597153382578565_n.jpg?_nc_cat=102&_nc_ht=scontent-ort2-2.xx&oh=408cdc391e2b2d12227f09ee84fbc596&oe=5CC2496C)
 
@@ -30,6 +32,8 @@ Given this goal, I hope to learn how to program in R, and more genrally, program
 Something fun about me is that I enjoy memes/ spend a majority of my free time laughing at memes and old vines. I also like to steep tea and do face masks. 
 
 ### Feedback
+
+---
 
 ## Amanda
 ### About Me
@@ -49,6 +53,8 @@ Really, I just hope that I find a career that breeds eternal curiosity, maybe in
 
 ### Feedback
 
+---
+
 ## James
 ### About Me
 ![A very old picture of myself](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/994000_488734011222322_102261500_n.jpg?_nc_cat=109&_nc_ht=scontent-ort2-2.xx&oh=562b3863155bd4737aab4eb295a16798&oe=5CF4C0C2)
@@ -64,6 +70,8 @@ I hope to get some exposure to data science and to learn R in this class. I'm ho
 Something interesting about myself is that I play a lot of basketball and have done so most of my life. 
 
 ### Feedback
+
+---
 
 ## Anna
 ### About Me
