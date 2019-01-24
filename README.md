@@ -5,6 +5,8 @@ The RMarkdown file should be in here somewhere.
 I think the next steps are for you to pull the file and then edit your parts.
 
 <<<<<<< Updated upstream
+Amanda Liddle
+
 Team Exercises
 Anna
 =======
