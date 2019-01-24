@@ -14,8 +14,19 @@ knitr::opts_chunk$set(echo = TRUE)
 Our goal for the semester is to learn r programming.
 
 ## Chris
-### About Me
-Type text here
+
+## Chris
+![super old photo of me and my sister](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/12112295_10101361245575172_7827597153382578565_n.jpg?_nc_cat=102&_nc_ht=scontent-ort2-2.xx&oh=408cdc391e2b2d12227f09ee84fbc596&oe=5CC2496C)
+
+One question i'm interested in is to see political party affiliation as a function of one's highest level of education. Also party affiliation by age.
+
+Six months after graduation, i would like to take some time to travel (and enjoy being even more broke than I was in college). 5 years after graduation, i would love to be a quant who works on wall street. 
+
+The greatest career acomplishment that I hope to attain is to become a CFO of a moderately sized company. 
+
+Given this goal, I hope to learn how to program in R, and more genrally, program more efficently. My coding is prettyyyy rough at the moment. 
+
+Something fun about me is that I enjoy memes/ spend a majority of my free time laughing at memes and old vines. I also like to steep tea and do face masks. 
 
 ### Feedback
 
