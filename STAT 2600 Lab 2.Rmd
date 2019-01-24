@@ -13,6 +13,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ### DataMePls(ssssss)
 Our goal for the semester is to learn r programming.
 
+__Hey look it's us__
+![team photo](Picture/squad.jpg)
+
 ## Chris
 
 ## Chris
@@ -32,12 +35,25 @@ Something fun about me is that I enjoy memes/ spend a majority of my free time l
 
 ## Amanda
 ### About Me
-Type text here
+
+![me 4 years ago](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/13494758_902519519892798_1748535062047686485_n.jpg?_nc_cat=109&_nc_ht=scontent-ort2-2.xx&oh=f0c839e233004b5366dd36c3267ce6df&oe=5CBFE6DB)
+
+Question: How much does lottery of birth and the economic status that people are born into relate to a person's probability of going to college?
+
+Six months after graduation, I want to treat myself to a vacation somewhere out of the country with a group of friends from college and never work. 
+But realistically, hopefully I can get a job that relates economics, data science, and statistics in a way that makes me happy in my work environment. 
+Following that, in five years, I want to feel pretty settled in a career, with genuine friends around me, and I want to be happy and fiscally independent more than anything else.
+
+In my future career, I don't really have any specific accomplishment because I have absolutely no idea what I want my future to be like, but I feel like I will find passions once I am in the field more. 
+Really, I just hope that I find a career that breeds eternal curiosity, maybe in research dealing with big data. I think learning how to code in a language that is widely used in the data science and statistics field will be very beneficial, and I am hoping to be comfortable with R by the end of this course. 
+
+![my favorite meme](https://i.pinimg.com/236x/3f/94/28/3f9428dd23609d79b635c5542a71fe28.jpg)
 
 ### Feedback
 
 ## James
 ### About Me
+![A very old picture of myself](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/994000_488734011222322_102261500_n.jpg?_nc_cat=109&_nc_ht=scontent-ort2-2.xx&oh=562b3863155bd4737aab4eb295a16798&oe=5CF4C0C2)
 One question that I'm interested in that can be answered with data is, is there a correlation between height and back problems. 
 
 In six months, I plan on going to graduate school for applied math. Five years after that, I want to have a high paying job doing something math related. 
@@ -52,6 +68,8 @@ Something interesting about myself is that I play a lot of basketball and have d
 ## Anna
 ### About Me
 ![A decent photo of myself](https://scontent-ort2-2.xx.fbcdn.net/v/t31.0-8/20543582_1451098261626153_5115894972998174498_o.jpg?_nc_cat=102&_nc_ht=scontent-ort2-2.xx&oh=8b77befaaf424e55cedf8bd1a362ccc0&oe=5CCB0068)
+___A decent photo of myself___
+
 I would like to answer the question of how large communities (or fandoms) can impact a company or brand's overall value.
 
 Six months out of graduation, I would like to have a job that pays above minimum wage. Five years after graduation, I would like to have a job that pays better than the one I had six months out of college.
@@ -61,6 +79,8 @@ I hope my greatest career acomplisment would be that I never gave up on a projec
 I hope to learn R so I can apply and be competivie for internships/careers in Data Science and Economics (or even Finance)
 
 A fun fact about myself is that I love Animal Crossing and cannot wait until Nintendo Announces anything on their upcoming project...
+
+___Me right now___
 ![Me right now](https://i.kinja-img.com/gawker-media/image/upload/s--Nrzh5cpt--/c_scale,f_auto,fl_progressive,q_80,w_800/w4cdsyzwdqzjn59w1bzg.png)
 
 ### Feedback
