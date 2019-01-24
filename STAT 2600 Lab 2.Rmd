@@ -17,8 +17,6 @@ __Hey look it's us__
 ![team photo](Picture/squad.jpg)
 
 ## Chris
-
-## Chris
 ![super old photo of me and my sister](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/12112295_10101361245575172_7827597153382578565_n.jpg?_nc_cat=102&_nc_ht=scontent-ort2-2.xx&oh=408cdc391e2b2d12227f09ee84fbc596&oe=5CC2496C)
 
 One question i'm interested in is to see political party affiliation as a function of one's highest level of education. Also party affiliation by age.
