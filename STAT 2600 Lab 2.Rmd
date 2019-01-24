@@ -52,6 +52,7 @@ Really, I just hope that I find a career that breeds eternal curiosity, maybe in
 ## James
 ### About Me
 ![A very old picture of myself](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/994000_488734011222322_102261500_n.jpg?_nc_cat=109&_nc_ht=scontent-ort2-2.xx&oh=562b3863155bd4737aab4eb295a16798&oe=5CF4C0C2)
+
 One question that I'm interested in that can be answered with data is, is there a correlation between height and back problems. 
 
 In six months, I plan on going to graduate school for applied math. Five years after that, I want to have a high paying job doing something math related. 
@@ -61,6 +62,7 @@ I'm not completely certain of what I want my greatest career accomplishment to b
 I hope to get some exposure to data science and to learn R in this class. I'm hoping that this class will give me some clarity on what I will focus on in graduate school. 
 
 Something interesting about myself is that I play a lot of basketball and have done so most of my life. 
+
 ### Feedback
 
 ## Anna
