@@ -6,7 +6,7 @@ I think the next steps are for you to pull the file and then edit your parts.
 
 <<<<<<< Updated upstream
 Amanda Liddle
-
+James Cates
 Team Exercises
 Anna
 =======
