@@ -1,70 +1,76 @@
 ---
 title: "STAT 2600 Lab 2"
-author: "Anna Sanders"
-date: "January 22, 2019"
-output: html_document
+author: "Amanda, Chris, James, and Anna"
+date: "January 24, 2019"
+output:
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-#Lab 2
-### DataMePls(ssssss)
-Our goal for the semester is to learn r programming.
+# DataMePls(ssssss)
+Our goal for the semester is to learn the basics of R programming.
 
-__Hey look it's us__
+__Hey look it's us!__
 ![team photo](Picture/squad.jpg)
 
 ---
 
 ## Chris
-![super old photo of me and my sister](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/12112295_10101361245575172_7827597153382578565_n.jpg?_nc_cat=102&_nc_ht=scontent-ort2-2.xx&oh=408cdc391e2b2d12227f09ee84fbc596&oe=5CC2496C)
+### About Me
+![___Super old photo of me and my sister___](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/12112295_10101361245575172_7827597153382578565_n.jpg?_nc_cat=102&_nc_ht=scontent-ort2-2.xx&oh=408cdc391e2b2d12227f09ee84fbc596&oe=5CC2496C)
 
-One question i'm interested in is to see political party affiliation as a function of one's highest level of education. Also party affiliation by age.
+One question I'm interested in is to see political party affiliation as a function of one's highest level of education. Also party affiliation by age.
 
-Six months after graduation, i would like to take some time to travel (and enjoy being even more broke than I was in college). 5 years after graduation, i would love to be a quant who works on wall street. 
+Six months after graduation, I would like to take some time to travel (and enjoy being even more broke than I was in college). 5 years after graduation, I would love to be a quant who works on wall street. 
 
-The greatest career acomplishment that I hope to attain is to become a CFO of a moderately sized company. 
+The greatest career accomplishment that I hope to attain is to become a CFO of a moderately sized company. 
 
-Given this goal, I hope to learn how to program in R, and more genrally, program more efficently. My coding is prettyyyy rough at the moment. 
+Given this goal, I hope to learn how to program in R, and more generally, program more efficiently. My coding is prettyyyy rough at the moment. 
 
 Something fun about me is that I enjoy memes/ spend a majority of my free time laughing at memes and old vines. I also like to steep tea and do face masks. 
 
 ### Feedback
-Amanda: I really like your statistics question, it seems like something that you could get a lot of data on. Your goals after college seem very reasonable; it could be improved 
+__Amanda__: I really like your statistics question, it seems like something that you could get a lot of data on. Your goals after college seem very reasonable; it could be improved 
                 by being more specific about where you want to travel because I am curious! I liked your use of "prettyyyy" and all your other word choice--it brings out
                 your personality which I think is important in an About Me bio.
-Anna: It's great that you have a super specific goal for your career path after college. I wish I could have a goal as specific as you.
-James: I like that your goal for the class is in direct correlation with what you want to do five years from now. I have no specific qualms overall, but I'd like to know why you want to work on wall street. 
+                
+__Anna__: It's great that you have a super specific goal for your career path after college. I wish I could have a goal as specific as you.
+
+__James__: I like that your goal for the class is in direct correlation with what you want to do five years from now. I have no specific qualms overall, but I'd like to know why you want to work on wall street. 
+
 ---
 
 ## Amanda
 ### About Me
+![___Me 4 years ago___](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/13494758_902519519892798_1748535062047686485_n.jpg?_nc_cat=109&_nc_ht=scontent-ort2-2.xx&oh=f0c839e233004b5366dd36c3267ce6df&oe=5CBFE6DB)
 
-![me 4 years ago](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/13494758_902519519892798_1748535062047686485_n.jpg?_nc_cat=109&_nc_ht=scontent-ort2-2.xx&oh=f0c839e233004b5366dd36c3267ce6df&oe=5CBFE6DB)
-
-Question: How much does lottery of birth and the economic status that people are born into relate to a person's probability of going to college?
+Question: How much does the lottery of birth and the economic status that people are born into relate to a person's probability of going to college?
 
 Six months after graduation, I want to treat myself to a vacation somewhere out of the country with a group of friends from college and never work. 
 But realistically, hopefully I can get a job that relates economics, data science, and statistics in a way that makes me happy in my work environment. 
 Following that, in five years, I want to feel pretty settled in a career, with genuine friends around me, and I want to be happy and fiscally independent more than anything else.
 
 In my future career, I don't really have any specific accomplishment because I have absolutely no idea what I want my future to be like, but I feel like I will find passions once I am in the field more. 
+
 Really, I just hope that I find a career that breeds eternal curiosity, maybe in research dealing with big data. I think learning how to code in a language that is widely used in the data science and statistics field will be very beneficial, and I am hoping to be comfortable with R by the end of this course. 
 
-![my favorite meme](https://i.pinimg.com/236x/3f/94/28/3f9428dd23609d79b635c5542a71fe28.jpg)
+![___My favorite meme___](https://i.pinimg.com/236x/3f/94/28/3f9428dd23609d79b635c5542a71fe28.jpg)
 
 ### Feedback
-Chris: I think its super cool that you're interested in stats/ econ because same! They're very versatile fields, and im sure you will be able to be happy in your job since there's such a diverse selection of those jobs.
-Anna: I love how you want to take a vacation after graduation! I think taking time for yourself after 4 years of college is often overlooked, so it's great that you want to do that.
-James: I appreciate that not only do you want to feel settled in a career, but you also want to be happy. Many people overlook that aspect of life. Something that can be expanded on is to add it why that meme is your favorite meme. 
+__Chris__: I think its super cool that you're interested in stats/ econ because same! They're very versatile fields, and I'm sure you will be able to be happy in your job since there's such a diverse selection of those jobs.
+
+__Anna__: I love how you want to take a vacation after graduation! I think taking time for yourself after 4 years of college is often overlooked, so it's great that you want to do that.
+
+__James__: I appreciate that not only do you want to feel settled in a career, but you also want to be happy. Many people overlook that aspect of life. Something that can be expanded on is to add it why that meme is your favorite meme. 
 
 ---
 
 ## James
 ### About me
-![A very old picture of myself](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/994000_488734011222322_102261500_n.jpg?_nc_cat=109&_nc_ht=scontent-ort2-2.xx&oh=562b3863155bd4737aab4eb295a16798&oe=5CF4C0C2)
+![___A very old picture of myself___](https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/994000_488734011222322_102261500_n.jpg?_nc_cat=109&_nc_ht=scontent-ort2-2.xx&oh=562b3863155bd4737aab4eb295a16798&oe=5CF4C0C2)
 
 One question that I'm interested in that can be answered with data is, is there a correlation between height and back problems. 
 
@@ -77,11 +83,12 @@ I hope to get some exposure to data science and to learn R in this class. I'm ho
 Something interesting about myself is that I play a lot of basketball and have done so most of my life. 
 
 ### Feedback
-Amanda: Your answers were very concise and too the point which I liked. I think it could be improved by getting more specific with what you want to learn 
+__Amanda__: Your answers were very concise and to the point which I liked. I think it could be improved by getting more specific with what you want to learn 
                 in the class, but overall, keep up the good work!
-Chris: That's awesome that you want to go to graduate school for applied math! My current goal is to do the BS/MS program in applied math, so maybe we will be in some more classes together! Maybe you can expand upon how this class will help you choose a focus for graduate school. 
-Anna: It's neat that you're going to graduate school soon. I hope this class will help you in grad school and beyond!
+                
+__Chris__: That's awesome that you want to go to graduate school for applied math! My current goal is to do the BS/MS program in applied math, so maybe we will be in some more classes together! Maybe you can expand upon how this class will help you choose a focus for graduate school. 
 
+__Anna__: It's neat that you're going to graduate school soon. It's nice to know that even people who are graduating soon aren't completely certain of their future career or life goals. I hope this class will help you in grad school and beyond!
 
 ---
 
@@ -94,17 +101,19 @@ I would like to answer the question of how large communities (or fandoms) can im
 
 Six months out of graduation, I would like to have a job that pays above minimum wage. Five years after graduation, I would like to have a job that pays better than the one I had six months out of college.
 
-I hope my greatest career acomplisment would be that I never gave up on a project.
+I hope my greatest career accomplishment would be that I will have never given up on a project.
 
-I hope to learn R so I can apply and be competivie for internships/careers in Data Science and Economics (or even Finance)
+I hope to learn R so I can apply and be competitivie for internships/careers in Data Science and Economics (or even Finance).
 
-A fun fact about myself is that I love Animal Crossing and cannot wait until Nintendo Announces anything on their upcoming project...
+A fun fact about myself is that I love Animal Crossing and cannot wait until Nintendo announces anything on their upcoming project...
 
 ___Me right now___
 ![Me right now](https://i.kinja-img.com/gawker-media/image/upload/s--Nrzh5cpt--/c_scale,f_auto,fl_progressive,q_80,w_800/w4cdsyzwdqzjn59w1bzg.png)
 
 ### Feedback
-Amanda: Your About Me page was super funny and interesting to read, especially in the question about what you want to do out of college. I felt like
+__Amanda__: Your About Me page was super funny and interesting to read, especially in the question about what you want to do out of college. I felt like
                 I could get a good sense of your personality, which was awesome! Great job!
-Chris: I think its super cool that you are into animal crossing! Nintendo has some fuego games on the switch for sure. I would love to hear an expansion upon your hypothesis for how you want to show if large communities have an impact a specific companies brand!
-James: I like your funny and honest take on what you want to do out of college. I'd like to know what kind of career you are interested in. 
+                
+__Chris__: I think its super cool that you are into animal crossing! Nintendo has some fuego games on the switch for sure. I would love to hear an expansion upon your hypothesis for how you want to show if large communities have an impact a specific companies brand!
+
+__James__: I like your funny and honest take on what you want to do out of college. I'd like to know what kind of career you are interested in. 
