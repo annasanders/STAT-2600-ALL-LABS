@@ -1,0 +1,13 @@
+---
+title: "LAB 5"
+author: "DATA ME PLS"
+date: "February 13, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# MILK IS GOOD EVEN THOUGH WE BECOME LACTOSE INTOLERANT OVER TIME
+
