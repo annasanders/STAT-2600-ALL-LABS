@@ -22,18 +22,36 @@ The year when the least milk was produced in the United States.
 In 2017, report the 5 states that produced the most milk. (Hint: Use arrange)
 In 2017, report the 5 states that produced the least milk. (Hint: Use arrange)
 
-## Colorado
+## Group SHit
+milksub <- milk %>%
+  filter(state %in% c('Colorado','California','Wisconsin','Georgia', 'Alaska')) %>%
+  select(state, year, milk_million)
 
-## Georgia
-
-## California
-
-## Rhode Island
-
-## Alaska 
+ggplot(data = milksub, aes(x = year, y = milk_million, color = state)) +
+  geom_point() + 
+  ggtitle('Pounds of milk over time by state') +
+  xlab('Year') +
+  ylab('Milk Produced (Million lb)')
+  
+milk_now <- milk %>%
+  filter(year == 2017) %>%
+  arrange (desc(milk_produced)) 
+  
+largest_state2 <- milk %>%
+  group_by(year) %>%
+  summarize(sum_milk = sum(milk_million))%>%
+  arrange(desc(sum_milk))
 
 ## 1997 (James)
 
-## 1998 (Anyone??)
+## 1998 (Chris)
 
 ## 1999 (Anna)
+bday_milk <- milk %>%
+  filter(year == 1999) %>%
+  summarise(mmean = mean(milk_produced/1000000),
+            mmedian = median (milk_produced/1000000))
+
+bday_state <- milk %>%
+  filter(year == 1999) %>%
+  arrange(desc(milk_produced))
