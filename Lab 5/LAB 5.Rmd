@@ -77,6 +77,28 @@ bday_milk2 <- bday_milk %>%
 For 1997, the state that produced the least amount of milk was Alaska, and the state that produced the most amount of milk was California. The average amount of milk produced in each state was 3121 million gallons, and the median amount of milk produced in each state was 1436 million gallons.  
 ## 1998 (Chris)
 
+## 1998 (Amanda)
+
+![Plot of Milk Production During Amanda's Birth Year (1998)](plots/AmandaMilkPlot.png)
+
+```{r,eval=FALSE}
+milk_bday <- milk %>%
+  filter(year == 1998)
+  ggplot(data = milk_bday) + geom_col(mapping = aes(x=state, y =milk_million, fill=state)) +
+   labs(x="States," y="Milk Produced (in millions of gallons)", title = "Milk Production by State in 1998" )
+```
+
+```{r,eval=FALSE}
+bday_milk_summary <- milk %>%
+  filter(year == 1998) %>%
+  summarise(mymean = mean(milk_produced/1000000),
+            mymedian = median (milk_produced/1000000))
+
+```
+
+In 1998, the median milk production was ____ million gallons, and the mean milk  production was ____ million gallons. 
+The state that produced the most amount of milk was ____ . The state that produced the least amount of milk was ____ .
+
 ## 1999 (Anna)
 ![](plots/Anna's Plot.png)
 
