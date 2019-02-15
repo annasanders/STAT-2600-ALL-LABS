@@ -61,7 +61,7 @@ ggplot() +
   ylab('Milk Produced (Million lb)') +
   geom_smooth(data = largest_state2, aes(x=year,y=avg_milk,color="Average Milk"))
 ```
-
+![](plots/team_plot_lab5.png)
 ## 1997 (James)
 ```{r,eval=FALSE}
 bday_milk <- milk %>%
