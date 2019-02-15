@@ -11,6 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 
 milk <- read.csv('state_milk_production.csv')
+milk <- milk %>%
+  mutate(milk_million = milk_produced/1000000)
 head(milk)
 ```
 # MILK IS GOOD EVEN THOUGH WE BECOME LACTOSE INTOLERANT OVER TIME
@@ -41,11 +43,7 @@ milksub <- milk %>%
   filter(state %in% c('Colorado','California','Wisconsin','Georgia', 'Alaska')) %>%
   select(state, year, milk_million)
 
-ggplot(data = milksub, aes(x = year, y = milk_million, color = state)) +
-  geom_point() + 
-  ggtitle('Pounds of milk over time by state') +
-  xlab('Year') +
-  ylab('Milk Produced (Million lb)')
+
   
 milk_now <- milk %>%
   filter(year == 2017) %>%
@@ -53,8 +51,15 @@ milk_now <- milk %>%
   
 largest_state2 <- milk %>%
   group_by(year) %>%
-  summarize(sum_milk = sum(milk_million))%>%
-  arrange(desc(sum_milk))
+  summarize(avg_milk = sum(milk_million)/50)%>%
+  arrange(desc(avg_milk))
+
+ggplot() +
+  geom_point(data = milksub, aes(x = year, y = milk_million, color = state)) + 
+  ggtitle('Pounds of milk over time by state') +
+  xlab('Year') +
+  ylab('Milk Produced (Million lb)') +
+  geom_smooth(data = largest_state2, aes(x=year,y=avg_milk))
 ```
 
 ## 1997 (James)
