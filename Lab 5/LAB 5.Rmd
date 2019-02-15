@@ -85,7 +85,7 @@ ggplot(data=bday_state, aes(x=state, fill=state, y=milk_million))+
   geom_col()+
   coord_flip()+
   theme(legend.position = "none")+
-  labs(x = "Milk Produciton (Millions of Gallons", y= "State", title= "Milk Production by State in 1999")
+  labs(y = "Milk Produciton (Millions of Gallons", x= "State", title= "Milk Production by State in 1999")
 ```
 
 For 1999, the mean milk production was 3251.8 million gallons. The median production was 1418 million gallons. This difference can be accounted by the extremely large amount of milk that was produced by top producers.
