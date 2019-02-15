@@ -59,11 +59,22 @@ ggplot() +
   ggtitle('Pounds of milk over time by state') +
   xlab('Year') +
   ylab('Milk Produced (Million lb)') +
-  geom_smooth(data = largest_state2, aes(x=year,y=avg_milk))
+  geom_smooth(data = largest_state2, aes(x=year,y=avg_milk,color="Average Milk"))
 ```
 
 ## 1997 (James)
-
+```{r,eval=FALSE}
+bday_milk <- milk %>%
+  filter(year==1997)
+ggplot(data=bday_milk,aes(x=milk_million))+geom_histogram(binwidth=500)+labs(x="Milk Produced in Millions",y="Count",title="Distribution of Milk Produced in 1997")  
+```
+![](plots/james_plot.png)
+```{r,eval=FALSE}
+bday_milk2 <- bday_milk %>%
+  arrange(desc(milk_million)) %>%
+  summarise(avg_milk=mean(milk_million),med_milk=median(milk_million))
+```
+For 1997, the state that produced the least amount of milk was Alaska, and the state that produced the most amount of milk was California. The average amount of milk produced in each state was 3121 million gallons, and the median amount of milk produced in each state was 1436 million gallons.  
 ## 1998 (Chris)
 
 ## 1999 (Anna)
