@@ -84,8 +84,8 @@ For 1997, the state that produced the least amount of milk was Alaska, and the s
 ```{r,eval=FALSE}
 milk_bday <- milk %>%
   filter(year == 1998)
-  ggplot(data = milk_bday) + geom_col(mapping = aes(x=state, y =milk_million, fill=state)) +
-   labs(x="States," y="Milk Produced (in millions of gallons)", title = "Milk Production by State in 1998" )
+ggplot(data = milk_bday) + geom_col(mapping = aes(x=state, y =milk_million, fill=state)) +
++     labs(x="States", y="Milk Produced (in millions of gallons)", title = "Milk Production by State in 1998" ) + coord_flip()
 ```
 
 ```{r,eval=FALSE}
