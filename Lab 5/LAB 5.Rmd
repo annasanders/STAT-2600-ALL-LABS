@@ -35,7 +35,7 @@ The bottom 5 producers (most to least) were Delaware, Alabama, Arkansas, Hawaii,
 
 GROUP PLOT OF THE 5 STATES PLUS THE LINE (JAMES)
 
-## Group SHit (deleate after youve taken from this)
+## Group SHit (delete after youve taken from this)
 ```{r, eval=FALSE}
 milksub <- milk %>%
   filter(state %in% c('Colorado','California','Wisconsin','Georgia', 'Alaska')) %>%
