@@ -15,7 +15,7 @@ milk <- milk %>%
   mutate(milk_million = milk_produced/1000000)
 head(milk)
 ```
-# MILK IS GOOD EVEN THOUGH WE BECOME LACTOSE INTOLERANT OVER TIME
+# MILK IS GOOD EVEN THOUGH WE BECOME LACTOSE INTOLERANT OVERTIME
 
 ```{r,eval=FALSE}
 largest_state2 <- milk %>%
@@ -31,7 +31,7 @@ The year when the least milk was produced in the United States was 1975.
 
 ---
 
-For both questions that dealt with 2017 Data, we used the code below to arrange the whole 2017 Data set and observe the top 5 and bottom 5 occruences. 
+For both questions that dealt with 2017 Data, we used the code below to arrange the whole 2017 Data set and observe the top 5 and bottom 5 occurrences. 
 
 ```{r, eval=FALSE}
 milk_now <- milk %>%
@@ -44,16 +44,12 @@ The bottom 5 producers (most to least) were Delaware, Alabama, Arkansas, Hawaii,
 
 ---
 
-GROUP PLOT OF THE 5 STATES PLUS THE LINE (JAMES)
-
-## Group SHit (delete after youve taken from this)
+![__Our Team Milk Plot__](plots/team_plot_lab5.png)
 ```{r, eval=FALSE}
 milksub <- milk %>%
   filter(state %in% c('Colorado','California','Wisconsin','Georgia', 'Alaska')) %>%
   select(state, year, milk_million)
 
-
-  
 milk_now <- milk %>%
   filter(year == 2017) %>%
   arrange (desc(milk_produced)) 
@@ -71,6 +67,8 @@ ggplot() +
   geom_smooth(data = largest_state2, aes(x=year,y=avg_milk,color="Average Milk"))
 ```
 
+---
+
 ## 1997 (James)
 ```{r,eval=FALSE}
 bday_milk <- milk %>%
@@ -84,6 +82,7 @@ bday_milk2 <- bday_milk %>%
   summarise(avg_milk=mean(milk_million),med_milk=median(milk_million))
 ```
 For 1997, the state that produced the least amount of milk was Alaska, and the state that produced the most amount of milk was California. The average amount of milk produced in each state was 3121 million gallons, and the median amount of milk produced in each state was 1436 million gallons.  
+
 ## 1998 (Chris)
 
  ![milk in 1998](plots/chris_milk.png)
@@ -95,9 +94,9 @@ milk1998 <- milk %>%
 ggplot(data = milk1998, aes(x = milk_million)) +
   geom_density() + 
   labs(title = 'Distribution estimate of milk produced in 1998 by state', x = 'milk produced in millions')
-  ```
+```
   
-  ```{r,eval=FALSE}
+```{r,eval=FALSE}
 
 median_year <- milk1998 %>%
   summarise(Med = median(milk_million)) %>%
@@ -155,7 +154,7 @@ ggplot(data=bday_state, aes(x=state, fill=state, y=milk_million))+
   geom_col()+
   coord_flip()+
   theme(legend.position = "none")+
-  labs(y = "Milk Produciton (Millions of Gallons", x= "State", title= "Milk Production by State in 1999")
+  labs(x = "Milk Produciton (Millions of Gallons", y = "State", title = "Milk Production by State in 1999")
 ```
 
 For 1999, the mean milk production was 3251.8 million gallons. The median production was 1418 million gallons. This difference can be accounted by the extremely large amount of milk that was produced by top producers.

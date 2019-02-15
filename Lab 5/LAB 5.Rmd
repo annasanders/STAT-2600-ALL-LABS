@@ -43,8 +43,6 @@ milksub <- milk %>%
   filter(state %in% c('Colorado','California','Wisconsin','Georgia', 'Alaska')) %>%
   select(state, year, milk_million)
 
-
-  
 milk_now <- milk %>%
   filter(year == 2017) %>%
   arrange (desc(milk_produced)) 
