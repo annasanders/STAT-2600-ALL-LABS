@@ -18,8 +18,8 @@ Why it is imporant (Anna)
 Recomended (Chris)
 
 
-## Cancelation Codes (James)
-## Desination (Chris)
-## Carrier (Amanda)
-## Security Delay (Anna)
+## Cancelation Codes, Carriers  (James)
+## Desination, Departure Time (Chris)
+## Arrival Time, Air Time (Amanda)
+## Security Delay, National Air System Delay (Anna)
 
