@@ -10,6 +10,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # DIA is NOT a Conspiracy
+Group Plot (Amanda)
+Why it is imporant (Anna)
+Recomended (Chris)
 
 
 ## Cancelation Codes (James)
