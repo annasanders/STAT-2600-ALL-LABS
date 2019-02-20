@@ -63,12 +63,18 @@ __Percent of Delays that are for National Air System Reaons : 23165/82183__
 
 ```{r, eval=FALSE}
 ggplot(dat=DENsec)+
-    geom_point(mapping=aes(x=SECURITY_DELAY, y=ARR_DELAY, color=MONTH))+
-    labs(x="Security Delay (Minutes)", y= "Arrival Delay (Minutes)", title= "Security Delay and Arrival Time")
+    geom_point(mapping=aes(x=SECURITY_DELAY, y=ARR_DELAY, color=MONTH),)+
+    labs(x="Security Delay (Minutes)", y= "Arrival Delay (Minutes)", title= "Security Delay and Arrival Time")+
+    scale_color_gradientn(colors= rainbow(6))+
+    theme(legend.background= element_rect(size= 0.3, linetype= "solid", color= "black"))+
+    scale_fill_discrete(name= "Month")
   
 ggplot(dat=DENnas)+
-  geom_point(mapping=aes(x=NAS_DELAY, y=ARR_DELAY, color=MONTH))+
-  labs(x="National Air System Delay (Minutes)", y= "Arrival Delay (Minutes)", title= "National Air System Delay and Arrival Time")
+  geom_point(mapping=aes(x=NAS_DELAY, y=ARR_DELAY, color=MONTH), position= "jitter")+
+  labs(x="National Air System Delay (Minutes)", y= "Arrival Delay (Minutes)", title= "National Air System Delay and Arrival Time")+
+  scale_color_gradientn(colors= rainbow(6))+
+  theme(legend.background= element_rect(size= 0.3, linetype= "solid", color= "black"))+
+  scale_fill_discrete(name= "Month")
 ```
 PLOT 1
 PLOT 2 
