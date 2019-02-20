@@ -1,0 +1,103 @@
+---
+title: "Lab 6"
+author: "Data Me Pls"
+date: "February 19, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+COflights <- read_csv("https://files.osf.io/v1/resources/3z5as4pej8/providers/osfstorage/5a8ca28f57103100104584db")
+```
+
+# DIA is NOT a Conspiracy
+![](https://static.boredpanda.com/blog/wp-content/uploads/2018/09/renovation-conspiracy-theory-signs-denver-international-airport-5b96658cc3786__700.jpg)
+
+---
+
+### Why it is imporant (Anna)
+As a member of the Illumanati and an Acolyte of Blucifer, the operations of the Denver International Airport (which shortens to DIA, but has DEN as its airport code) are of great imporantce (https://www.thrillist.com/travel/nation/denver-airport-conspiracy-theories). As DIA goes though a series of construction projects, it is even more important that the ariport runs as normally as possible to make sure excess suspicion is aroused. In order to remain a 'normal airport' the pubic's eye, DIA must continue to deliver its patrons (both human and lizard) to their destinations with little delays (http://www.slate.com/blogs/atlas_obscura/2014/03/17/the_blue_mustang_is_part_of_several_conspiracy_theories_centered_on_denver.html). To help recomend solutions, our team has come up with multiple plots and recomendations to help keep DIA running smoothly.
+
+---
+
+###Group Plot (Amanda)
+
+---
+
+###Recomended (Chris)
+
+---
+
+## Effect of Carriers on Arriving Late to DIA  (James)
+One interesting question is for all flights that arrive at DIA, does the carrier have any impact of the whether the flight was delayed. The answer is yes. Out of the all the carriers, the conditional probability of being late given that one flew Southwest Airlines is higher than the probability of arriving late. The probability of arriving late to DIA is 0.157, while the probability of arriving late given that one flew Southwest is 0.185. Another interesting fact is that by flying United Airlines, the probability of arriving late in DIA is 0.11. This means that if one wants to have a lower probability of arriving late, flying United would be a smart option. Given that these two carriers arrive the most at DIA, it is clear that United has an advantage if one wants to arrive on time. From the plot of conditional probabilities, it's clear that there are other carriers that have higher probabilities of being late, but given that there were fewer observations, it would be more adventageous to look at the two most popular carriers. 
+```{r, eval=FALSE}
+#Plot
+ggplot(data=DENflights_test)+geom_bar(aes(x=CARRIER,fill=as.factor(LATE)),position="Dodge")+labs(x="Carrier",y="count",title='Late Flights Per Carrier')
+#Calculating Conditional probability for arriving late given flown WN
+WN_and_late<-filter(DENflights_late,CARRIER=="WN")
+WN_flights<-filter(DENflights,CARRIER=="WN")
+late_given_WN = (12577/221642)/(67986/221642)
+#Calculating Conditional probability for arriving late given flown UA
+UA_and_late<-filter(DENflights_late,CARRIER=='UA')
+UA_flights<-filter(DENflights,CARRIER=='UA')
+late_give_UA<-6889/61629
+#Conditional Probability versus Carrier Plot
+prob_vs_carrier<- DENflights_test %>%
+  group_by(CARRIER)%>%
+  summarize(total_late=sum(LATE),count=n())%>%
+  mutate(prob = total_late/count)
+view(prob_vs_carrier)
+
+ggplot(data=prob_vs_carrier)+geom_point(aes(x=CARRIER,y=prob))+labs(x="Carrier",y="Prob. of being Late",title="Conditional Prob. of being Late Vs. Carrier")
+
+```
+
+## Desination, Departure Time (Chris)
+
+## Arrival Time, Air Time (Amanda)
+
+## Security Delay, National Air System Delay (Anna)
+```{r, eval=FALSE}
+DENflights <- COflights %>%
+  filter (ORIGIN== 'DEN')
+
+DENsec <-DENflights %>%
+  filter (SECURITY_DELAY > 0, ARR_DELAY >=15) %>%
+  select ("YEAR", "MONTH", "DAY_OF_MONTH", "SECURITY_DELAY", "ARR_DELAY")
+
+DENnas <-DENflights %>%
+  filter (NAS_DELAY > 0, ARR_DELAY >=15) %>%
+  select ("YEAR", "MONTH", "DAY_OF_MONTH", "NAS_DELAY", "ARR_DELAY")
+
+DENtdelay <- COflights %>%
+  filter (ARR_DELAY >= 15)
+```
+
+__Probability that a DEN Flight will be Delayed for Security Reasons : 38/223165__
+
+__Percent of Delays that are for Security Reasons : 38/82183__
+
+__Probability that a DEN Flight will be Delayed for National Air System Reasons : 23165/223165__
+
+__Percent of Delays that are for National Air System Reaons : 23165/82183__
+
+```{r, eval=FALSE}
+ggplot(dat=DENsec)+
+    geom_point(mapping=aes(x=SECURITY_DELAY, y=ARR_DELAY, color=MONTH),)+
+    labs(x="Security Delay (Minutes)", y= "Arrival Delay (Minutes)", title= "Security Delay and Arrival Time")+
+    scale_color_gradientn(colors= rainbow(6))+
+    theme(legend.background= element_rect(size= 0.3, linetype= "solid", color= "black"))+
+    scale_fill_discrete(name= "Month")
+  
+ggplot(dat=DENnas)+
+  geom_point(mapping=aes(x=NAS_DELAY, y=ARR_DELAY, color=MONTH), position= "jitter")+
+  labs(x="National Air System Delay (Minutes)", y= "Arrival Delay (Minutes)", title= "National Air System Delay and Arrival Time")+
+  scale_color_gradientn(colors= rainbow(6))+
+  theme(legend.background= element_rect(size= 0.3, linetype= "solid", color= "black"))+
+  scale_fill_discrete(name= "Month")
+```
+PLOT 1
+PLOT 2 
+

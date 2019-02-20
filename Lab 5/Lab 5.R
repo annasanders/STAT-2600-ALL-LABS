@@ -20,7 +20,7 @@ ggplot(data=bday_state, aes(x=state, fill=state, y=milk_million))+
   geom_col()+
   coord_flip()+
   theme(legend.position = "none")+
-  labs(x = "Milk Produciton (Millions of Gallons", y= "State", title= "Milk Production by State in 1999")
+  labs(y = "Milk Produciton (Millions of Gallons", x = "State", title= "Milk Production by State in 1999")
 
 milksub <- milk %>%
   filter(state %in% c('Colorado','California','Wisconsin','Georgia', 'Alaska')) %>%
