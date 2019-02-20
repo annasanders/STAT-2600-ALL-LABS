@@ -16,7 +16,6 @@ COflights <- read_csv("https://files.osf.io/v1/resources/3z5as4pej8/providers/os
 
 ### Why it is imporant (Anna)
 Most people hate when their flight is delayed. Not only does it cause problems with scheduling for the airports, it also can cause chaos with passenger's own inteneraries. In order to keep passengers happy and airports running smoothly, the airport must know why flights arrive later than expected.
-[As a member of the Illumanati and an Acolyte of Blucifer, the operations of the Denver International Airport (which shortens to DIA, but has DEN as its airport code) are of great imporantce (https://www.thrillist.com/travel/nation/denver-airport-conspiracy-theories). As DIA goes though a series of construction projects, it is even more important that the ariport runs as normally as possible to make sure excess suspicion is aroused. In order to remain a 'normal airport' the pubic's eye, DIA must continue to deliver its patrons (both human and lizard) to their destinations with little delays (http://www.slate.com/blogs/atlas_obscura/2014/03/17/the_blue_mustang_is_part_of_several_conspiracy_theories_centered_on_denver.html). To help recomend solutions, our team has come up with multiple plots and recomendations to help keep DIA running smoothly.]
 
 ---
 
@@ -57,6 +56,7 @@ ggplot(data=prob_vs_carrier)+geom_point(aes(x=CARRIER,y=prob))+labs(x="Carrier",
 ## Arrival Time, Air Time (Amanda)
 
 ## Security Delay, National Air System Delay (Anna)
+Most people would agree that a Security Delay or a delay with the National Air System, or the a delay caused by a disturbance within our national airspace, causes delay, but the question is how much of a delay and how often does it occur. Below is the summary of data.
 ```{r, eval=FALSE}
 DENflights <- COflights %>%
   filter (ORIGIN== 'DEN', CANCELLED== 0, DIVERTED== 0)
