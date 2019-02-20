@@ -61,7 +61,7 @@ ggplot(data=prob_vs_carrier)+geom_point(aes(x=CARRIER,y=prob))+labs(x="Carrier",
 ## Security Delay, National Air System Delay (Anna)
 ```{r, eval=FALSE}
 DENflights <- COflights %>%
-  filter (ORIGIN== 'DEN')
+  filter (ORIGIN== 'DEN', CANCELLED== 0, DIVERTED== 0)
 
 DENsec <-DENflights %>%
   filter (SECURITY_DELAY > 0, ARR_DELAY >=15) %>%
@@ -75,13 +75,17 @@ DENtdelay <- COflights %>%
   filter (ARR_DELAY >= 15)
 ```
 
-__Probability that a DEN Flight will be Delayed for Security Reasons : 38/223165__
+__Probability that a DEN Flight will be Delayed for Security Reasons : 38/2231148__
+
+__Probability that a DEN Flight that has Security Delay is Delayed: 38/38__
 
 __Percent of Delays that are for Security Reasons : 38/82183__
 
-__Probability that a DEN Flight will be Delayed for National Air System Reasons : 23165/223165__
+__Probability that a DEN Flight will be Delayed for National Air System Reasons : 23199/221148__
 
-__Percent of Delays that are for National Air System Reaons : 23165/82183__
+__Probability that a DEN Flight that has National Air System Delay is Delayed: 23199/23199__
+
+__Percent of Delays that are for National Air System Reaons : 23199/82183__
 
 ```{r, eval=FALSE}
 ggplot(dat=DENsec)+
