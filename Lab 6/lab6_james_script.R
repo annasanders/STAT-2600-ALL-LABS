@@ -33,4 +33,34 @@ prob_vs_carrier<- DENflights_test %>%
 view(prob_vs_carrier)
 
 #PLOT OF DATA FROM PREVIOUS DATA
-ggplot(data=prob_vs_carrier)+geom_point(aes(x=CARRIER,y=prob))+labs(x="Carrier",y="Prob. of being Late",title="Conditional Prob. of being Late Vs. Carrier")
+ggplot(data=prob_vs_carrier)+geom_point(aes(x=CARRIER,y=prob))+labs(x="Carrier",y="Prob. of being Late",title="Conditional Prob. of being Late Arriving at Denver per Carrier")
+
+#FLIGHTS THAT DEPART FROM DIA NOT CANCELLED AND NOT DIVERTED
+DENdepart <-filter(COflights,ORIGIN=="DEN",CANCELLED==0,DIVERTED==0)
+DENdepart<-mutate(DENdepart,LATE = ifelse(ARR_DELAY>=15,1,0))
+view(DENdepart)
+#TAXI STUFF (NOT IMPORTANT)
+depart_Taxi_late <-filter(DENdepart,TAXI_OUT>=10)
+late_given_taxi<-summarize(depart_Taxi_late,sum=sum(LATE))
+total_late_given_taxi <- 38405
+prob_late_given_taxi <- 38405/203159
+
+#EFFECTS OF CARRIER ON DEPARTING FLIGHTS
+prob_carrier_depart_late<-DENdepart %>%
+  group_by(CARRIER) %>%
+  summarize(total_late=sum(LATE),count=n())%>%
+  mutate(prob = total_late/count)
+view(prob_carrier_depart_late)
+dept_late_prob = 41376/221148
+ggplot(data=prob_carrier_depart_late)+geom_point(aes(x=CARRIER,y=prob))+geom_hline(yintercept=0.187)
+
+#EFFECTS ON LATE AIRCRAFT DELAY GREATER THAN FIVE MINUTES
+DENdepart<-mutate(DENdepart,ACD=ifelse(LATE_AIRCRAFT_DELAY>=5,1,0))
+DENdepart<-mutate(DENdepart, LATE_ACD= LATE*ACD)
+DENdepart_w_WD <-na.omit(DENdepart,cols='LATE_ACD')
+aircraft_delay_prob<-DENdepart_w_WD %>%
+  mutate(LATE_ACD= LATE*ACD)%>%
+  summarize(count=n(),late=sum(LATE),ACD=sum(ACD),both=sum(LATE_ACD)) %>%
+  mutate(prob=both/ACD)
+view(DENdepart_w_WD)
+view(DENdepart)
