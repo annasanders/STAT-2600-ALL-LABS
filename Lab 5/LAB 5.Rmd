@@ -201,8 +201,8 @@ bday_milk_summary <- milk %>%
 
 ```
 
-In 1998, the median milk production was ____ million gallons, and the mean milk  production was ____ million gallons. 
-The state that produced the most amount of milk was ____ . The state that produced the least amount of milk was ____ .
+In 1998, the median milk production was 1415 million gallons, and the mean milk  production was 3144.68 million gallons. 
+The state that produced the most amount of milk was California . The state that produced the least amount of milk was Alaska .
 
 ## 1999 (Anna)
 ![](plots/Anna's Plot.png)
