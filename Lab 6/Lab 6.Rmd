@@ -20,7 +20,8 @@ Most people hate when their flight is delayed. Not only does it cause problems w
 ---
 
 ###Group Plot (Amanda)
-
+![](plots/dep_late_carrier.png)
+From this plot, it is clear that there are some airlines that have a significantly higher probability of arriving late. In the plot above, the horizontal line is the general probability of arriving late. Out of all the carriers above the horizontal line, the most popular carrier is WN, or more commonly known as SouthWest Airlines. Also, B6 (JetBlue) has the highest probability of being late. 
 ---
 
 ###Recomended (Chris)
@@ -28,6 +29,7 @@ Most people hate when their flight is delayed. Not only does it cause problems w
 ---
 
 ## Effect of Carriers on Arriving Late to DIA  (James)
+![](plots/arr_late_carrier.png)
 One interesting question is for all flights that arrive at DIA, does the carrier have any impact of the whether the flight was delayed. The answer is yes. Out of the all the carriers, the conditional probability of being late given that one flew Southwest Airlines is higher than the probability of arriving late. The probability of arriving late to DIA is 0.157, while the probability of arriving late given that one flew Southwest is 0.185. Another interesting fact is that by flying United Airlines, the probability of arriving late in DIA is 0.11. This means that if one wants to have a lower probability of arriving late, flying United would be a smart option. Given that these two carriers arrive the most at DIA, it is clear that United has an advantage if one wants to arrive on time. From the plot of conditional probabilities, it's clear that there are other carriers that have higher probabilities of being late, but given that there were fewer observations, it would be more adventageous to look at the two most popular carriers. 
 ```{r, eval=FALSE}
 #Plot
