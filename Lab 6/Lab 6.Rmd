@@ -54,9 +54,13 @@ ggplot(data=prob_vs_carrier)+geom_point(aes(x=CARRIER,y=prob))+labs(x="Carrier",
 The impact of destination and departure delay: 
 ![](plots/lab6_plot1.png)
 
+As seen in this plot, the destination of flights leaving DIA has a large impact on the probability of there being a departure delay. 
+
 The impact of distance and departure delay:
 
 ![](plots/lab6_plot2.png)
+
+As seen in this plot, the distance an airport is away from DIA does impact if there will be a delay or not. If an airport is under 1500 miles away from DIA, there is a much higher proabbility that there will be a delay than if it is 2000 miles or further away. Around 1000 miles away has the largest probability of being delayed. 
 
 ```{r, eval=FALSE}
 
