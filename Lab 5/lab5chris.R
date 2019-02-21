@@ -24,7 +24,7 @@ head(milk1998)
 
 ggplot(data = milk1998, aes(x = milk_million)) +
   geom_density() + 
-  ggtitle('Distribution estimate of milk produced in 1998 by state')
+  labs(title = 'Distribution estimate of milk produced in 1998 by state', x = 'milk produced in millions')
 
 median_year <- milk1998 %>%
   summarise(Med = median(milk_million)) %>%
