@@ -55,6 +55,51 @@ ggplot(data=prob_vs_carrier)+geom_point(aes(x=CARRIER,y=prob))+labs(x="Carrier",
 
 ## Desination, Departure Time (Chris)
 
+The impact of destination and departure delay: 
+![](plots/lab6_plot1.png)
+
+The impact of distance and departure delay:
+
+![](plots/lab6_plot2.png)
+
+```{r, eval=FALSE}
+
+#destination probability of delays:
+
+den_flights <- filter(COflights,ORIGIN == 'DEN') %>%
+  select(ORIGIN, DEST, DEP_TIME, DEP_DELAY) %>%
+  na.omit
+
+dest_den <- den_flights %>%
+  group_by(DEST) %>%
+  summarize(mean_wait = mean(DEP_DELAY), count = n()) %>%
+  arrange(desc(mean_wait))%>%
+  mutate(prob_delayed = count/ 221780)
+
+ggplot(dest_den, aes(x = DEST, y = prob_delayed, fill = DEST))+
+  geom_col()+
+  coord_flip()+
+  theme(legend.position = "none")+
+   labs(x = "destination" , y= "Probability delayed", title= "Destination's impact on delays")
+
+#distance probability of delays: 
+
+den_flights2 <- filter(COflights, ORIGIN == 'DEN') %>%
+  select(ORIGIN, DEST, DEP_DELAY, DISTANCE) %>%
+  na.omit
+
+dist_den <- den_flights2 %>%
+  group_by(DISTANCE) %>%
+  summarize(mean_dist = mean(DISTANCE), count1 = n()) %>%
+  arrange(desc(mean_dist)) %>%
+  mutate(prob_delayed2 = count1 / 221780)
+
+ggplot(dist_den , aes(x = DISTANCE, y = prob_delayed2, color = DISTANCE))+
+  geom_point()+
+  labs(x = "distance" , y= "Probability delayed", title= "Distance's impact on delays")
+
+```
+
 ## Arrival Time, Air Time (Amanda)
 
 ## Security Delay, National Air System Delay (Anna)
