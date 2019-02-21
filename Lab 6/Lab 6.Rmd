@@ -19,18 +19,14 @@ Most people hate when their flight is delayed. Not only does it cause problems w
 
 ---
 
-###Group Plot (Amanda)
+### Group Plot
 ![](plots/dep_late_carrier.png)
+
 From this plot, it is clear that there are some airlines that have a significantly higher probability of arriving late. In the plot above, the horizontal line is the general probability of arriving late. Out of all the carriers above the horizontal line, the most popular carrier is WN, or more commonly known as SouthWest Airlines. Also, B6 (JetBlue) has the highest probability of being late. 
----
 
-###Recomended (Chris)
+### Group Plot 2
+Most people would agree that a Security Delay or a delay with the National Air System, or the a delay caused by a disturbance within our national airspace, causes delay, but the question is how much of a delay and how often does it occur. Below is the summary of data.
 
----
-
-## Effect of Carriers on Arriving Late to DIA  (James)
-![](plots/arr_late_carrier.png)
-One interesting question is for all flights that arrive at DIA, does the carrier have any impact of the whether the flight was delayed. The answer is yes. Out of the all the carriers, the conditional probability of being late given that one flew Southwest Airlines is higher than the probability of arriving late. The probability of arriving late to DIA is 0.157, while the probability of arriving late given that one flew Southwest is 0.185. Another interesting fact is that by flying United Airlines, the probability of arriving late in DIA is 0.11. This means that if one wants to have a lower probability of arriving late, flying United would be a smart option. Given that these two carriers arrive the most at DIA, it is clear that United has an advantage if one wants to arrive on time. From the plot of conditional probabilities, it's clear that there are other carriers that have higher probabilities of being late, but given that there were fewer observations, it would be more adventageous to look at the two most popular carriers. 
 ```{r, eval=FALSE}
 #Plot
 ggplot(data=DENflights_test)+geom_bar(aes(x=CARRIER,fill=as.factor(LATE)),position="Dodge")+labs(x="Carrier",y="count",title='Late Flights Per Carrier')
@@ -147,20 +143,73 @@ ggplot(dat=DENnas)+
   theme(legend.background= element_rect(size= 0.3, linetype= "solid", color= "black"))+
   scale_fill_discrete(name= "Month")
 ```
-PLOT 1
-PLOT 2 
 
-``` {r, eval=false}
+![](Plots/Group Plot 2.1.png)
+![](Plots/Group Plot 2.2.png)
+---
+
+###Recomended (Chris)
+
+---
+
+## Effect of Carriers on Arriving Late to DIA  (James)
+![](plots/arr_late_carrier.png)
+
+One interesting question is for all flights that arrive at DIA, does the carrier have any impact of the whether the flight was delayed. The answer is yes. Out of the all the carriers, the conditional probability of being late given that one flew Southwest Airlines is higher than the probability of arriving late. The probability of arriving late to DIA is 0.157, while the probability of arriving late given that one flew Southwest is 0.185. Another interesting fact is that by flying United Airlines, the probability of arriving late in DIA is 0.11. This means that if one wants to have a lower probability of arriving late, flying United would be a smart option. Given that these two carriers arrive the most at DIA, it is clear that United has an advantage if one wants to arrive on time. From the plot of conditional probabilities, it's clear that there are other carriers that have higher probabilities of being late, but given that there were fewer observations, it would be more adventageous to look at the two most popular carriers. 
+
+```{r, eval=FALSE}
+#Plot
+ggplot(data=DENflights_test)+geom_bar(aes(x=CARRIER,fill=as.factor(LATE)),position="Dodge")+labs(x="Carrier",y="count",title='Late Flights Per Carrier')
+#Calculating Conditional probability for arriving late given flown WN
+WN_and_late<-filter(DENflights_late,CARRIER=="WN")
+WN_flights<-filter(DENflights,CARRIER=="WN")
+late_given_WN = (12577/221642)/(67986/221642)
+#Calculating Conditional probability for arriving late given flown UA
+UA_and_late<-filter(DENflights_late,CARRIER=='UA')
+UA_flights<-filter(DENflights,CARRIER=='UA')
+late_give_UA<-6889/61629
+#Conditional Probability versus Carrier Plot
+prob_vs_carrier<- DENflights_test %>%
+  group_by(CARRIER)%>%
+  summarize(total_late=sum(LATE),count=n())%>%
+  mutate(prob = total_late/count)
+view(prob_vs_carrier)
+
+ggplot(data=prob_vs_carrier)+geom_point(aes(x=CARRIER,y=prob))+labs(x="Carrier",y="Prob. of being Late",title="Conditional Prob. of being Late Vs. Carrier")
+
+```
+
+## Desination, Departure Time (Chris)
+
+## Arrival Time, Air Time (Amanda)
+
+## Month and Day Delays(Anna)
+Although Month and Day are likely not correlated, it is still important to check. 
+``` {r, eval=FALSE}
 DENmon <-DENflights %>%
   mutate(DELAY= ARR_DELAY>=15) %>%
   select ("MONTH", "DELAY", "ARR_DELAY")
 
 DENday <-DENflights %>%
   mutate(DELAY= ARR_DELAY>=15) %>%
-  select ("DAY_OF_MONTH", "DELAY", "ARR_DELAY")
+  select ("DAY_OF_", "DELAY", "ARR_DELAY")
+
+ggplot (data= DENmon)+
+  geom_bar(mapping= aes(x= as.factor(MONTH), fill= DELAY), position= "fill")+
+  labs(x= "Month", y= "Number of Flights", title= "Month and Number of Delayed Flights")+
+  scale_x_discrete(breaks= c("1","2","3","4","5","6","7","8","9","10","11","12"),
+                   labels=c("January","Febuary","March","April","May","June","July","August","September","October","November","December"))+
+  theme(axis.text.x= element_text(angle=45))+
+  scale_fill_manual(values=c("Blue","Red"), name= "Delay", breaks= c("FALSE","TRUE"), labels= c("No","Yes"))
 
 ggplot (data= DENday)+
   geom_bar(mapping= aes(x= as.factor(DAY_OF_MONTH), fill= DELAY), position= "fill")+
-  labs(x= "Month", y= "Number of Flights", title= "Month and Number of Delayed Flights")+
-  theme(axis.text.x= element_text(angle=45))
+  labs(x= "Day", y= "Number of Flights", title= "Day and Number of Delayed Flights")+
+  theme(axis.text.x= element_text(angle=45))+
+  scale_fill_manual(values=c("Blue","Red"), name= "Delay", breaks= c("FALSE","TRUE"), labels= c("No", "Yes"))
 ```
+
+![](Plots/Anna's Plot 1.png) 
+![](Plots/Anna's Plot 2.png)
+
+As you can see from the plots, there is not any strong correlation between Day or Month.There is slightly more delays in the Winter months, but not enough to make any significant difference between months.
