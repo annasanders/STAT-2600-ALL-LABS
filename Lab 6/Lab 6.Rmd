@@ -105,3 +105,17 @@ ggplot(dat=DENnas)+
 PLOT 1
 PLOT 2 
 
+``` {r, eval=false}
+DENmon <-DENflights %>%
+  mutate(DELAY= ARR_DELAY>=15) %>%
+  select ("MONTH", "DELAY", "ARR_DELAY")
+
+DENday <-DENflights %>%
+  mutate(DELAY= ARR_DELAY>=15) %>%
+  select ("DAY_OF_MONTH", "DELAY", "ARR_DELAY")
+
+ggplot (data= DENday)+
+  geom_bar(mapping= aes(x= as.factor(DAY_OF_MONTH), fill= DELAY), position= "fill")+
+  labs(x= "Month", y= "Number of Flights", title= "Month and Number of Delayed Flights")+
+  theme(axis.text.x= element_text(angle=45))
+```
