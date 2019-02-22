@@ -98,6 +98,16 @@ ggplot(dist_den , aes(x = DISTANCE, y = prob_delayed2, color = DISTANCE))+
 
 ## Arrival Time, Air Time (Amanda)
 
+``` {r, eval=FALSE}
+lateFlights <- COflights %>%
+mutate(LATE=ifelse(ARR_DELAY >=15,1,0)) %>% mutate(AIRTIME_HOURS = ceiling(AIR_TIME/60))
+#view(lateFlights)
+ggplot(data = lateFlights) + geom_col(aes(x=AIRTIME_HOURS, y=LATE, fill = AIRTIME_HOURS)) + labs(x="Airtime of Flights (Hours)", y="Number of Arrival Delays", title = "Number of Arrival Delays Into Denver Grouped by Length of Flight") +  theme(legend.position = "none")
+```
+
+
+
+
 ## Security Delay, National Air System Delay (Anna)
 Most people would agree that a Security Delay or a delay with the National Air System, or the a delay caused by a disturbance within our national airspace, causes delay, but the question is how much of a delay and how often does it occur. Below is the summary of data.
 ```{r, eval=FALSE}
