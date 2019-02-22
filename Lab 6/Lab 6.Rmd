@@ -14,12 +14,12 @@ COflights <- read_csv("https://files.osf.io/v1/resources/3z5as4pej8/providers/os
 
 # DIA is NOT a Conspiracy
 
-### Why it is imporant (Anna)
+### Why it is imporant
 Most people hate when their flight is delayed. Not only does it cause problems with scheduling for the airports, it also can cause chaos with passenger's own inteneraries. In order to keep passengers happy and airports running smoothly, the airport must know why flights arrive later than expected.
 
 ---
 
-### Group Plot
+### Group Plot 
 ![](plots/dep_late_carrier.png)
 
 From this plot, it is clear that there are some airlines that have a significantly higher probability of arriving late. In the plot above, the horizontal line is the general probability of arriving late. Out of all the carriers above the horizontal line, the most popular carrier is WN, or more commonly known as SouthWest Airlines. Also, B6 (JetBlue) has the highest probability of being late. 
@@ -49,6 +49,60 @@ ggplot(data=prob_vs_carrier)+geom_point(aes(x=CARRIER,y=prob))+labs(x="Carrier",
 
 ```
 
+## Security Delay, National Air System Delay
+Most people would agree that a Security Delay or a delay with the National Air System, or the a delay caused by a disturbance within our national airspace, causes delay, but the question is how much of a delay and how often does it occur. Below is the summary of data.
+```{r, eval=FALSE}
+DENflights <- COflights %>%
+  filter (ORIGIN== 'DEN', CANCELLED== 0, DIVERTED== 0)
+
+DENsec <-DENflights %>%
+  filter (SECURITY_DELAY > 0, ARR_DELAY >=15) %>%
+  select ("YEAR", "MONTH", "DAY_OF_MONTH", "SECURITY_DELAY", "ARR_DELAY")
+
+DENnas <-DENflights %>%
+  filter (NAS_DELAY > 0, ARR_DELAY >=15) %>%
+  select ("YEAR", "MONTH", "DAY_OF_MONTH", "NAS_DELAY", "ARR_DELAY")
+
+DENtdelay <- COflights %>%
+  filter (ARR_DELAY >= 15)
+```
+
+__Probability that a DEN Flight will be Delayed for Security Reasons : 38/2231148__
+
+__Probability that a DEN Flight that has Security Delay is Delayed: 38/38__
+
+__Percent of Delays that are for Security Reasons : 38/82183__
+
+__Probability that a DEN Flight will be Delayed for National Air System Reasons : 23199/221148__
+
+__Probability that a DEN Flight that has National Air System Delay is Delayed: 23199/23199__
+
+__Percent of Delays that are for National Air System Reaons : 23199/82183__
+
+```{r, eval=FALSE}
+ggplot(dat=DENsec)+
+    geom_point(mapping=aes(x=SECURITY_DELAY, y=ARR_DELAY, color=MONTH),)+
+    labs(x="Security Delay (Minutes)", y= "Arrival Delay (Minutes)", title= "Security Delay and Arrival Time")+
+    scale_color_gradientn(colors= rainbow(6))+
+    theme(legend.background= element_rect(size= 0.3, linetype= "solid", color= "black"))+
+    scale_fill_discrete(name= "Month")
+  
+ggplot(dat=DENnas)+
+  geom_point(mapping=aes(x=NAS_DELAY, y=ARR_DELAY, color=MONTH), position= "jitter")+
+  labs(x="National Air System Delay (Minutes)", y= "Arrival Delay (Minutes)", title= "National Air System Delay and Arrival Time")+
+  scale_color_gradientn(colors= rainbow(6))+
+  theme(legend.background= element_rect(size= 0.3, linetype= "solid", color= "black"))+
+  scale_fill_discrete(name= "Month")
+```
+
+![](Plots/Group Plot 2.1.png)
+![](Plots/Group Plot 2.2.png)
+---
+
+###Recomended
+While we believe to have isolated certain factors associated with delays, some of these factors cannot be helped. For example, in order for airports to make money, they must have airplanes fly in and out of the airport. This means an airport cannot be picky on which carriers they allow to land. Similarly, the National Air System (NAS) is not controlled by any one aiport, so any NAS delay cannot be prevented by the airports.
+
+---
 ## Desination, Departure Time (Chris)
 
 The impact of destination and departure delay: 
@@ -117,75 +171,13 @@ labs(x="Airtime of Flights (Hours)", y="Number of Arrival Delays", title = "Numb
 ```
 
 This plot looks at the relationship between the length of a fight (how long the plane is in the air for) and compares it to whether or not the
-flight is delayed or not, in order to visualize if there is a correlation between the airtime of a flight and it's chances of being delayed. The graph shows 
-that most flights were delayed when they were around one hour long, and as the length of flights increased, the number of delayed flights started decreasing.
+flight is delayed or not, in order to visualize if there is a correlation between the airtime of a flight and it's chances of being delayed. The graph shows that most flights were delayed when they were around one hour long, and as the length of flights increased, the number of delayed flights started decreasing.
+
 This plot also compares a second variable to the timeliness of a flight: carrier. For each type of flight (based on airtime), the plot
 illustrates the proportion of those delayed flights that were by a certain character. From this depiction, two observations can be seen:
-1.  We can see if certain carriers have more late flights of one length than of another length. For example, from the plot we can see that in the smallest flight length category,
-    OO was responsible for all of the late flights, but they had a lot less late flights in the other categories. This could either be because
-    this airline has some problem with their shorter flights that makes them delayed more, or they could just have more short flights in general,
-    so they naturally see more delayed flights that are short.
-2. We can see if there is an overarching theme of which carriers tend to have a larger proportion of delayed fights relative to other carriers.
-    For example, WV appeared to have the most delayed flights relative to every other carrier in every length of flight. 
-    On the other hand, VX, NK, B6, and AS had a lot less delayed flights compared to the other carriers.
- 
+1.  We can see if certain carriers have more late flights of one length than of another length. For example, from the plot we can see that in the smallest flight length category, OO was responsible for all of the late flights, but they had a lot less late flights in the other categories. This could either be because this airline has some problem with their shorter flights that makes them delayed more, or they could just have more short flights in general, so they naturally see more delayed flights that are short.
 
-
-
-
-## Security Delay, National Air System Delay (Anna)
-Most people would agree that a Security Delay or a delay with the National Air System, or the a delay caused by a disturbance within our national airspace, causes delay, but the question is how much of a delay and how often does it occur. Below is the summary of data.
-```{r, eval=FALSE}
-DENflights <- COflights %>%
-  filter (ORIGIN== 'DEN', CANCELLED== 0, DIVERTED== 0)
-
-DENsec <-DENflights %>%
-  filter (SECURITY_DELAY > 0, ARR_DELAY >=15) %>%
-  select ("YEAR", "MONTH", "DAY_OF_MONTH", "SECURITY_DELAY", "ARR_DELAY")
-
-DENnas <-DENflights %>%
-  filter (NAS_DELAY > 0, ARR_DELAY >=15) %>%
-  select ("YEAR", "MONTH", "DAY_OF_MONTH", "NAS_DELAY", "ARR_DELAY")
-
-DENtdelay <- COflights %>%
-  filter (ARR_DELAY >= 15)
-```
-
-__Probability that a DEN Flight will be Delayed for Security Reasons : 38/2231148__
-
-__Probability that a DEN Flight that has Security Delay is Delayed: 38/38__
-
-__Percent of Delays that are for Security Reasons : 38/82183__
-
-__Probability that a DEN Flight will be Delayed for National Air System Reasons : 23199/221148__
-
-__Probability that a DEN Flight that has National Air System Delay is Delayed: 23199/23199__
-
-__Percent of Delays that are for National Air System Reaons : 23199/82183__
-
-```{r, eval=FALSE}
-ggplot(dat=DENsec)+
-    geom_point(mapping=aes(x=SECURITY_DELAY, y=ARR_DELAY, color=MONTH),)+
-    labs(x="Security Delay (Minutes)", y= "Arrival Delay (Minutes)", title= "Security Delay and Arrival Time")+
-    scale_color_gradientn(colors= rainbow(6))+
-    theme(legend.background= element_rect(size= 0.3, linetype= "solid", color= "black"))+
-    scale_fill_discrete(name= "Month")
-  
-ggplot(dat=DENnas)+
-  geom_point(mapping=aes(x=NAS_DELAY, y=ARR_DELAY, color=MONTH), position= "jitter")+
-  labs(x="National Air System Delay (Minutes)", y= "Arrival Delay (Minutes)", title= "National Air System Delay and Arrival Time")+
-  scale_color_gradientn(colors= rainbow(6))+
-  theme(legend.background= element_rect(size= 0.3, linetype= "solid", color= "black"))+
-  scale_fill_discrete(name= "Month")
-```
-
-![](Plots/Group Plot 2.1.png)
-![](Plots/Group Plot 2.2.png)
----
-
-###Recomended (Chris)
-
----
+2. We can see if there is an overarching theme of which carriers tend to have a larger proportion of delayed fights relative to other carriers. For example, WV appeared to have the most delayed flights relative to every other carrier in every length of flight. On the other hand, VX, NK, B6, and AS had a lot less delayed flights compared to the other carriers.
 
 ## Effect of Carriers on Arriving Late to DIA  (James)
 ![](plots/arr_late_carrier.png)
@@ -214,20 +206,25 @@ ggplot(data=prob_vs_carrier)+geom_point(aes(x=CARRIER,y=prob))+labs(x="Carrier",
 
 ```
 
-## Desination, Departure Time (Chris)
-
-## Arrival Time, Air Time (Amanda)
-
-## Month and Day Delays(Anna)
+## Month and Day Delays (Anna)
 Although Month and Day are likely not correlated, it is still important to check. 
 ``` {r, eval=FALSE}
+DENflights <- COflights %>%
+  filter (ORIGIN== 'DEN', CANCELLED== 0, DIVERTED== 0)
+
 DENmon <-DENflights %>%
   mutate(DELAY= ARR_DELAY>=15) %>%
   select ("MONTH", "DELAY", "ARR_DELAY")
 
+DENjan <- DENmon %>%
+  filter(MONTH== 1)
+
 DENday <-DENflights %>%
   mutate(DELAY= ARR_DELAY>=15) %>%
-  select ("DAY_OF_", "DELAY", "ARR_DELAY")
+  select ("DAY_OF_MONTH", "DELAY", "ARR_DELAY")
+
+DENsev <- DENday %>%
+  filter(DAY_OF_MONTH== 7)
 
 ggplot (data= DENmon)+
   geom_bar(mapping= aes(x= as.factor(MONTH), fill= DELAY), position= "fill")+
@@ -247,4 +244,9 @@ ggplot (data= DENday)+
 ![](Plots/Anna's Plot 1.png) 
 ![](Plots/Anna's Plot 2.png)
 
-As you can see from the plots, there is not any strong correlation between Day or Month.There is slightly more delays in the Winter months, but not enough to make any significant difference between months.
+As you can see from the plots, there is not any strong correlation between Day or Month. There is slightly more delays in the winter months, but not enough to make any significant difference between months. Below is the joint probabilities of the highest percent missed in each category.
+
+__Probability a Plane was Late and the month was January: 16691/221148__
+
+__Probability a Plane was Late and the day was the 7th: 7039/221148__
+
