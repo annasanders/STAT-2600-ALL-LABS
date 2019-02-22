@@ -100,7 +100,7 @@ ggplot(dat=DENnas)+
 ---
 
 ###Recomended
-While we believe to have isolated certain factors associated with delays, some of these factors cannot be helped. For example, in order for airports to make money, they must have airplanes fly in and out of the airport. This means an airport cannot be picky about which carriers they allow to land. Similarly, the National Air System (NAS) is not controlled by any one airport, so any NAS delay cannot be prevented by the airports.
+While we believe to have isolated certain factors associated with delays, some of these factors cannot be helped. For example, in order for airports to make money, they must have airplanes fly in and out of the airport. This means an airport cannot be picky about which carriers they allow to land. Similarly, the National Air System (NAS) is not controlled by any one airport, so any NAS delay cannot be prevented by the airports. Some more contributions that can not be changed are the distance away an airport is, or the city a plane flies in to. These are basic staples of travel, so there is nothing DIA can do to improve upon these factors that cause delays. 
 
 ---
 ## Desination, Departure Time (Chris)
@@ -113,6 +113,12 @@ __The impact of distance and departure delay:__
 ![](plots/lab6_plot2.png)
 
 As seen in this plot, the distance an airport is away from DIA does impact if there will be a delay or not. If an airport is under 1500 miles away from DIA, there is a much higher probability that there will be a delay than if it is 2000 miles or further away. Around 1000 miles away has the largest probability of being delayed. 
+
+There are probabilites calculated below: 
+
+Probability that a flight is delayed given its within 1000 miles of DIA: 0.1722
+Probability that a flight is delayed given its within 1000-2000 miles of DIA: 0.245
+Probability that a flight is delayed given its within 2000-3000 miles of DIA: 0.1245
 
 ```{r, eval=FALSE}
 
@@ -150,6 +156,26 @@ ggplot(dist_den , aes(x = DISTANCE, y = prob_delayed2, color = DISTANCE))+
   geom_point()+
   labs(x = "distance" , y= "Probability delayed", title= "Distance's impact on delays")
 
+den_probs <- filter(COflights,ORIGIN == 'DEN') %>%
+  select(ORIGIN, DEST, DEP_TIME, DEP_DELAY, DISTANCE) %>%
+  na.omit %>%
+  group_by(DISTANCE) %>%
+  summarize(count2 = n()) 
+
+smalldist <- filter(den_probs, DISTANCE <= 1000) %>%
+ summarize(total_Delayed = sum(count2))
+prob1 = 157268/(4*221780)
+#this probability is 0.1772
+
+smalldist2 <- filter(den_probs, DISTANCE <= 2000) %>%
+ summarize(total_Delayed = sum(count2))
+prob2 = 220535/(4*221780)
+#this probability is 0.245
+
+smalldist3 <- filter(den_probs, DISTANCE <= 3000) %>%
+ summarize(total_Delayed = sum(count2))
+prob3 = 220976/(8*221780)
+# this probability is 0.1245
 ```
 
 ## Arrival Time, Air Time (Amanda)
