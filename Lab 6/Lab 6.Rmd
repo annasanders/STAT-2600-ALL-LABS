@@ -171,6 +171,41 @@ This plot also compares a second variable to the timeliness of a flight: carrier
 
 2. We can see if there is an overarching theme of which carriers tend to have a larger proportion of delayed fights relative to other carriers. For example, WV appeared to have the most delayed flights relative to every other carrier in every length of flight. On the other hand, VX, NK, B6, and AS had a lot less delayed flights compared to the other carriers.
 
+The following is the code for calculating the probability that a flight will be delayed arriving into Denver, given the airtime of the flight. From these calculations, we see that the probability of a flight being delayed actually increases as the airtime increases.
+
+``` {r, eval=FALSE}
+#calculate probability of being late given airtime 1 hour
+LateAndAirtimeOne <- filter(lateFlights, LATE == 1, AIRTIME_HOURS == 1)
+AirtimeOne <- filter(lateFlights, AIRTIME_HOURS == 1)
+probOne = 2591/15631
+#probability is 0.16576
+
+#calculate probability of being late given airtime 2 hours
+LateAndAirTimeTwo <- filter(lateFlights, LATE == 1, AIRTIME_HOURS == 2)
+AirTimeTwo <- filter(lateFlights, AIRTIME_HOURS == 2)
+probTwo = 18374/110496
+#probability is 0.16629
+
+#calculate probability of being late given airtime 3 hours
+LateAndAirTimeThree <- filter(lateFlights, LATE == 1, AIRTIME_HOURS == 3)
+AirTimeThree <- filter(lateFlights, AIRTIME_HOURS == 3)
+probThree = 15496/74960
+#probability is 0.20672
+
+#calculate probability of being late given airtime 4 hours
+LateAndAirTimeFour <- filter(lateFlights, LATE == 1, AIRTIME_HOURS == 4)
+AirTimeFour <- filter(lateFlights, AIRTIME_HOURS == 4)
+probFour = 4493/18638
+#probability is 0.24106
+
+#calculate probability of being late given airtime 5 hours
+LateAndAirTimeFive <- filter(lateFlights, LATE == 1, AIRTIME_HOURS == 5)
+AirTimeFive <- filter(lateFlights, AIRTIME_HOURS == 5)
+probFive = 193/317
+#probability is 0.60883
+
+```
+
 ## Effect of Carriers on Arriving Late to DIA  (James)
 ![](plots/arr_late_carrier.png)
 
