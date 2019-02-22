@@ -102,12 +102,33 @@ ggplot(dist_den , aes(x = DISTANCE, y = prob_delayed2, color = DISTANCE))+
 
 ## Arrival Time, Air Time (Amanda)
 
+![](/Users/amandaliddle4/Library/Mobile\ Documents/com\~apple\~CloudDocs/Data\ Science/STAT-2600-ALL-LABS/Lab\ 6/plots/AmandaFinalFlightPlot.png)
+
 ``` {r, eval=FALSE}
+
 lateFlights <- COflights %>%
 mutate(LATE=ifelse(ARR_DELAY >=15,1,0)) %>% mutate(AIRTIME_HOURS = ceiling(AIR_TIME/60))
+lateFlights <- COflights %>%
+    mutate(LATE=ifelse(ARR_DELAY >=15,1,0)) %>% mutate(AIRTIME_HOURS = ceiling(AIR_TIME/60))
 #view(lateFlights)
-ggplot(data = lateFlights) + geom_col(aes(x=AIRTIME_HOURS, y=LATE, fill = AIRTIME_HOURS)) + labs(x="Airtime of Flights (Hours)", y="Number of Arrival Delays", title = "Number of Arrival Delays Into Denver Grouped by Length of Flight") +  theme(legend.position = "none")
+ggplot(data = lateFlights) + geom_col(aes(x=AIRTIME_HOURS, y=LATE, fill = CARRIER)) + 
+labs(x="Airtime of Flights (Hours)", y="Number of Arrival Delays", title = "Number of Arrival Delays Into Denver Grouped by Length of Flight")
+
 ```
+
+This plot looks at the relationship between the length of a fight (how long the plane is in the air for) and compares it to whether or not the
+flight is delayed or not, in order to visualize if there is a correlation between the airtime of a flight and it's chances of being delayed. The graph shows 
+that most flights were delayed when they were around one hour long, and as the length of flights increased, the number of delayed flights started decreasing.
+This plot also compares a second variable to the timeliness of a flight: carrier. For each type of flight (based on airtime), the plot
+illustrates the proportion of those delayed flights that were by a certain character. From this depiction, two observations can be seen:
+1.  We can see if certain carriers have more late flights of one length than of another length. For example, from the plot we can see that in the smallest flight length category,
+    OO was responsible for all of the late flights, but they had a lot less late flights in the other categories. This could either be because
+    this airline has some problem with their shorter flights that makes them delayed more, or they could just have more short flights in general,
+    so they naturally see more delayed flights that are short.
+2. We can see if there is an overarching theme of which carriers tend to have a larger proportion of delayed fights relative to other carriers.
+    For example, WV appeared to have the most delayed flights relative to every other carrier in every length of flight. 
+    On the other hand, VX, NK, B6, and AS had a lot less delayed flights compared to the other carriers.
+ 
 
 
 
