@@ -97,11 +97,15 @@ ggplot(dat=DENnas)+
 
 ![](Plots/Group Plot 2.1.png)
 ![](Plots/Group Plot 2.2.png)
+
+It is evident that any delay of NAS or security would have a direct impact on arrival delay. On the NAS and arrival delay graph, there is a clear positive linear relation to arrival delay time.
+
 ---
 
 ###Recommendations
 While we believe to have isolated certain factors associated with delays, some of these factors cannot be helped. For example, in order for airports to make money, they must have airplanes fly in and out of the airport. This means an airport cannot be picky about which carriers they allow to land. Similarly, the National Air System (NAS) is not controlled by any one airport, so any NAS delay cannot be prevented by the airports. Some more contributions that can not be changed are the distance away an airport is, or the city a plane flies in to. These are basic staples of travel, so there is nothing DIA can do to improve upon these factors that cause delays. 
-Also, to make better recommendations, it's neccesary for DIA to report the cause of the delay more consistently. In the data set, there are many flights that are reported to be delayed, but with no data on specific types of delays. For example, there are plenty of B6 flights that were delayed, but there was no data given for weather delay, security delay, etc. So with that said, it would be beneficial for DIA to continue to collect more data, but to also try to record data for each measured quantity. 
+
+Also, to make better recommendations, it's necessary for DIA to report the cause of the delay more consistently. In the data set, there are many flights that are reported to be delayed, but with no data on specific types of delays. For example, there are plenty of B6 flights that were delayed, but there was no data given for weather delay, security delay, etc. So with that said, it would be beneficial for DIA to continue to collect more data, but to also try to record data for each measured quantity. 
 
 ---
 ## Desination, Departure Time (Chris)
@@ -111,11 +115,12 @@ __The impact of destination and departure delay:__
 As seen in this plot, the destination of flights leaving DIA has a large impact on the probability of there being a departure delay. 
 
 __The impact of distance and departure delay:__
+
 ![](plots/lab6_plot2.png)
 
 As seen in this plot, the distance an airport is away from DIA does impact if there will be a delay or not. If an airport is under 1500 miles away from DIA, there is a much higher probability that there will be a delay than if it is 2000 miles or further away. Around 1000 miles away has the largest probability of being delayed. 
 
-There are probabilites calculated below: 
+There are probabilities calculated below: 
 
 Probability that a flight is delayed given its within 1000 miles of DIA: 0.1722
 Probability that a flight is delayed given its within 1000-2000 miles of DIA: 0.245
@@ -307,8 +312,12 @@ __Probability a Plane was Late and the day was the 7th: 7039/221148__
 
 ## Summary
 
-Amanda: I used the geom_col() function to plot out the effects of airtime on whether a flight was delayed or not. I first used the mutate function so that I was only looking at flights with the origin of Denver International Airport, and I also used it to measure airtime in hours. I also used the round function so that airtime would be only representative of integers, rather than being 1.1 hours, 1.11 hours, etc. This way, the bars of my graph would be separated by about how many hours the flight was. Then I created a variable that tells me whether or not a flight is late (if it arrives late, then it has value of 1). So for each airtime length, I could count up how many late fights it had. I also used the fill function to color code the bars by carrier so I could see which airlines had more late flights in each category of airtime length. I also used the label function to put labels on my graph.
+__Amanda:__ I used the geom_col() function to plot out the effects of airtime on whether a flight was delayed or not. I first used the mutate function so that I was only looking at flights with the origin of Denver International Airport, and I also used it to measure airtime in hours. I also used the round function so that airtime would be only representative of integers, rather than being 1.1 hours, 1.11 hours, etc. This way, the bars of my graph would be separated by about how many hours the flight was. Then I created a variable that tells me whether or not a flight is late (if it arrives late, then it has a value of 1). So for each airtime length, I could count up how many late fights it had. I also used the fill function to color code the bars by carrier so I could see which airlines had more late flights in each category of airtime length. I also used the label function to put labels on my graph.
 
-Chris: I used the geom_col and geom_point functions to plot two different graphs of different impacts on delays (certain airports flown into and distance respectively). I used the coloring functions, coordinate flip commnds, and labeled the graphs. I counted up total delayed flights given a certain condition (mostly given a certain geographical distance from DIA) and then compared that to total delayed flights. I used my plots to show the probability of having a delayed flight given flying into certain airports and given how far away the airport is from DIA. I found certain airports are more likely to have delays and that the peak amount of delays are for airports that are around 1000-2000 miles away from DIA. 
+__Chris:__ I used the geom_col and geom_point functions to plot two different graphs of different impacts on delays (certain airports flown into and distance respectively). I used the coloring functions, coordinate flip commands, and labeled the graphs. I counted up total delayed flights given a certain condition (mostly given a certain geographical distance from DIA) and then compared that to total delayed flights. I used my plots to show the probability of having a delayed flight given flying into certain airports and given how far away the airport is from DIA. I found certain airports are more likely to have delays and that the peak amount of delays are for airports that are around 1000-2000 miles away from DIA. 
 
-James: I used mainly the geom_point function to plot the conditional probabilities of being late given carrier. I labeled each graph using the labs function and included a horizontal line on one plot to indicate the probability of being late in general. 
+__James:__ I used mainly the geom_point function to plot the conditional probabilities of being late given carrier. I labeled each graph using the labs function and included a horizontal line on one plot to indicate the probability of being late in general. 
+
+__Anna:__ I used geom_bar to help plot out the percent of planes on each day and month that were delayed. Since each day/month had a different amount of planes going out of the airport, I thought it would be best to use the position= 'fill' argument to normalize the bars to make it easier to see the differences in delays across all days. I also used different colors on my graphs to make them easier to read.
+
+__Group:__ The first group plot used geom_point to help show the probability that a certain carrier would be late. We thought this would be the easiest way to represent probability data. The second group plot also used geom_point to help show the relation between NAS or security delay with arrival delay. We chose to add a tertiary variable of month in order to see if there was any clear relationship between months and security or NAS delay (if some months had more delays than others).  
