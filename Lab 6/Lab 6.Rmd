@@ -153,21 +153,17 @@ ggplot(dist_den , aes(x = DISTANCE, y = prob_delayed2, color = DISTANCE))+
 ```
 
 ## Arrival Time, Air Time (Amanda)
-![](plots/AmandaFinalFlightPlot.png)
+![](plots/amandaRealPlot.png)
 
 ``` {r, eval=FALSE}
 
-lateFlights <- COflights %>%
-mutate(LATE=ifelse(ARR_DELAY >=15,1,0)) %>% mutate(AIRTIME_HOURS = ceiling(AIR_TIME/60))
-lateFlights <- COflights %>%
-    mutate(LATE=ifelse(ARR_DELAY >=15,1,0)) %>% mutate(AIRTIME_HOURS = ceiling(AIR_TIME/60))
-#view(lateFlights)
-ggplot(data = lateFlights) + geom_col(aes(x=AIRTIME_HOURS, y=LATE, fill = CARRIER)) + 
-labs(x="Airtime of Flights (Hours)", y="Number of Arrival Delays", title = "Number of Arrival Delays Into Denver Grouped by Length of Flight")
+    lateFlights <- filter(COflights, ORIGIN == 'DEN') %>% mutate(LATE=ifelse(ARR_DELAY >=15,1,0)) %>% mutate(AIRTIME_HOURS = ceiling(AIR_TIME/60))
+
+    ggplot(data = lateFlights) + geom_col(aes(x=AIRTIME_HOURS, y=LATE, fill = CARRIER)) + labs(x="Airtime of Flights (Hours)", y="Number of Arrival Delays", title = "Number of Arrival Delays Into Denver Grouped by Length of Flight")
 
 ```
 
-This plot looks at the relationship between the length of a fight (how long the plane is in the air for) and compares it to whether or not the flight is delayed or not, in order to visualize if there is a correlation between the airtime of a flight and its chances of being delayed. The graph shows that most flights were delayed when they were around one hour long, and as the length of flights increased, the number of delayed flights started decreasing.
+This plot looks at the relationship between the length of a flight (how long the plane is in the air for) and compares it to whether or not the flight is delayed or not, in order to visualize if there is a correlation between the airtime of a flight and its chances of being delayed. The graph shows that most flights were delayed when they were around one hour long, and as the length of flights increased, the number of delayed flights started decreasing.
 
 This plot also compares a second variable to the timeliness of a flight: carrier. For each type of flight (based on airtime), the plot illustrates the proportion of those delayed flights that were by a certain character. From this depiction, two observations can be seen:
 
