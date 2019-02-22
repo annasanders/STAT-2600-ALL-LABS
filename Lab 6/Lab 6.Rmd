@@ -1,6 +1,6 @@
 ---
 title: "Lab 6"
-author: "Data Me Pls"
+author: "Data Me Pls: Chris, Amanda, James, Anna"
 date: "February 19, 2019"
 output: html_document
 ---
@@ -12,21 +12,16 @@ library(tidyverse)
 COflights <- read_csv("https://files.osf.io/v1/resources/3z5as4pej8/providers/osfstorage/5a8ca28f57103100104584db")
 ```
 
-# DIA is NOT a Conspiracy
+# The Causes of Delays in Denver International Airport
 
-### Why it is imporant
-Most people hate when their flight is delayed. Not only does it cause problems with scheduling for the airports, it also can cause chaos with passenger's own inteneraries. In order to keep passengers happy and airports running smoothly, the airport must know why flights arrive later than expected.
+### Why it is important
+Most people hate when their flight is delayed. Not only does it cause problems with scheduling for the airports, but it also can cause chaos with passenger's own itineraries. In order to keep passengers happy and airports running smoothly, the airport must know why flights arrive later than expected.
+
+In particular, the question of why some flights are delayed is complex, as a number of issues can arise which can cause a delay. Below, we have analyzed multiple factors that could contribute to an airplane delay and have come up with recommendations in how the airport could try and solve the issues.
 
 ---
 
-### Group Plot 
-![](plots/dep_late_carrier.png)
-
-From this plot, it is clear that there are some airlines that have a significantly higher probability of arriving late. In the plot above, the horizontal line is the general probability of arriving late. Out of all the carriers above the horizontal line, the most popular carrier is WN, or more commonly known as SouthWest Airlines. Also, B6 (JetBlue) has the highest probability of being late. 
-
-### Group Plot 2
-Most people would agree that a Security Delay or a delay with the National Air System, or the a delay caused by a disturbance within our national airspace, causes delay, but the question is how much of a delay and how often does it occur. Below is the summary of data.
-
+### Group Plot 1
 ```{r, eval=FALSE}
 #Plot
 ggplot(data=DENflights_test)+geom_bar(aes(x=CARRIER,fill=as.factor(LATE)),position="Dodge")+labs(x="Carrier",y="count",title='Late Flights Per Carrier')
@@ -49,8 +44,13 @@ ggplot(data=prob_vs_carrier)+geom_point(aes(x=CARRIER,y=prob))+labs(x="Carrier",
 
 ```
 
-## Security Delay, National Air System Delay
+![](plots/dep_late_carrier.png)
+
+From this plot, it is clear that there are some airlines that have a significantly higher probability of arriving late. In the plot above, the horizontal line is the general probability of arriving late. Out of all the carriers above the horizontal line, the most popular carrier is WN, or more commonly known as SouthWest Airlines. Also, B6 (JetBlue) has the highest probability of being late. 
+
+### Group Plot 2
 Most people would agree that a Security Delay or a delay with the National Air System, or the a delay caused by a disturbance within our national airspace, causes delay, but the question is how much of a delay and how often does it occur. Below is the summary of data.
+
 ```{r, eval=FALSE}
 DENflights <- COflights %>%
   filter (ORIGIN== 'DEN', CANCELLED== 0, DIVERTED== 0)
@@ -67,17 +67,17 @@ DENtdelay <- COflights %>%
   filter (ARR_DELAY >= 15)
 ```
 
-__Probability that a DEN Flight will be Delayed for Security Reasons : 38/2231148__
+__Probability that a DEN Flight will be Delayed for Security Reasons: 38/2231148__
 
 __Probability that a DEN Flight that has Security Delay is Delayed: 38/38__
 
-__Percent of Delays that are for Security Reasons : 38/82183__
+__Percent of Delays that are for Security Reasons: 38/82183__
 
-__Probability that a DEN Flight will be Delayed for National Air System Reasons : 23199/221148__
+__Probability that a DEN Flight will be Delayed for National Air System Reasons: 23199/221148__
 
 __Probability that a DEN Flight that has National Air System Delay is Delayed: 23199/23199__
 
-__Percent of Delays that are for National Air System Reaons : 23199/82183__
+__Percent of Delays that are for National Air System Reaons: 23199/82183__
 
 ```{r, eval=FALSE}
 ggplot(dat=DENsec)+
@@ -100,21 +100,19 @@ ggplot(dat=DENnas)+
 ---
 
 ###Recomended
-While we believe to have isolated certain factors associated with delays, some of these factors cannot be helped. For example, in order for airports to make money, they must have airplanes fly in and out of the airport. This means an airport cannot be picky on which carriers they allow to land. Similarly, the National Air System (NAS) is not controlled by any one aiport, so any NAS delay cannot be prevented by the airports.
+While we believe to have isolated certain factors associated with delays, some of these factors cannot be helped. For example, in order for airports to make money, they must have airplanes fly in and out of the airport. This means an airport cannot be picky about which carriers they allow to land. Similarly, the National Air System (NAS) is not controlled by any one airport, so any NAS delay cannot be prevented by the airports.
 
 ---
 ## Desination, Departure Time (Chris)
-
-The impact of destination and departure delay: 
+__The impact of destination and departure delay:__ 
 ![](plots/lab6_plot1.png)
 
 As seen in this plot, the destination of flights leaving DIA has a large impact on the probability of there being a departure delay. 
 
-The impact of distance and departure delay:
-
+__The impact of distance and departure delay:__
 ![](plots/lab6_plot2.png)
 
-As seen in this plot, the distance an airport is away from DIA does impact if there will be a delay or not. If an airport is under 1500 miles away from DIA, there is a much higher proabbility that there will be a delay than if it is 2000 miles or further away. Around 1000 miles away has the largest probability of being delayed. 
+As seen in this plot, the distance an airport is away from DIA does impact if there will be a delay or not. If an airport is under 1500 miles away from DIA, there is a much higher probability that there will be a delay than if it is 2000 miles or further away. Around 1000 miles away has the largest probability of being delayed. 
 
 ```{r, eval=FALSE}
 
@@ -155,8 +153,7 @@ ggplot(dist_den , aes(x = DISTANCE, y = prob_delayed2, color = DISTANCE))+
 ```
 
 ## Arrival Time, Air Time (Amanda)
-
-![](/Users/amandaliddle4/Library/Mobile\ Documents/com\~apple\~CloudDocs/Data\ Science/STAT-2600-ALL-LABS/Lab\ 6/plots/AmandaFinalFlightPlot.png)
+![](plots/AmandaFinalFlightPlot.png)
 
 ``` {r, eval=FALSE}
 
@@ -170,11 +167,10 @@ labs(x="Airtime of Flights (Hours)", y="Number of Arrival Delays", title = "Numb
 
 ```
 
-This plot looks at the relationship between the length of a fight (how long the plane is in the air for) and compares it to whether or not the
-flight is delayed or not, in order to visualize if there is a correlation between the airtime of a flight and it's chances of being delayed. The graph shows that most flights were delayed when they were around one hour long, and as the length of flights increased, the number of delayed flights started decreasing.
+This plot looks at the relationship between the length of a fight (how long the plane is in the air for) and compares it to whether or not the flight is delayed or not, in order to visualize if there is a correlation between the airtime of a flight and its chances of being delayed. The graph shows that most flights were delayed when they were around one hour long, and as the length of flights increased, the number of delayed flights started decreasing.
 
-This plot also compares a second variable to the timeliness of a flight: carrier. For each type of flight (based on airtime), the plot
-illustrates the proportion of those delayed flights that were by a certain character. From this depiction, two observations can be seen:
+This plot also compares a second variable to the timeliness of a flight: carrier. For each type of flight (based on airtime), the plot illustrates the proportion of those delayed flights that were by a certain character. From this depiction, two observations can be seen:
+
 1.  We can see if certain carriers have more late flights of one length than of another length. For example, from the plot we can see that in the smallest flight length category, OO was responsible for all of the late flights, but they had a lot less late flights in the other categories. This could either be because this airline has some problem with their shorter flights that makes them delayed more, or they could just have more short flights in general, so they naturally see more delayed flights that are short.
 
 2. We can see if there is an overarching theme of which carriers tend to have a larger proportion of delayed fights relative to other carriers. For example, WV appeared to have the most delayed flights relative to every other carrier in every length of flight. On the other hand, VX, NK, B6, and AS had a lot less delayed flights compared to the other carriers.
@@ -182,7 +178,7 @@ illustrates the proportion of those delayed flights that were by a certain chara
 ## Effect of Carriers on Arriving Late to DIA  (James)
 ![](plots/arr_late_carrier.png)
 
-One interesting question is for all flights that arrive at DIA, does the carrier have any impact of the whether the flight was delayed. The answer is yes. Out of the all the carriers, the conditional probability of being late given that one flew Southwest Airlines is higher than the probability of arriving late. The probability of arriving late to DIA is 0.157, while the probability of arriving late given that one flew Southwest is 0.185. Another interesting fact is that by flying United Airlines, the probability of arriving late in DIA is 0.11. This means that if one wants to have a lower probability of arriving late, flying United would be a smart option. Given that these two carriers arrive the most at DIA, it is clear that United has an advantage if one wants to arrive on time. From the plot of conditional probabilities, it's clear that there are other carriers that have higher probabilities of being late, but given that there were fewer observations, it would be more adventageous to look at the two most popular carriers. 
+One interesting question is for all flights that arrive at DIA, does the carrier have any impact of the whether the flight was delayed. The answer is yes. Out of all the carriers, the conditional probability of being late given that one flew Southwest Airlines is higher than the probability of arriving late. The probability of arriving late to DIA is 0.157, while the probability of arriving late given that one flew Southwest is 0.185. Another interesting fact is that by flying United Airlines, the probability of arriving late in DIA is 0.11. This means that if one wants to have a lower probability of arriving late, flying United would be a smart option. Given that these two carriers arrive the most at DIA, it is clear that United has an advantage if one wants to arrive on time. From the plot of conditional probabilities, it's clear that there are other carriers that have higher probabilities of being late, but given that there were fewer observations, it would be more advantageous to look at the two most popular carriers. 
 
 ```{r, eval=FALSE}
 #Plot
