@@ -277,3 +277,9 @@ __Probability a Plane was Late and the month was January: 16691/221148__
 
 __Probability a Plane was Late and the day was the 7th: 7039/221148__
 
+
+## Summary
+
+Amanda: I used the geom_col() function to plot out the effects of airtime on whether a flight was delayed or not. I first used the mutate function so that I was only looking at flights with the origin of Denver International Airport, and I also used it to measure airtime in hours. I also used the round function so that airtime would be only representative of integers, rather than being 1.1 hours, 1.11 hours, etc. This way, the bars of my graph would be separated by about how many hours the flight was. Then I created a variable that tells me whether or not a flight is late (if it arrives late, then it has value of 1). So for each airtime length, I could count up how many late fights it had. I also used the fill function to color code the bars by carrier so I could see which airlines had more late flights in each category of airtime length. I also used the label function to put labels on my graph.
+
+
