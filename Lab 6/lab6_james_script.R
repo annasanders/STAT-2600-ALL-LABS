@@ -64,3 +64,7 @@ aircraft_delay_prob<-DENdepart_w_WD %>%
   mutate(prob=both/ACD)
 view(DENdepart_w_WD)
 view(DENdepart)
+
+#ANALYSIS ON B6
+B6_flights<-filter(DENdepart,CARRIER=="B6")
+view(B6_flights)
