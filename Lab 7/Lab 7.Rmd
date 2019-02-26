@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, eval=FALSE}
 ## RUN THIS CODE TO GET THE DATA! (WE CAN TIDY LATER)
 library(tidyverse)
-housepwr <- read.delim2("household_power_consumption.txt",
+housepwr <- read.delim2(unz("household_power_consumption.zip", "household_power_consumption.txt"),
                         sep= ";", header= FALSE)
 ```
 
