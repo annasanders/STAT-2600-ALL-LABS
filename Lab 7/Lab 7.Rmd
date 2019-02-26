@@ -1,0 +1,29 @@
+---
+title: "Lab 7"
+author: "Data Me Pls: Chris, James, Amanda, Anna"
+date: "February 22, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, eval=FALSE}
+## RUN THIS CODE TO GET THE DATA! (WE CAN TIDY LATER)
+library(tidyverse)
+housepwr <- read.delim2("household_power_consumption.txt",
+                        sep= ";", header= FALSE)
+```
+
+# Findings
+
+---
+
+## Amanda
+
+## James
+
+## Chris
+
+## Anna
