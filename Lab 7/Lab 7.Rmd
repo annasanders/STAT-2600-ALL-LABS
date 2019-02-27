@@ -12,7 +12,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, eval=FALSE}
 ## RUN THIS CODE TO GET THE DATA! (WE CAN TIDY LATER)
 library(tidyverse)
-housepwr <- read.delim2(unz("household_power_consumption.zip", "household_power_consumption.txt"),
+
+household_power_consumption <- read.csv("~/Downloads/household_power_consumption.txt", header=FALSE, sep=";")housepwr <- read.delim2(unz("household_power_consumption.zip", "household_power_consumption.txt"),
                         sep= ";", header= FALSE)
 ```
 
@@ -26,10 +27,19 @@ housepwr <- read.delim2(unz("household_power_consumption.zip", "household_power_
 
 ## Amanda
 
-How does energy consumption in the kitchen change across months?
-How does the proportion of each type of energy consumption change across months?
+```
+householdPowerConsumption <- read.table("~/Downloads/household_power_consumption.txt", header=T, na.strings=c("NA", "", "?"), sep=";", stringsAsFactors = FALSE)
 
-How do i address question
+householdPwr <- householdPowerConsumption %>% separate(Date, into=c("Day", "Month", "Year"), sep = "/", convert = TRUE)
+View(householdPwr)
+
+```
+
+
+       
+
+
+
 
 -graph
 -summary statistic
