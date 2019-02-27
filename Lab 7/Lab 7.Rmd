@@ -18,9 +18,22 @@ housepwr <- read.delim2(unz("household_power_consumption.zip", "household_power_
 
 # Findings
 
+# Dataset Description
+
+
+
 ---
 
 ## Amanda
+
+How does energy consumption in the kitchen change across months?
+How does the proportion of each type of energy consumption change across months?
+
+How do i address question
+
+-graph
+-summary statistic
+
 
 ## James
 
