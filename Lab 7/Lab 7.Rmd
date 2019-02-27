@@ -9,23 +9,31 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r, eval=FALSE}
-## RUN THIS CODE TO GET THE DATA! (WE CAN TIDY LATER)
-library(tidyverse)
-housepwr <- read.table(unz("household_power_consumption.zip", "household_power_consumption.txt"),
-                        sep= ";", header= T, na.strings = c("NA","","?"), stringsAsFactors = FALSE)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 ```
-str
+
+```{r, eval=FALSE}
+library(tidyverse)
+install.packages("data.table")
+library(data.table)
+housepwr <- read.delim(unz("household_power_consumption.zip", "household_power_consumption.txt"),
+                       sep= ";", 
+                       header= TRUE, 
+                       na.strings= c("NA","","?"), 
+                       stringsAsFactors= FALSE)
+
+housemon <- housepwr %>%
+  separate(Date, into= c("day","month","year"), sep= "/", convert= TRUE)
+```
+
 # Findings
 
 # Dataset Description
 
-
-
 ---
-
-## Amanda
-
+  
+## Amanda (month, submetering 1)
 How does energy consumption in the kitchen change across months?
 How does the proportion of each type of energy consumption change across months?
 
@@ -33,12 +41,11 @@ How do i address question
 
 -graph
 -summary statistic
-
-
+  
 ## James
-
-## Chris
-
+  
+## Chris (global, month)
 How does average global active power change every month throughout the four years? 
+  
+## Anna (month, submetering 3)
 
-## Anna
