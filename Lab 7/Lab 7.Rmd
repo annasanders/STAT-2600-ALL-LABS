@@ -12,10 +12,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, eval=FALSE}
 ## RUN THIS CODE TO GET THE DATA! (WE CAN TIDY LATER)
 library(tidyverse)
-housepwr <- read.delim2(unz("household_power_consumption.zip", "household_power_consumption.txt"),
-                        sep= ";", header= FALSE)
+housepwr <- read.table(unz("household_power_consumption.zip", "household_power_consumption.txt"),
+                        sep= ";", header= T, na.strings = c("NA","","?"), stringsAsFactors = FALSE)
 ```
-
+str
 # Findings
 
 # Dataset Description
@@ -38,5 +38,7 @@ How do i address question
 ## James
 
 ## Chris
+
+How does average global active power change every month throughout the four years? 
 
 ## Anna
