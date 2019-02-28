@@ -44,10 +44,13 @@ How do i address question
 How does average global active power change every month throughout the four years? 
 
 ```{r, eval=FALSE}
-householdpwr <- housepwr %>% 
+householdpwr<-housepwr %>% 
   separate(Date, into = c("Day","Month","Year"), sep = "/", convert = TRUE) %>%
-  select(Day,Month,Year,Global_active_power) %>%
-  summarize(mean_pwr = mean(Global_active_power)
+  select(Day,Month,Year,Global_active_power)
+
+householdpwr2 <- householdpwr %>%
+  group_by(Year, Month) %>%
+  summarize(mean_pwr = mean(Global_active_power, na.rm = TRUE) , count = n())
 
 ```
 ## Anna
