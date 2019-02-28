@@ -9,81 +9,45 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ```{r, eval=FALSE}
+## RUN THIS CODE TO GET THE DATA! (WE CAN TIDY LATER)
 library(tidyverse)
-<<<<<<< HEAD
-
-household_power_consumption <- read.csv("~/Downloads/household_power_consumption.txt", header=FALSE, sep=";")housepwr <- read.delim2(unz("household_power_consumption.zip", "household_power_consumption.txt"),
-                        sep= ";", header= FALSE)
-=======
-install.packages("data.table")
-library(data.table)
-housepwr <- read.delim(unz("household_power_consumption.zip", "household_power_consumption.txt"),
-                       sep= ";", 
-                       header= TRUE, 
-                       na.strings= c("NA","","?"), 
-                       stringsAsFactors= FALSE)
-
-housemon <- housepwr %>%
-  separate(Date, into= c("day","month","year"), sep= "/", convert= TRUE)
->>>>>>> master
 housepwr <- read.table(unz("household_power_consumption.zip", "household_power_consumption.txt"),
                         sep= ";", header= T, na.strings = c("NA","","?"), stringsAsFactors = FALSE)
 na.omit(housepwr)
  
 ```
-
+str
 # Findings
 
 # Dataset Description
 
+
+
 ---
-<<<<<<< HEAD
 
 ## Amanda
 
-```
-householdPowerConsumption <- read.table("~/Downloads/household_power_consumption.txt", header=T, na.strings=c("NA", "", "?"), sep=";", stringsAsFactors = FALSE)
-
-householdPwr <- householdPowerConsumption %>% separate(Date, into=c("Day", "Month", "Year"), sep = "/", convert = TRUE)
-View(householdPwr)
-
-```
-
-
-       
-
-
-=======
-  
-## Amanda (month, submetering 1)
 How does energy consumption in the kitchen change across months?
 How does the proportion of each type of energy consumption change across months?
->>>>>>> master
 
+How do i address question
 
 -graph
 -summary statistic
-  
-## James
-  
-## Chris (global, month)
-How does average global active power change every month throughout the four years? 
-  
-## Anna (month, submetering 3)
 
+
+## James
+
+## Chris
 
 How does average global active power change every month throughout the four years? 
 
 ```{r, eval=FALSE}
 householdpwr <- housepwr %>% 
- separate(Date, into = c("Day","Month","Year"), sep = "/", convert = TRUE) %>%
+  separate(Date, into = c("Day","Month","Year"), sep = "/", convert = TRUE) %>%
   select(Day,Month,Year,Global_active_power) %>%
-  #summarize(mean_pwr = mean(Global_active_power),count = n())
+  summarize(mean_pwr = mean(Global_active_power)
 
 ```
 ## Anna
