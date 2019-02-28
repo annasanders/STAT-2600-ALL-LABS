@@ -31,6 +31,10 @@ housepwr <- read.delim(unz("household_power_consumption.zip", "household_power_c
 housemon <- housepwr %>%
   separate(Date, into= c("day","month","year"), sep= "/", convert= TRUE)
 >>>>>>> master
+housepwr <- read.table(unz("household_power_consumption.zip", "household_power_consumption.txt"),
+                        sep= ";", header= T, na.strings = c("NA","","?"), stringsAsFactors = FALSE)
+na.omit(housepwr)
+ 
 ```
 
 # Findings
@@ -72,3 +76,14 @@ How does average global active power change every month throughout the four year
   
 ## Anna (month, submetering 3)
 
+
+How does average global active power change every month throughout the four years? 
+
+```{r, eval=FALSE}
+householdpwr <- housepwr %>% 
+ separate(Date, into = c("Day","Month","Year"), sep = "/", convert = TRUE) %>%
+  select(Day,Month,Year,Global_active_power) %>%
+  #summarize(mean_pwr = mean(Global_active_power),count = n())
+
+```
+## Anna
