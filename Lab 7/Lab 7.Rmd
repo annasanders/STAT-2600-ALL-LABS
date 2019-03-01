@@ -19,7 +19,7 @@ na.omit(housepwr)
 ```
 # Dataset Description
 
-This dataset is describing the energy consumption of one household near Paris, France over the course of four years. 
+This data set is describing the energy consumption of one household near Paris, France over the course of four years. 
 It reads in data for every minute of these four years to see their overall consumption, and their consumption in each category: heating and cooling, kitchen, and laundry.
 For every day, there is a separate time given by the hour and minutes to see how much energy they used at that time. 
 
@@ -32,8 +32,10 @@ We dealt with NAs by using the code: na.strings= c("NA","","?"). This made it so
 The question I wanted to answer was how does energy consumption in the kitchen change across months?
 
 To answer this question, I split up the date so that I could have year, month, and day all in their own columns so I could split all the data up by months.
+
 Then, I created a graph comparing the kitchen energy consumption month by month to see which month used the most. 
-I also used a function to change the names of the Months axis, changed the color of the bars so it would be more aesthetically pleasing, changed the labels of the axes, and flipped the coordinates.
+
+I also used a function to change the names of the Month's axis, changed the color of the bars so it would be more aesthetically pleasing, changed the labels of the axes, and flipped the coordinates.
 
 ![](Plots/amandaKitchen.png)
 
@@ -51,12 +53,30 @@ scale_x_discrete(limits = c("January", "February", "March", "April", "May", "Jun
 
 The data shows that there tends to be more kitchen energy consumption in the winter months, with the most use in January, and the least in August. August used half as much energy than January in the kitchen. 
 I thought this question was interesting because I wasn't sure if the time of year would have any effect on how much people use the kitchen. So when I made the graph, I was surprised to see that people did in fact use less energy in the kitchen in summer months.
-In order to figure out what question to do, I had to do some exploratory data analysis techniques. I had no idea what any of the categories were so the first step was to play with the numbers in each column and see how they were related to eachother.
+
+In order to figure out what question to do, I had to do some exploratory data analysis techniques. I had no idea what any of the categories were so the first step was to play with the numbers in each column and see how they were related to each other.
+
 I also played with summing up values and taking averages to see how much the data differed. I was really excited by the fact the data was split up into different categories, which is how  I decided to focus my research on the kitchen.
 
 Using the summary function, I looked at the maximum values of kitchen energy consumption versus the mean to see how different they were. The maximum value was 88 watt-hours and the average was 1.122 watt-hours, which tells me that there were some times where much more energy was needed in the kitchen than others.
 
 ## James
+
+Question: How does the energy consumption of air conditioning change in the summer months throughout each year? 
+
+My hypothesis is that the active energy increases each year for the summer months. For this problem, I filtered the months to only have May, June, July, and August. I then plotted the sub metering 3 data with color representing year, and I facet wrapped the months. I thought this would be an interesting question because the average temperature per year is increasing, so I wondered if one could see this correlation with the amount of energy used in air conditioning. 
+
+![](Plots/james_plot.png)
+
+This plot shows a lot of interesting features. In the month of May, it's clear that the active energy in 2010 was higher than in previous years. In fact, the average active energy increases from 5.15 to 6.51, to 6.96, to 8.18 in the month of May. In the month of June, the mean for 2010 is also higher than the previous years, but it's lower than the mean in May. In July, the average for 2010 isn't actually the highest, which is interesting. For July, 2008 had the highest average of 5.09. Given the data and the statistics, there is a partial answer to my question. It's easy to see from the plots that the 2010 data was always near the top compared to the other years. The cause of this isn't directly apparent due to many other variables that aren't accounted for in this data set. 
+
+```{r,eval=FALSE}
+data3<-data2 %>%
+  group_by(year)%>%
+  filter(month == c(5,6,7,8))
+ggplot(data=data3)+geom_smooth(aes(x=day,y=Sub_metering_3,color=as.factor(year)))+facet_wrap(~month)+
+  labs(x="Day of Month",y="Active Energy (Watt-Hour)",title="Air Cond. Usage in Summer Months",color="Year")
+```
 
 ## Chris
 
@@ -80,19 +100,19 @@ ggplot(householdpwr2 , aes(x = Month , y = mean_pwr , color = Year, group = Year
 ```
 ![](Plots/chris_lab7plot.png)
 
-Quesiton: how does average energy use change month by month, and how do these monthly changes compare yearly? 
+Question: How does average energy use change month by month, and how do these monthly changes compare yearly? 
 
 I addressed this question by sorting the given data set to reflect the average daily use of global power in a house over all the months of the year for a little over four years. I then made a plot of these findings to visualize the patterns that occur over this span of time. 
 
-I found that there are some monthly trends that occur over the span of the years. We see that energy consumption is much higher in the colder months (January-March and October-December) than in the warmer months (April-September). We see this trend as peaks in energy in December and January and significant drops in August. The trends remain consistent over the four years with some deviations, but generally retain the same patten. We don't see any yearly trends as every month in a year doesn't follow a strictly lower or strictly higher trend compared to previous years. I think my question is interesting becasue its informative for energy companies or people who are budgeting if they want to tie a monetary value as to when the most and least power are used. This monthly data can be reflective of other households in similar climates in the northern hemisphere. 
+I found that there are some monthly trends that occur over the span of the years. We see that energy consumption is much higher in the colder months (January-March and October-December) than in the warmer months (April-September). We see this trend as peaks in energy in December and January and significant drops in August. The trends remain consistent over the four years with some deviations, but generally retain the same pattern. We don't see any yearly trends as every month in a year doesn't follow a strictly lower or strictly higher trend compared to previous years. I think my question is interesting because its informative for energy companies or people who are budgeting if they want to tie a monetary value as to when the most and least power are used. This monthly data can be reflective of other households in similar climates in the northern hemisphere. 
 
-I came up with this quesstion after reading what the variables stood for. I saw organized columns with different variables, and one of them containted a date that was not parsed into day, month and year, so I wanted tow try and do this technique as practice. I also saw that every row was an observation based on time, so I knew my analysis should be dependent on time in some general sense; therefore, I chose a more macroscopic view of time and analyzed months and years. The final reason I chose to analyze monthly and yearly statistics for average power used was beccause I noticed there were 2 million different observations, and I wanted a more narrow scope to analyze as it compresses the large data set into a much more manageble set. 
+I came up with this question after reading what the variables stood for. I saw organized columns with different variables, and one of them contained a date that was not parsed into day, month and year, so I wanted to try and do this technique as practice. I also saw that every row was an observation based on time, so I knew my analysis should be dependent on time in some general sense; therefore, I chose a more macroscopic view of time and analyzed months and years. The final reason I chose to analyze monthly and yearly statistics for average power used was because I noticed there were 2 million different observations, and I wanted a more narrow scope to analyze as it compresses the large data set into a much more manageable set. 
 
 ## Anna
 
 The question that I am attempting to solve is: Is there a difference in energy usage for heating and cooling per over the years?
 
-To solve this question, I picked two months (June and December) where I though the difference between energy usage would be high (as many people use heating/cooling this month). I created many tibbles that isolated the time (in minutes) and Sub_metering_3 (which measured energy usage of heating and cooling). I choose one day out of each month and year combination (all around the same date) and made sure it had 1440 data points. I then put the data into a ggplot. I chose to use geom_step as the data was not a completly continuous series, but functioned close enough to one.
+To solve this question, I picked two months (June and December) where I thought the difference between energy usage would be high (as many people use heating/cooling this month). I created many tibbles that isolated the time (in minutes) and Sub_metering_3 (which measured energy usage of heating and cooling). I choose one day out of each month and year combination (all around the same date) and made sure it had 1440 data points. I then put the data into a ggplot. I chose to use geom_step as the data was not a completely continuous series, but functioned close enough to one.
 
 ```{r, eval=FALSE}
 # Loading the Data
@@ -104,6 +124,18 @@ housepwr <- read.delim(unz("household_power_consumption.zip", "household_power_c
  
 housemon <- housepwr %>% 
   separate(Date, into= c("day","month","year"), sep= "/", convert= TRUE)
+
+houseavg12 <- housemon%>%
+  filter(month==12)%>%
+  group_by(year, month)%>%
+  select("year", "Sub_metering_3")%>%
+  summarise(avg= mean(Sub_metering_3, na.rm= TRUE))
+
+houseavg6 <- housemon%>%
+  filter(month==6)%>%
+  group_by(year, month)%>%
+  select("year", "Sub_metering_3")%>%
+  summarise(avg= mean(Sub_metering_3, na.rm= TRUE))
 
 ## June Data and Plot
 house6.7 <- housemon%>%
@@ -199,5 +231,23 @@ ggplot()+
 ![](Plots/Anna's Plot 1.png)
 ![](Plots/Anna's Plot 2.png)
 
-As you can see from the graphs above, later years in both the months of June and December used more power overall; however, there is no significat difference between the years. This means that while it is likely that people use more power for heating/cooling than previous years, there is not a significant difference. This finding is important because as humanity looks towards being more energy conscious, it is important to see where energy usage has increased within the household. Then, companies and non-profits can help educate others decrease their overall energy usage.
+As you can see from the graphs above, later years in both the months of June and December used more power overall; however, there is no significant difference between the years. This means that while it is likely that people use more power for heating/cooling than previous years, there is not a significant difference. This finding is important because as humanity looks towards being more energy conscious, it is important to see where energy usage has increased within the household. Then, companies and non-profits can help educate others decrease their overall energy usage.
+
+Looking at the specific averages, there is not a significant difference in years. (All in WattHours)
+
+12/2006: 7.4
+
+12/2007: 8.1
+
+12/2008: 6.9
+
+12/2009: 8.6
+
+6/2007: 4.4
+
+6/2008: 6.7
+
+6/2009: 6.5
+
+6/2010: 7.1
 
