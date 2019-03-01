@@ -17,9 +17,6 @@ housepwr <- read.table(unz("household_power_consumption.zip", "household_power_c
 na.omit(housepwr)
  
 ```
-str
-
-
 # Dataset Description
 
 This dataset is describing the energy consumption of one household near Paris, France over the course of four years. 
@@ -28,10 +25,7 @@ For every day, there is a separate time given by the hour and minutes to see how
 
 We dealt with NAs by using the code: na.strings= c("NA","","?"). This made it so everything with one of those characters would be considered NA.
 
-
-<<<<<<< HEAD
 ---
-<<<<<<< HEAD
 
 ## Amanda (month, submetering 1)
 
@@ -61,9 +55,6 @@ In order to figure out what question to do, I had to do some exploratory data an
 I also played with summing up values and taking averages to see how much the data differed. I was really excited by the fact the data was split up into different categories, which is how  I decided to focus my research on the kitchen.
 
 Using the summary function, I looked at the maximum values of kitchen energy consumption versus the mean to see how different they were. The maximum value was 88 watt-hours and the average was 1.122 watt-hours, which tells me that there were some times where much more energy was needed in the kitchen than others.
-
-
-
 
 ## James
 
@@ -97,8 +88,6 @@ I found that there are some monthly trends that occur over the span of the years
 
 I came up with this quesstion after reading what the variables stood for. I saw organized columns with different variables, and one of them containted a date that was not parsed into day, month and year, so I wanted tow try and do this technique as practice. I also saw that every row was an observation based on time, so I knew my analysis should be dependent on time in some general sense; therefore, I chose a more macroscopic view of time and analyzed months and years. The final reason I chose to analyze monthly and yearly statistics for average power used was beccause I noticed there were 2 million different observations, and I wanted a more narrow scope to analyze as it compresses the large data set into a much more manageble set. 
 
-## Anna
-=======
 ## Anna
 
 The question that I am attempting to solve is: Is there a difference in energy usage for heating and cooling per over the years?
@@ -210,5 +199,5 @@ ggplot()+
 ![](Plots/Anna's Plot 1.png)
 ![](Plots/Anna's Plot 2.png)
 
-As you can see from the graphs above, later years in both the months of June and December used more power overall.
->>>>>>> master
+As you can see from the graphs above, later years in both the months of June and December used more power overall; however, there is no significat difference between the years. This means that while it is likely that people use more power for heating/cooling than previous years, there is not a significant difference. This finding is important because as humanity looks towards being more energy conscious, it is important to see where energy usage has increased within the household. Then, companies and non-profits can help educate others decrease their overall energy usage.
+
