@@ -76,25 +76,7 @@ householdpwr2 <- householdpwr %>%
   group_by(Year, Month) %>%
   summarize(mean_pwr = mean(Global_active_power, na.rm = TRUE) , count = n())
 
-ggplot(householdpwr2 , aes(x = Month , y = mean_pwr , color = Year, group = Year))+ 
-  geom_point()+ geom_path()+
-  scale_x_continuous(breaks = seq(1, 12, by = 1)) +
-  ylab('Average power used in a day per month (KW/H)')+
-  scale_colour_gradientn(colors=rainbow(4))
-
 ```
-<<<<<<< HEAD
-
-Quesiton: how does average energy use change month by month, and how do these monthly changes compare yearly? 
-
-I addressed this question by sorting the given data set to reflect the average daily use of global power in a house over all the months of the year for a little over four years. I then made a plot of these findings to visualize the patterns that occur over this span of time. 
-
-I found that there are some monthly trends that occur over the span of the years. We see that energy consumption is much higher in the colder months (January-March and October-December) than in the warmer months (April-September). We see this trend as peaks in energy in December and January and significant drops in August. The trends remain consistent over the four years with some deviations, but generally retain the same patten. We don't see any yearly trends as every month in a year doesn't follow a strictly lower or strictly higher trend compared to previous years. I think my question is interesting becasue its informative for energy companies or people who are budgeting if they want to tie a monetary value as to when the most and least power are used. This monthly data can be reflective of other households in similar climates in the northern hemisphere. 
-
-I came up with this quesstion after reading what the variables stood for. I saw organized columns with different variables, and one of them containted a date that was not parsed into day, month and year, so I wanted tow try and do this technique as practice. I also saw that every row was an observation based on time, so I knew my analysis should be dependent on time in some general sense; therefore, I chose a more macroscopic view of time and analyzed months and years. The final reason I chose to analyze monthly and yearly statistics for average power used was beccause I noticed there were 2 million different observations, and I wanted a more narrow scope to analyze as it compresses the large data set into a much more manageble set. 
-
-## Anna
-=======
 ## Anna
 
 The question that I am attempting to solve is: Is there a difference in energy usage for heating and cooling per over the years?
@@ -207,4 +189,3 @@ ggplot()+
 ![](Plots/Anna's Plot 2.png)
 
 As you can see from the graphs above, later years in both the months of June and December used more power overall.
->>>>>>> master
