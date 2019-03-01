@@ -40,7 +40,7 @@ housemon <- housepwr %>%
 ---
 <<<<<<< HEAD
 
-## Amanda
+## Amanda (month, submetering 1)
 
 ```
 householdPowerConsumption <- read.table("~/Downloads/household_power_consumption.txt", header=T, na.strings=c("NA", "", "?"), sep=";", stringsAsFactors = FALSE)
@@ -48,18 +48,14 @@ householdPowerConsumption <- read.table("~/Downloads/household_power_consumption
 householdPwr <- householdPowerConsumption %>% separate(Date, into=c("Day", "Month", "Year"), sep = "/", convert = TRUE)
 View(householdPwr)
 
+ggplot(data = householdPwr, aes(x=Month, y= Sub_metering_1, fill = Month)) + geom_col() + labs(x="Months", y="Energy Consumption in Kitchen", title="Kitchen Energy Consumption by Month") + 
+scale_x_discrete(limits = c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")) + coord_flip() + theme(legend.position = "none")
+
 ```
 
-
-       
-
-
-=======
-  
-## Amanda (month, submetering 1)
 How does energy consumption in the kitchen change across months?
-How does the proportion of each type of energy consumption change across months?
->>>>>>> master
+
+
 
 
 -graph
