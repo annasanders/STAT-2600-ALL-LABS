@@ -83,7 +83,6 @@ ggplot(householdpwr2 , aes(x = Month , y = mean_pwr , color = Year, group = Year
   scale_colour_gradientn(colors=rainbow(4))
 
 ```
-<<<<<<< HEAD
 ![](Plots/chris_lab7plot.png)
 
 Quesiton: how does average energy use change month by month, and how do these monthly changes compare yearly? 
