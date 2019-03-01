@@ -18,9 +18,16 @@ na.omit(housepwr)
  
 ```
 str
-# Findings
+
 
 # Dataset Description
+
+This dataset is describing the energy consumption of one household near Paris, France over the course of four years. 
+It reads in data for every minute of these four years to see their overall consumption, and their consumption in each category: heating and cooling, kitchen, and laundry.
+For every day, there is a separate time given by the hour and minutes to see how much energy they used at that time. 
+
+We dealt with NAs by using the code: na.strings= c("NA","","?"). This made it so everything with one of those characters would be considered NA.
+
 
 <<<<<<< HEAD
 ---
@@ -28,37 +35,34 @@ str
 
 ## Amanda (month, submetering 1)
 
+The question I wanted to answer was how does energy consumption in the kitchen change across months?
+
+To answer this question, I split up the date so that I could have year, month, and day all in their own columns so I could split all the data up by months.
+Then, I created a graph comparing the kitchen energy consumption month by month to see which month used the most. 
+I also used a function to change the names of the Months axis, changed the color of the bars so it would be more aesthetically pleasing, changed the labels of the axes, and flipped the coordinates.
+
+![](Plots/amandaKitchen.png)
+
 ```
 householdPowerConsumption <- read.table("~/Downloads/household_power_consumption.txt", header=T, na.strings=c("NA", "", "?"), sep=";", stringsAsFactors = FALSE)
 
 householdPwr <- householdPowerConsumption %>% separate(Date, into=c("Day", "Month", "Year"), sep = "/", convert = TRUE)
 View(householdPwr)
+summary(householdPwr)
 
 ggplot(data = householdPwr, aes(x=Month, y= Sub_metering_1, fill = Month)) + geom_col() + labs(x="Months", y="Energy Consumption in Kitchen", title="Kitchen Energy Consumption by Month") + 
 scale_x_discrete(limits = c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")) + coord_flip() + theme(legend.position = "none")
-=======
->>>>>>> master
 
 ```
 
-<<<<<<< HEAD
-How does energy consumption in the kitchen change across months?
-=======
----
->>>>>>> master
+The data shows that there tends to be more kitchen energy consumption in the winter months, with the most use in January, and the least in August. August used half as much energy than January in the kitchen. 
+I thought this question was interesting because I wasn't sure if the time of year would have any effect on how much people use the kitchen. So when I made the graph, I was surprised to see that people did in fact use less energy in the kitchen in summer months.
+In order to figure out what question to do, I had to do some exploratory data analysis techniques. I had no idea what any of the categories were so the first step was to play with the numbers in each column and see how they were related to eachother.
+I also played with summing up values and taking averages to see how much the data differed. I was really excited by the fact the data was split up into different categories, which is how  I decided to focus my research on the kitchen.
 
-## Amanda
+Using the summary function, I looked at the maximum values of kitchen energy consumption versus the mean to see how different they were. The maximum value was 88 watt-hours and the average was 1.122 watt-hours, which tells me that there were some times where much more energy was needed in the kitchen than others.
 
-<<<<<<< HEAD
-=======
-How does energy consumption in the kitchen change across months?
-How does the proportion of each type of energy consumption change across months?
->>>>>>> master
 
-How do i address question
-
--graph
--summary statistic
 
 
 ## James
