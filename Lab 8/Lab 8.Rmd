@@ -1,0 +1,12 @@
+---
+title: "Lab 8"
+author: "Data Me Pls: James, Chris, Amanda, Anna"
+date: "March 1, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# FML
