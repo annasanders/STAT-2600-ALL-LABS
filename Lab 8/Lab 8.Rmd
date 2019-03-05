@@ -10,3 +10,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # FML
+Potential data sets:
+https://www.kaggle.com/russellyates88/suicide-rates-overview-1985-to-2016
+https://www.kaggle.com/mohansacharya/graduate-admissions
+https://catalog.data.gov/dataset/u-s-chronic-disease-indicators-cdi
+https://github.com/fivethirtyeight/data
+https://github.com/fivethirtyeight/data/tree/master/bob-ross 
