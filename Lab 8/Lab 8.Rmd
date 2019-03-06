@@ -7,7 +7,31 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+suicides <- read_csv("master.csv")
+
 ```
+# QUESTION
+
+###Why important
+
+###Overall Summary
+
+###Reconmendatioins
+
+---
+
+### Chris (GDP, #)
+
+### Amanda (Gender, #)
+
+### James (Who knows)
+
+### Anna (Generation/Age, #)
+
+
+
 
 # FML
 Potential data sets:
