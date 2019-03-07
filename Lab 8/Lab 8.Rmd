@@ -9,7 +9,9 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
-suicides <- read_csv("master.csv")
+install.packages("readxl")
+library(readxl)
+suicides <- read.table(file= "master.xls", sep= "\t", header=T)
 
 ```
 # QUESTION
