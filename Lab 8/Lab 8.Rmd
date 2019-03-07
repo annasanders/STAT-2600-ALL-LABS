@@ -9,10 +9,13 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
-suicides <- read_csv("master.csv")
+install.packages("readxl")
+library(readxl)
+suicides <- read.table(file= "master.xls", sep= "\t", header= TRUE)
 
 ```
 # QUESTION
+Dataset: https://www.kaggle.com/russellyates88/suicide-rates-overview-1985-to-2016
 
 ###Why important
 
@@ -30,14 +33,15 @@ I want to kow about stuff
 ### James (Who knows)
 
 ### Anna (Generation/Age, #)
+```{r, echo= FALSE}
+agecount <- suicides %>%
+  select("age", "suicides_no", "generation")
 
+generationtotal <- agecount %>%
+  group_by(generation) %>%
+  summarise(total= sum(suicides_no))
 
-
-
-# FML
-Potential data sets:
-https://www.kaggle.com/russellyates88/suicide-rates-overview-1985-to-2016
-https://www.kaggle.com/mohansacharya/graduate-admissions
-https://catalog.data.gov/dataset/u-s-chronic-disease-indicators-cdi
-https://github.com/fivethirtyeight/data
-https://github.com/fivethirtyeight/data/tree/master/bob-ross 
+agetotal <- agecount %>%
+  group_by(age) %>%
+  summarise(total=sum(suicides_no))
+```
