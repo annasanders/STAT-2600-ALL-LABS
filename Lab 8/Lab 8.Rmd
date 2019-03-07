@@ -25,6 +25,7 @@ suicides <- read_csv("master.csv")
 ### Chris (GDP, #)
 
 ### Amanda (Gender, #)
+I want to kow about stuff
 
 ### James (Who knows)
 
