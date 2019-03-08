@@ -24,19 +24,19 @@ Mental health is becoming more and more important in relation to overall health 
 For this lab, our domain expert is The World Health Organization (WHO https://www.who.int/mental_health/suicide-prevention/en/). We believe this data set, which has data from multiple different countries and years, would best help answer the questions: Who is most at risk to commit suicide, what different factors affect suicide rates, and  what are some trends in the data? Answering these questions can help governments and other global health organizations better identify and assist those contemplating suicide.
 
 ###Overall Conclusion and Summary of Findings
-We found a lot of different but interesting correlations in this data set. In the most populated countries, there isn't a trend that encompasses these countries. There are countries that have decreasing suicide rates, such as Japan, and there are countries that have increasing suicide rates, such as the United States. We also found that there is a weak positive correlation between HDI and suicide density. 
+We found a lot of different but interesting correlations in this data set. In the most populated countries, there isn't a trend that encompasses these countries. There are countries that have decreasing suicide rates, such as Japan, and there are countries that have increasing suicide rates, such as the United States. We also found that there is a weak positive correlation between HDI and suicide density. Finally, we found that the GDP per capita serves as a weak guide toward suicide trends; It shows strong correltion between the middle-high GDP range, no correlation among low GDP, and a somewhat intermediate correlation between extremely high GDP's. 
 
 Upon analyzing the data to see what factors have strong correlations with suicide rates, we came to a few different conclusions. To begin, males overwhelmingly have a higher suicide than females do, with a rate about three times as large as females do. Second, we also discovered that the Baby Boomers and people around 35 to 54 years old had higher suicide rates than the rest of the population.
 
 ###Reconmendatioins
 
-We reccommend that in their pursuit to decrease the suicide rate, the World Health Organization should put more emphasis on outreaching to middle aged adults, specifically males. This group of the population has significantly higher suicide rates than the rest of the population, so focusing on these people would most likely be more effective. It may also be helpful them to focus their outreach in the countries that have increasing suicide rates, such as the United States, because in these countries, it is clear that suicide is becoming more of an issue as time goes on.
+We reccommend that in their pursuit to decrease the suicide rate, the World Health Organization should put more emphasis on outreaching to middle aged adults, specifically males. This group of the population has significantly higher suicide rates than the rest of the population, so focusing on these people would most likely be more effective. It may also be helpful them to focus their outreach in the countries that have increasing suicide rates, such as the United States, because in these countries, it is clear that suicide is becoming more of an issue as time goes on. This trend also extends to other developed countries with similar GDP's to the United States (such as Canada and the United Kingdom). 
 
 ---
 
 ### Chris (GDP per capita, #)
 
-```{r, echo = FALSE}
+```{r, eval = FALSE}
 gdp <- suicides %>%
   select("country","gdp_per_capita....","suicides_no")
 
@@ -57,9 +57,12 @@ ggplot(suicides_bygdp, aes(x= mean_gdp , y= mean_suicide))+
   geom_point(aes(color=country))+ 
   geom_smooth()+
   guides(color = FALSE) +
-  scale_x_continuous(breaks = seq(0, 70000, by = 5000))
+  scale_x_continuous(breaks = seq(0, 70000, by = 5000)) + 
+  labs(x= "GDP per Capita", y = "Total suicides between 1985 and 2010", title = "GDP versus suicide rates")
 
 ```
+![](Plots/chrisplotlab8.png)
+
 In the above plot, we are analyzing what impact, if any, that a country's gdp has on their total number of suicides from 1985 to 2010. This information is important for experts because they can see suicide trends matched against a country's welfare. They also can use this information to compare countries with similar GDP's and see if there are any outliers in these ranges to further explore.
 The plot features a unique point for every one of the 101 countries we have data on displaying their total number of suicides. We then overlayed a trend curve which conveys the average number of suicides for a given mean gdp. 
 The plot reveals many trends. It conveys that GDP seems to have little correlation in suicides at lower GDP per capita levels (15,000 and under). Then, we see a spike in number of suicides for countries that are in the 20,000 to 40,000 range. Its important to note a few countries in this range: mainly the United States, Canada and the United Kingdom. We then see that countries with higher GDP's per capita tend to have fewer suicides. Its important to note some countries in these higher GDP ranges: Denmark and Luxembourg. These Western European countries have much more social welfare, which could potentially be a reason towards their lower suicide rates. 
@@ -70,7 +73,7 @@ My graph looks at the relationship between number of suicides and gender. This i
 
 ![](Plots/amandaSuicidePlot.png)
 
-```{r setup, include=FALSE}
+```{r, eval= FALSE}
 library(tidyverse)
 #View(suicides)
 suicides <- read.table(file= "master.xls", sep= "\t", header= TRUE, na.strings=c("NA", "", "?", 0))
@@ -190,4 +193,4 @@ From these two graphs, one can clearly see that the largest age group and genera
 Amanda: I filtered the data so that it was only using suicide rates and sex since that was the only data I cared about. Then, I summed up all of the values for suicide rates by males and summed up all the ones for females so I could compare the two numbers using geom_col. I added labels and color to the graph to make it more aesthetically pleasing. I also dropped the NAs so as to make the data more neat.
 James:
 Anna:
-Chris:
+Chris: I filtered the data to only convey suicide rates and the respective countries with their GDP's. I then averaged values over time to get average GDP for every country and then added up all the suicides over that given time period in order to compare total suicides with a country's GDP. I used two plots to show individual countries and their total suicides as well as a line that showed the trend as GDP increases. I did some aesthetic manipulation to make the information in my graph more easily conveyable. 
