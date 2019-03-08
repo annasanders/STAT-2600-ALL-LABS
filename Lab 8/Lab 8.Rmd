@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
+library(dplyr)
 install.packages("readxl")
 library(readxl)
 suicides <- read.table(file= "master.xls", sep= "\t", header= TRUE)
@@ -33,7 +34,34 @@ We reccommend that in their pursuit to decrease the suicide rate, the World Heal
 
 ---
 
-### Chris (GDP, #)
+### Chris (GDP per capita, #)
+
+```{r, echo = FALSE}
+gdp <- suicides %>%
+  select("country","gdp_per_capita....","suicides_no")
+
+colnames(gdp)[2] <- "Gdp"
+
+gdporder <- gdp %>%
+  group_by(country) %>%
+  summarise(mean_gdp = mean(Gdp))
+
+total_suicide <- gdp %>%
+  group_by(country) %>%
+  summarise(mean_suicide = mean(suicides_no))
+
+suicides_bygdp <- left_join(gdporder,total_suicide)
+
+ggplot(suicides_bygdp, aes(x= mean_gdp , y= mean_suicide))+
+ scale_fill_gradient(rainbow) +
+  geom_point(aes(color=country))+ 
+  geom_smooth()+
+  guides(color = FALSE) +
+  scale_x_continuous(breaks = seq(0, 70000, by = 5000))
+
+```
+In the above plot, we are analyzing what impact, if any, that a country's gdp has on their total number of suicides from 1985 to 2010. The plot features a unique point for every one of the 101 countries we have data on displaying their total number of suicides. We then overlayed a trend curve which conveys the average number of suicides for a given mean gdp. 
+The plot reveals many trends. It conveys that GDP seems to have little correlation in suicides at lower GDP per capita levels (15,000 and under). Then, we see a spike in number of suicides for countries that are in the 20,000 to 40,000 range. Its important to note a few countries in this range: mainly the United States, Canada and the United Kingdom. We then see that countries with higher GDP's per capita tend to have fewer suicides. Its important to note some countries in these higher GDP ranges: Denmark and Luxembourg. These Western European countries have much more social welfare, which could potentially be a reason towards their lower suicide rates. 
 
 ### Amanda (Gender, #)
 
