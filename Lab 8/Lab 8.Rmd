@@ -15,14 +15,14 @@ suicides <- read.table(file= "master.xls", sep= "\t", header= TRUE)
 suicides <- read.table(file= "master.xls", sep= "\t", header= TRUE, na.strings=c("NA", "", "?"))
 
 ```
-# QUESTION
+# Suicide Prevention
 Dataset: https://www.kaggle.com/russellyates88/suicide-rates-overview-1985-to-2016
 
 Mental health is becoming more and more important in relation to overall health and wellbeing. In the instance where mental health is not being taken care of, people can turn to addictive substances, preversive behavior, or even death.
 
-###Why important
+For this lab, our domain expert is The World Health Organization (WHO https://www.who.int/mental_health/suicide-prevention/en/). We believe this data set, which has data from multiple different countries and years, would best help answer the question: Who is most at risk to commit suicide? Answering this question can help governments and other global health organizations better identify and assist those contemplating suicide.
 
-###Overall Summary
+###Overall Summary of Findings
 
 ###Reconmendatioins
 
@@ -47,7 +47,7 @@ ggplot(data=suicideByGender, aes(x=country, y=suicides_no, fill=sex)) + geom_col
 ### James (Who knows)
 
 ### Anna (Generation/Age, #)
-My variables looked at the difference in age and generation with total numbers of suicides. Knowing this information would greatly help countries and other health promotion organizations better distribute resources in order to prevent suicides.
+My variables looked at the difference in age and generation with total numbers of suicides. Knowing this information would greatly help medical professionals focus in on certain ages or generations to further prevent suicides.
 
 __Generation Breakdown (approximate)__
 Generation Name      | Age Breakdown (Years)
