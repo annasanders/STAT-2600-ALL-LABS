@@ -11,15 +11,18 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 install.packages("readxl")
 library(readxl)
+suicides <- read.table(file= "master.xls", sep= "\t", header= TRUE)
 suicides <- read.table(file= "master.xls", sep= "\t", header= TRUE, na.strings=c("NA", "", "?"))
 
 ```
-# QUESTION
+# Suicide Prevention
 Dataset: https://www.kaggle.com/russellyates88/suicide-rates-overview-1985-to-2016
 
-###Why important
+Mental health is becoming more and more important in relation to overall health and wellbeing. In the instance where mental health is not being taken care of, people can turn to addictive substances, preversive behavior, or even suicide.
 
-###Overall Summary
+For this lab, our domain expert is The World Health Organization (WHO https://www.who.int/mental_health/suicide-prevention/en/). We believe this data set, which has data from multiple different countries and years, would best help answer the questions: Who is most at risk to commit suicide, what different factors affect suicide rates, and  what are some trends in the data? Answering these questions can help governments and other global health organizations better identify and assist those contemplating suicide.
+
+###Overall Summary of Findings
 
 ###Reconmendatioins
 
@@ -28,6 +31,7 @@ Dataset: https://www.kaggle.com/russellyates88/suicide-rates-overview-1985-to-20
 ### Chris (GDP, #)
 
 ### Amanda (Gender, #)
+I want to kow about stuff
 ```{r setup, include=FALSE}
 library(tidyverse)
 #View(suicides)
@@ -40,13 +44,68 @@ ggplot(data=suicideByGender, aes(x=sex, y=suicides_no, fill=sex)) + geom_col() +
 
 ```
 
-### James (Who knows)
+
+### James ()
+For my analysis, I had a few questions that I wanted to look at. With an emphasis on the current decade, I wanted to look at the most populated countries, and how their suicide rates were changing the past years. In the plot below, I plotted the density of suicides of the top 5 most populated countries in this data set. Clearly, there are some countries such as Japan and Russia that had very densities, but they are decreasing with time. This isn't true with the United States, where the density is steadily increasing. 
+![](Plots/james_plot1)
+
+I then wanted to see if there was any correlation between the Human Development Index (HDI) and suicide density. Just like my last plot, I restricted my analysis in the years 2010+, and I also restricted my data to countries with a population of over two million. In the plot below, there doesn't seem to be much of a strong correlation, but there is some correlation; as the density increases, the HDI also increases. However, this isn't a strong conclusion because there are countries that don't have an HDI recorded, such as Russia. 
+![](Plots/james_plot2)
+
+```{r, eval=FALSE}
+s2<-filter(suicides,population>1000000,year==2010|year==2011|year==2012|year==2013|
+             year==2014|year==2015|year==2016)
+view(s2)
+s3<-s2%>%
+  select(1:9)
+view(s3)
+#look at number of suicides versus suicides per 100k people
+s_density <- select(s3, country, year, 4:7)
+view(s_density)
+
+dvt<-s_density%>%
+  group_by(country,year)%>%
+  summarize(suicides=sum(suicides_no),pop=sum(population),den=sum(suicides.100k.pop))
+view(dvt)
+dvt<-arrange(dvt,desc(pop),country)
+dvt85 <- filter(dvt,pop>=85000000)
+view(dvt30)
+ggplot(data=dvt85)+geom_point(aes(x=year,y=den,color=as.factor(year)))+facet_wrap(~country)+theme(axis.text.x = element_blank(),axis.ticks.x=element_blank())+labs(x="",y="Density per 100k",color='Year')
+
+#LOOKING AT HDI
+hdi<-s3%>%
+  select(1:7,9)%>%
+  filter(!is.na(s3$HDI.for.year))%>%
+  group_by(country,year)%>%
+  summarize(suicides=sum(suicides_no),pop=sum(population),den=sum(suicides.100k.pop),hdi=min(`HDI.for.year`))%>%
+  arrange(desc(hdi))
+view(hdi)       
+ggplot(data=hdi)+geom_point(aes(x=den,y=hdi,color=pop))+labs(x='Suicide Density per 100k',y='HDI',color='Population',title='HDI versus Suicide Density')+geom_smooth(aes(x=den,y=hdi))
+
+```
+
 
 ### Anna (Generation/Age, #)
-```{r, echo= FALSE}
+My variables looked at the difference in age and generation with total numbers of suicides. Knowing this information would greatly help medical professionals focus in on certain ages or generations to further prevent suicides.
+
+__Generation Breakdown (approximate)__
+Generation Name      | Age Breakdown (Years)
+-------------------- | ------------- 
+Generation Z         | 7-24        
+Millennials          | 25-39   
+Generation X         | 40-54  
+Baby Boomer          | 55-73  
+Silent Generation    | 74-94  
+G.I. Generation      | 95-109  
+
+To answer this question, I first sorted out the varibles I wanted (age, generation, and suicides_no) and then sumed the suicides_no associated with each generation/age. I then created a ggplot bar graph to show the difference between each variable (age/generation).  
+
+```{r, eval= FALSE}
+# Primary Sorting
 agecount <- suicides %>%
   select("age", "suicides_no", "generation")
 
+# Breakdown of Variables
 generationtotal <- agecount %>%
   group_by(generation) %>%
   summarise(total= sum(suicides_no))
@@ -54,4 +113,35 @@ generationtotal <- agecount %>%
 agetotal <- agecount %>%
   group_by(age) %>%
   summarise(total=sum(suicides_no))
+
+# ggplot Code
+ggplot(data= generationtotal)+
+  geom_bar(mapping= aes(x=generation, y=total, fill=generation), stat= "identity")+
+  labs(title= "Total Suicides for Different Generations")+
+  scale_y_continuous(name= "Total Suicides (Millions)",
+                     breaks= c(0, 500000, 1000000, 1500000, 2000000, 2500000), 
+                     labels= c("0", "0.5", "1", "1.5", "2", "2.5"),
+                     limits= c(0,2500000))+
+  scale_x_discrete(limits= c("Generation Z", "Millenials", "Generation X", "Boomers", "Silent", "G.I. Generation"))+
+  theme(axis.title.x=element_blank(), axis.text.x= element_blank(), axis.ticks.x=element_blank())+
+  scale_fill_discrete(name= "Generation",
+                      breaks= c("Generation Z", "Millenials", "Generation X", "Boomers", "Silent", "G.I. Generation"))
+                      
+ggplot(data= agetotal)+
+  geom_bar(mapping=aes(x=age, y=total, fill=age), stat= "identity")+
+  labs(y="Total Suicides", title= "Total Suicides for Different Age Groups")+
+  scale_y_continuous(name= "Total Suicides (Millions)",
+                     breaks= c(0, 500000, 1000000, 1500000, 2000000, 2500000), 
+                     labels= c("0", "0.5", "1", "1.5", "2", "2.5"),
+                     limits= c(0,2500000))+
+  scale_x_discrete(limits= c("5-14 years","15-24 years", "25-34 years", "35-54 years", "55-74 years", "75+ years"))+
+  theme(axis.title.x=element_blank(), axis.text.x= element_blank(), axis.ticks.x=element_blank())+
+  scale_fill_discrete(name= "Age Group",
+                      breaks= c("5-14 years","15-24 years", "25-34 years", "35-54 years", "55-74 years", "75+ years"),
+                      labels=c("5-14 Years","15-24 Years", "25-34 Years", "35-54 Years", "55-74 Years", "75+ Years"))
 ```
+
+![](Plots/Anna's Plot 1.png)
+![](Plots/Anna's Plot 2.png)
+
+From these two graphs, one can clearly see that the largest age group and generation is those 35-54 years old and the Baby Boomer generation. This information can help health professionals better information on which individuals are more likely to commit suicide. 
