@@ -48,6 +48,41 @@ ggplot(data=suicideByGender, aes(x=country, y=suicides_no, fill=sex)) + geom_col
 For my analysis, I had a few questions that I wanted to look at. With an emphasis on the current decade, I wanted to look at the most populated countries, and how their suicide rates were changing the past years. In the plot below, I plotted the density of suicides of the top 5 most populated countries in this data set. Clearly, there are some countries such as Japan and Russia that had very densities, but they are decreasing with time. This isn't true with the United States, where the density is steadily increasing. 
 ![](Plots/james_plot1)
 
+I then wanted to see if there was any correlation between the Human Development Index (HDI) and suicide density. Just like my last plot, I restricted my analysis in the years 2010+, and I also restricted my data to countries with a population of over two million. In the plot below, there doesn't seem to be much of a strong correlation, but there is some correlation; as the density increases, the HDI also increases. However, this isn't a strong conclusion because there are countries that don't have an HDI recorded, such as Russia. 
+![](Plots/james_plot2)
+
+```{r}{Eval=FALSE}
+s2<-filter(suicides,population>1000000,year==2010|year==2011|year==2012|year==2013|
+             year==2014|year==2015|year==2016)
+view(s2)
+s3<-s2%>%
+  select(1:9)
+view(s3)
+#look at number of suicides versus suicides per 100k people
+s_density <- select(s3, country, year, 4:7)
+view(s_density)
+
+dvt<-s_density%>%
+  group_by(country,year)%>%
+  summarize(suicides=sum(suicides_no),pop=sum(population),den=sum(suicides.100k.pop))
+view(dvt)
+dvt<-arrange(dvt,desc(pop),country)
+dvt85 <- filter(dvt,pop>=85000000)
+view(dvt30)
+ggplot(data=dvt85)+geom_point(aes(x=year,y=den,color=as.factor(year)))+facet_wrap(~country)+theme(axis.text.x = element_blank(),axis.ticks.x=element_blank())+labs(x="",y="Density per 100k",color='Year')
+
+#LOOKING AT HDI
+hdi<-s3%>%
+  select(1:7,9)%>%
+  filter(!is.na(s3$HDI.for.year))%>%
+  group_by(country,year)%>%
+  summarize(suicides=sum(suicides_no),pop=sum(population),den=sum(suicides.100k.pop),hdi=min(`HDI.for.year`))%>%
+  arrange(desc(hdi))
+view(hdi)       
+ggplot(data=hdi)+geom_point(aes(x=den,y=hdi,color=pop))+labs(x='Suicide Density per 100k',y='HDI',color='Population',title='HDI versus Suicide Density')+geom_smooth(aes(x=den,y=hdi))
+
+```
+
 
 ### Anna (Generation/Age, #)
 My variables looked at the difference in age and generation with total numbers of suicides. Knowing this information would greatly help medical professionals focus in on certain ages or generations to further prevent suicides.

@@ -21,4 +21,16 @@ dvt85 <- filter(dvt,pop>=85000000)
 view(dvt30)
 ggplot(data=dvt85)+geom_point(aes(x=year,y=den,color=as.factor(year)))+facet_wrap(~country)+theme(axis.text.x = element_blank(),axis.ticks.x=element_blank())+labs(x="",y="Density per 100k",color='Year')
 
-       
+#LOOKING AT HDI
+hdi<-s3%>%
+  select(1:7,9)%>%
+  filter(!is.na(s3$HDI.for.year))%>%
+  group_by(country,year)%>%
+  summarize(suicides=sum(suicides_no),pop=sum(population),den=sum(suicides.100k.pop),hdi=min(`HDI.for.year`))%>%
+  arrange(desc(hdi))
+view(hdi)       
+ggplot(data=hdi)+geom_point(aes(x=den,y=hdi,color=pop))+labs(x='Suicide Density per 100k',y='HDI',color='Population',title='HDI versus Suicide Density')+geom_smooth(aes(x=den,y=hdi))
+
+russia<-s3 %>%
+  filter(country=='Russian Federation')
+view(russia)
