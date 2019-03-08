@@ -22,7 +22,7 @@ Mental health is becoming more and more important in relation to overall health 
 
 For this lab, our domain expert is The World Health Organization (WHO https://www.who.int/mental_health/suicide-prevention/en/). We believe this data set, which has data from multiple different countries and years, would best help answer the questions: Who is most at risk to commit suicide, what different factors affect suicide rates, and  what are some trends in the data? Answering these questions can help governments and other global health organizations better identify and assist those contemplating suicide.
 
-###Overall Summary of Findings
+###Overall Conclusion and Summary of Findings
 We found a lot of different but interesting correlations in this data set. In the most populated countries, there isn't a trend that encompasses these countries. There are countries that have decreasing suicide rates, such as Japan, and there are countries that have increasing suicide rates, such as the United States. We also found that there is a weak positive correlation between HDI and suicide density. 
 
 Upon analyzing the data to see what factors have strong correlations with suicide rates, we came to a few different conclusions. To begin, males overwhelmingly have a higher suicide than females do, with a rate about three times as large as females do. Second, we also discovered that the Baby Boomers and people around 35 to 54 years old had higher suicide rates than the rest of the population.
@@ -153,3 +153,12 @@ ggplot(data= agetotal)+
 ![](Plots/Anna's Plot 2.png)
 
 From these two graphs, one can clearly see that the largest age group and generation is those 35-54 years old and the Baby Boomer generation. This information can help health professionals better information on which individuals are more likely to commit suicide. 
+
+---
+
+###Team Summary
+
+Amanda: I filtered the data so that it was only using suicide rates and sex since that was the only data I cared about. Then, I summed up all of the values for suicide rates by males and summed up all the ones for females so I could compare the two numbers using geom_col. I added labels and color to the graph to make it more aesthetically pleasing. I also dropped the NAs so as to make the data more neat.
+James:
+Anna:
+Chris:
