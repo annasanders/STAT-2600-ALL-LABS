@@ -24,14 +24,22 @@ For this lab, our domain expert is The World Health Organization (WHO https://ww
 
 ###Overall Summary of Findings
 
+Upon analyzing the data to see what factors have strong correlations with suicide rates, we came to a few different conclusions. To begin, males overwhelmingly have a higher suicide than females do, with a rate about three times as large as females do. Second, we also discovered that the Baby Boomers and people around 35 to 54 years old had higher suicide rates than the rest of the population.
+
 ###Reconmendatioins
+
+We reccommend that in their pursuit to decrease the suicide rate, the World Health Organization should put more emphasis on outreaching to middle aged adults, specifically males. This group of the population has significantly higher suicide rates than the rest of the population, so focusing on these people would most likely be more effective. It may also be helpful them to focus their outreach in the countries that have increasing suicide rates, such as the United States, because in these countries, it is clear that suicide is becoming more of an issue as time goes on.
 
 ---
 
 ### Chris (GDP, #)
 
 ### Amanda (Gender, #)
-I want to kow about stuff
+
+My graph looks at the relationship between number of suicides and gender. This information is important for experts so they can see if there is a disparity between suicide rates for females versus males. From the graphs, it is obvious that the suicide rate for males is a lot higher than it is for females. In fact, it is about three times higher. This is important for the World Health Organization because they can focus on trying to figure out why it is so much higher for males, so that they can figure out how to try to decrease this number.
+
+![](Plots/amandaSuicidePlot.png)
+
 ```{r setup, include=FALSE}
 library(tidyverse)
 #View(suicides)
