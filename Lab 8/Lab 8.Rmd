@@ -23,6 +23,7 @@ Mental health is becoming more and more important in relation to overall health 
 For this lab, our domain expert is The World Health Organization (WHO https://www.who.int/mental_health/suicide-prevention/en/). We believe this data set, which has data from multiple different countries and years, would best help answer the questions: Who is most at risk to commit suicide, what different factors affect suicide rates, and  what are some trends in the data? Answering these questions can help governments and other global health organizations better identify and assist those contemplating suicide.
 
 ###Overall Summary of Findings
+We found a lot of different but interesting correlations in this data set. In the most populated countries, there isn't a trend that encompasses these countries. There are countries that have decreasing suicide rates, such as Japan, and there are countries that have increasing suicide rates, such as the United States. We also found that there is a weak positive correlation between HDI and suicide density. 
 
 Upon analyzing the data to see what factors have strong correlations with suicide rates, we came to a few different conclusions. To begin, males overwhelmingly have a higher suicide than females do, with a rate about three times as large as females do. Second, we also discovered that the Baby Boomers and people around 35 to 54 years old had higher suicide rates than the rest of the population.
 
@@ -52,7 +53,7 @@ ggplot(data=suicideByGender, aes(x=sex, y=suicides_no, fill=sex)) + geom_col() +
 ```
 
 
-### James ()
+### James (HDI)
 For my analysis, I had a few questions that I wanted to look at. With an emphasis on the current decade, I wanted to look at the most populated countries, and how their suicide rates were changing the past years. In the plot below, I plotted the density of suicides of the top 5 most populated countries in this data set. Clearly, there are some countries such as Japan and Russia that had very densities, but they are decreasing with time. This isn't true with the United States, where the density is steadily increasing. 
 ![](Plots/james_plot1)
 
