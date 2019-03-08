@@ -39,8 +39,7 @@ suicides <- read.table(file= "master.xls", sep= "\t", header= TRUE, na.strings=c
 suicideByGender <- select(suicides, sex, suicides_no, country) %>% drop_na()
 #View(suicideByGender)
 
-ggplot(data=suicideByGender, aes(x=sex, y=suicides_no, fill=sex)) + geom_col() + labs(x="Gender", y="Number Of Suicides", title = "Number of Suicides by Country and Gender", legend = "Gender") + theme(legend.position = "none")
-
+ggplot(data=suicideByGender, aes(x=sex, y=suicides_no, fill=sex)) + geom_col() + labs(x="Gender", y="Number Of Suicides", title = "Number of Suicides by Gender", legend = "Gender") + theme(legend.position = "none")
 
 ```
 
