@@ -10,3 +10,19 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # woo...
+
+# Amanda ()
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(lubridate)
+library(OpenStreetMap)
+
+```
+
+# Chris
+
+# Anna
+
+# James
