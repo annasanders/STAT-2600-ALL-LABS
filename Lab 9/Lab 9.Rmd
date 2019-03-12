@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 title: "Lab 9"
 author: "Data Me Pls: Amanda, James, Chris, Anna"
@@ -26,3 +27,19 @@ library(OpenStreetMap)
 # Anna
 
 # James
+=======
+---
+title: "Lab 9"
+author: "Data Me Pls: Amanda, James, Chris, Anna"
+date: "March 8, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+bikes <- read.exl()
+```
+
+# woo...
+>>>>>>> master
