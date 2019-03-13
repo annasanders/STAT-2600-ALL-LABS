@@ -12,8 +12,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r eval= FALSE}
 library(tidyverse)
 library(lubridate)
+install.packages("OpenStreetMap")
 library(OpenStreetMap)
-
+bikes <- read_csv("Nice_ride_trip_history_2017_season.csv", col_names = TRUE,
+                 col_types=  cols(`Start date`= col_datetime(format="%m/%d/%Y %H:%M"), 
+  
 # Set latitudes and longitudes of city map
 LAT1 <- 44.88 
 LAT2 <- 45.05
@@ -65,6 +68,6 @@ autoplot(map.latlon) + # Plots a map
 
 ## Chris
 
-## Anna
+## Anna (When is bicycle traffic the highest, and where are people going?)
 
 ## James
