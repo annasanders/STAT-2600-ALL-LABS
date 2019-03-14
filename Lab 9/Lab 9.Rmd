@@ -66,6 +66,13 @@ autoplot(map.latlon) + # Plots a map
 
 ## Amanda ()
 
+```{r, eval = FALSE}
+library(tidyverse)
+library('lubridate')
+
+
+```
+
 ## Chris
 
 ## Anna (When is bicycle traffic the highest, and where are people going?)
