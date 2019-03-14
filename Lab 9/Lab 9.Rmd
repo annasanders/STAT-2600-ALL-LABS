@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ---
 title: "Lab 9"
 author: "Data Me Pls: Amanda, James, Chris, Anna"
@@ -78,3 +79,87 @@ library('lubridate')
 ## Anna (When is bicycle traffic the highest, and where are people going?)
 
 ## James
+=======
+<<<<<<< HEAD
+---
+title: "Lab 9"
+author: "Data Me Pls: Amanda, James, Chris, Anna"
+date: "March 8, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r eval= FALSE}
+library(tidyverse)
+library(lubridate)
+install.packages("OpenStreetMap")
+library(OpenStreetMap)
+bikes <- read_csv("Nice_ride_trip_history_2017_season.csv", col_names = TRUE, col_types= cols(`Start date`= col_datetime(format="%m/%d/%Y %H:%M"), `End date`= col_datetime(format="%m/%d/%Y %H:%M")))
+
+bikes1 <- read_csv("Nice_ride_trip_history_2017_season.csv")
+
+bikedate <-bikes1%>%
+  separate(`Start date`, into= c("Sdate", "Stime"), sep= " ")%>%
+  separate(`End date`, into= c("Edate", "Etime"), sep= " ")
+
+bikedate1 <-bikedate%>%
+  separate(Sdate, into= c("Smon", "Sday", "Syear"), sep= "/")%>%
+  separate(Edate, into= c("Emon", "Eday", "Syear"), sep= "/")
+  
+# Set latitudes and longitudes of city map
+LAT1 <- 44.88 
+LAT2 <- 45.05
+LON1 <- -93.35
+LON2 <- -93.08
+
+# Generate map
+map <- openmap(c(LAT2,LON1), c(LAT1,LON2), zoom = NULL,
+               type = "esri",
+               mergeTiles = TRUE)
+
+# Project map to latitude and longitude
+map.latlon <- openproj(map, projection = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
+
+# Plot map of Minneapolis
+autoplot(map.latlon) # Plots a map 
+
+# Plot all niceride stations
+autoplot(map.latlon) + # Plots a map 
+  geom_point(data=locations, 
+               aes(x=Longitude, y=Latitude), 
+               color = 'blue', size = 1) +
+  labs(x='Longitude', y='Latitude') +
+  ggtitle('Locations of NiceRide Stations')
+
+# Filter data for halloween morning
+hallo <- data %>%
+  filter(Startingdate == "2017-08-31") %>%
+  filter(Startinghour < 8)
+# Note that I used lubridate to make the columns Startingdate and Startinghour
+
+# Plot rides for halloween morning
+autoplot(map.latlon) + # Plots a map 
+  geom_segment(data=hallo, 
+               aes(x=start.long, y=start.lat,
+                   xend=end.long, yend=end.lat), 
+               color = 'blue', size = .5,
+               arrow = arrow(length = unit(0.2, "cm"))) +
+  labs(x='Longitude', y='Latitude') +
+  scale_x_continuous(limits = c(-93.3, -93.2)) +
+  scale_y_continuous(limits = c(44.93, 45.02)) +
+  ggtitle('Halloween Morning Rides')
+
+```
+
+# I WANT TO RIDE MY BICYCLE, I WANT TO RIDE MY BIKE
+
+## Amanda ()
+
+## Chris
+
+## Anna (When is bicycle traffic the highest, and where are people going?)
+
+## James
+>>>>>>> master
