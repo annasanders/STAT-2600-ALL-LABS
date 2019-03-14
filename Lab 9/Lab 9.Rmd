@@ -14,8 +14,17 @@ library(tidyverse)
 library(lubridate)
 install.packages("OpenStreetMap")
 library(OpenStreetMap)
-bikes <- read_csv("Nice_ride_trip_history_2017_season.csv", col_names = TRUE,
-                 col_types=  cols(`Start date`= col_datetime(format="%m/%d/%Y %H:%M"), 
+bikes <- read_csv("Nice_ride_trip_history_2017_season.csv", col_names = TRUE, col_types= cols(`Start date`= col_datetime(format="%m/%d/%Y %H:%M"), `End date`= col_datetime(format="%m/%d/%Y %H:%M")))
+
+bikes1 <- read_csv("Nice_ride_trip_history_2017_season.csv")
+
+bikedate <-bikes1%>%
+  separate(`Start date`, into= c("Sdate", "Stime"), sep= " ")%>%
+  separate(`End date`, into= c("Edate", "Etime"), sep= " ")
+
+bikedate1 <-bikedate%>%
+  separate(Sdate, into= c("Smon", "Sday", "Syear"), sep= "/")%>%
+  separate(Edate, into= c("Emon", "Eday", "Syear"), sep= "/")
   
 # Set latitudes and longitudes of city map
 LAT1 <- 44.88 
