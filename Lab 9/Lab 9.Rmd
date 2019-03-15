@@ -106,7 +106,10 @@ bikedate <-bikes1%>%
 
 bikedate1 <-bikedate%>%
   separate(Sdate, into= c("Smon", "Sday", "Syear"), sep= "/")%>%
-  separate(Edate, into= c("Emon", "Eday", "Syear"), sep= "/")
+  separate(Edate, into= c("Emon", "Eday", "Eyear"), sep= "/")
+
+bikedate2 <-bikedate1%>%
+  
   
 # Set latitudes and longitudes of city map
 LAT1 <- 44.88 
