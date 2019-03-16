@@ -176,6 +176,7 @@ Lake Street & Knox Ave S             | 4602         | Bde Maka Ska, Lake of the 
 Lake Calhoun Center                  | 4147         | Bde Maka Ska
 Washington Ave SE & Union Street SE  | 4133         | University of Minnesota
 
+![](Plots/Anna's Plot.png)
 
 As you can see from the top five dates for renting a bike, most days fall around The Fourth of July, which is an important American holiday. The City of Minneapolis has a fireworks show near the Stone Arch Bridge, which is located near the 100 Main Street SE Location. The other locations are near outdoor landmarks like parks, lakes, or the Mississippi River. From the graph, it is easy to see that a large share of the rides come from the summer months, where one could assume that many children are out of school and many parents take their children to do outdoor activities. This dataset only had data from April to November, so one can assume that the service shut down during those months, as Minnesota gets lots of snow during the winter. 
 
