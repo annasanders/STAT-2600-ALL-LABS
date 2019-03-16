@@ -99,6 +99,8 @@ View(joinedBike1)
 ## Chris
 
 ## Anna (When is bicycle traffic the highest, and where are people going?)
+I answered this question in the context of overall volume of rides per day. I sorted the data by days, not by time, as certain months in the year would throw off regular commuting data (i.e. the people who ride these bikes to work and the people who only use these bikes in the summer). 
+
 ```{r, eval= FALSE}
 # Loading the Data with lubradate
 bikes <- read_csv("Nice_ride_trip_history_2017_season.csv", col_names = TRUE, col_types= cols(`Start date`= col_datetime(format="%m/%d/%Y %H:%M"), `End date`= col_datetime(format="%m/%d/%Y %H:%M")))
@@ -115,7 +117,67 @@ bikedate1 <-bikedate%>%
   separate(Sdate, into= c("Smon", "Sday", "Syear"), sep= "/")%>%
   separate(Edate, into= c("Emon", "Eday", "Eyear"), sep= "/")
 
+# Putting it back into date form
+bikedate2 <-bikedate1%>%
+  mutate(Sdate= make_date(Syear, Smon, Sday))%>%
+  mutate(Edate= make_date(Eyear, Emon, Eday))%>%
+  select(Sdate, Edate, `Start station`, `End station`, `Total duration (Seconds)`)
+
+# Summing Data
+daytotal <- bikedate2%>%
+  group_by(Sdate)%>%
+  count(Total= n())%>%
+  select(Sdate, Total)
+
+# July Data
+julytotal <- bikedate2%>%
+  filter(Sdate>= as.Date("2017-07-01") & Sdate<= as.Date("2017-07-31"))
+
+julyloc <- julytotal%>%
+  group_by(`End station`)%>%
+  count(Total= n())%>%
+  select(`End station`, Total)
+
+# ggplot
+ggplot(daytotal)+
+  geom_line(mapping= aes(x= Sdate, y= Total))+
+  labs(x= "Date", y= "Total Rides", title= "Total Rides per day in 2017")+
+  scale_x_date(breaks=c(as.Date("2017-04-01", origin= "1970-01-01"),
+    as.Date("2017-05-01", origin= "1970-01-01"),
+    as.Date("2017-06-01", origin= "1970-01-01"),
+    as.Date("2017-07-01", origin= "1970-01-01"),
+    as.Date("2017-08-01", origin= "1970-01-01"),
+    as.Date("2017-09-01", origin= "1970-01-01"),
+    as.Date("2017-10-01", origin= "1970-01-01"),
+    as.Date("2017-11-01", origin= "1970-01-01")),
+    labels=c("April", "May", "June", "July", "August", "September", "October", "November"))+
+  geom_smooth(mapping= aes(x=Sdate, y=Total, color=..y..), se= F, show.legend= F)+
+  scale_color_gradient2(low= "blue", mid="yellow", high= "red", midpoint= median(daytotal$Total))
+  
+
+RColorBrewer::display.brewer.all()
+
 ```
+__Top Days for Riding a Bike in Minneapolis:__
+Date        | Total 
+------------| ------------- 
+2017-07-02  | 4602       
+2017-07-04  | 4288
+2017-07-01  | 4193
+2017-07-03  | 4147
+2017-07-22  | 4133
+
+__Top D Locations for Riding a Bike in Minneapois in July:__
+Locaiton                             | Total        | Close Landmark
+-------------------------------------| -------------|---------------
+Lake Street & Knox Ave S             | 4602         | Bde Maka Ska, Lake of the Isles
+11th Ave S & S 2nd Street            | 4288         | Downtown East Minneapolis
+100 Main Street SE                   | 4193         | Green Space off of the Mississippi River
+Lake Calhoun Center                  | 4147         | Bde Maka Ska
+Washington Ave SE & Union Street SE  | 4133         | University of Minnesota
+
+
+As you can see from the top five dates for renting a bike, most days fall around The Fourth of July, which is an important American holiday. The City of Minneapolis has a fireworks show near the Stone Arch Bridge, which is located near the 100 Main Street SE Location. The other locations are near outdoor landmarks like parks, lakes, or the Mississippi River. From the graph, it is easy to see that a large share of the rides come from the summer months, where one could assume that many children are out of school and many parents take their children to do outdoor activities. This dataset only had data from April to November, so one can assume that the service shut down during those months, as Minnesota gets lots of snow during the winter. 
 
 ## James
 
