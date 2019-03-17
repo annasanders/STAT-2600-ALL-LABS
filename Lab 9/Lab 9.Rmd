@@ -62,7 +62,7 @@ autoplot(map.latlon) + # Plots a map
 # Overall Findings
 It is clear from our analysis that most people rent bikes in the summer, non-members bring in the most revnue and (CHRIS FINDING). From this, we can recomend that more resources be given to the summer months (increased bikes or advertisments), more outreach to those who do not want a membership but who want to rent a bike anyway, and (CHRIS FINDING). Our  
 
-## Amanda (How do rides on any arbitrary day in the summer compare to in the winter?)
+## Amanda (How do rides in a summer month compare to in the winter?)
 
 I asked this question because I wanted to know how rides would compare in the summer versus in the winter, so I choose to compare all November rides to all June ones (There was no data for some months). The data shows that there are significantly more rides in the summer time than in the winter time.
 
@@ -106,7 +106,6 @@ ggplot(data=month, aes(x=Smon, y=Total, fill=Smon)) + geom_col() + scale_x_discr
 
 ```
 
-To do this, I split the data into months and joined the data matching the longitudes and latitudes to both the start dates and end dates. I was unable to use autoplot since I have a Macbook, but I then filtered the data by months so I could just compare one winter month to one summer one. The results show that clearly more people use the bike system in the summer months so they should use more of their resources then to get more customers.
 
 ## Chris
 
@@ -208,7 +207,7 @@ Under the basis of my assumptions, I wanted to look at the ratio of being late f
 # What Everyone Did and What Question We Answered:
 __Chris:__
 
-__Amanda:__
+__Amanda:__I answered the question: What do rides in the summer look like compared to in the winter? To do this, I split the data into months and joined the data matching the longitudes and latitudes to both the start dates and end dates. I was unable to use autoplot since I have a Macbook, but I then filtered the data by months so I could just compare one winter month to one summer one. The results show that clearly more people use the bike system in the summer months so they should use more of their resources then to get more customers.
 
 __Anna:__ I answered the questions: What was the overall distribution of rides over the entire year, where were most rides going to, and what were the most popular dates for renting bikes and why. I used lubradate to put the date columns into a date so I could manipulate them easier. I grouped and arranged the data to find the most popular day and location. For the overall distribution of rides, I used a geom_line function to show the distribution and a geom_smooth to show the overall trend. 
 
