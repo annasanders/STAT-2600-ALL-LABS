@@ -63,6 +63,10 @@ autoplot(map.latlon) + # Plots a map
 
 ## Amanda (How do rides on any arbitrary day in the summer compare to in the winter?)
 
+I asked this question because I wanted to know how rides would compare in the summer versus in the winter, so I choose to compare all November rides to all June ones (There was no data for some months). The data shows that there are significantly more rides in the summer time than in the winter time.
+
+
+![](Plots/AmandaRide.png)
 ```{r eval= FALSE}
 library(tidyverse)
 library(lubridate)
@@ -92,7 +96,24 @@ colnames(joinedBike)[colnames(joinedBike)=="Latitude"] <- "StartStationLatitude"
 joinedBike1 <- joinedBike %>% left_join(longsLats, by = c("End station" = "Name"))
  colnames(joinedBike1)[colnames(joinedBike1)=="Longitude"] <- "EndStationLongitude"
 colnames(joinedBike1)[colnames(joinedBike1)=="Latitude"] <- "EndStationLatitude" 
-View(joinedBike1)
+
+
+joinedBike2 <- transform(joinedBike1, Smon = as.numeric(Smon), 
+                    Sday = as.numeric(Sday))
+
+#View(joinedBike2)
+
+month <- joinedBike2%>%
+  group_by(Smon)%>%
+  count(Total= n())%>% filter(Smon=="11" | Smon=="6") %>%
+  select(Smon, Total)
+
+
+
+
+ggplot(data=month, aes(x=Smon, y=Total, fill=Smon)) + geom_col() + scale_x_discrete(limits = c("June", "November")) + labs(x="Months", y="Total Rides", title="Total Rides in June versus in November")  + theme(legend.position = "none")
+
+
 
 ```
 
