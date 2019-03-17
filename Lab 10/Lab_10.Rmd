@@ -1,0 +1,12 @@
+---
+title: "Lab_10"
+author: "Data Me Pls: Chris, James, Amanda, Anna"
+date: "March 17, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# IT'S ALMOST SPRING BREAK (AND I'M READY TO GIVE 0% EFFORT ON THIS LAB)
