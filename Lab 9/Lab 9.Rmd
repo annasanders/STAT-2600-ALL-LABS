@@ -114,8 +114,9 @@ month <- joinedBike2%>%
 ggplot(data=month, aes(x=Smon, y=Total, fill=Smon)) + geom_col() + scale_x_discrete(limits = c("June", "November")) + labs(x="Months", y="Total Rides", title="Total Rides in June versus in November")  + theme(legend.position = "none")
 
 
-
 ```
+
+To do this, I split the data into months and joined the data matching the longitudes and latitudes to both the start dates and end dates. I was unable to use autoplot since I have a Macbook, but I then filtered the data by months so I could just compare one winter month to one summer one. The results show that clearly more people use the bike system in the summer months so they should use more of their resources then to get more customers.
 
 ## Chris
 
