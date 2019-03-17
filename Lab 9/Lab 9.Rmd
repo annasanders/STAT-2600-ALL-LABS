@@ -61,7 +61,6 @@ ggplot(data=month, aes(x=Smon, y=Total, fill=Smon)) + geom_col() + scale_x_discr
 
 ```
 
-
 ## Chris
 
 ## Anna (When is bicycle traffic the highest, and where are people going?)
@@ -166,5 +165,5 @@ __Amanda:__I answered the question: What do rides in the summer look like compar
 
 __Anna:__ I answered the questions: What was the overall distribution of rides over the entire year, where were most rides going to, and what were the most popular dates for renting bikes and why. I used lubradate to put the date columns into a date so I could manipulate them easier. I grouped and arranged the data to find the most popular day and location. For the overall distribution of rides, I used a geom_line function to show the distribution and a geom_smooth to show the overall trend. 
 
-__James:__
+__James:__ See above section.
 
