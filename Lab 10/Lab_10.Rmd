@@ -42,6 +42,22 @@ QnA <- QnA%>%
 ```
 
 ## Timeliness of a Post (GROUP)
+```{r, eval=FALSE}
+time <- QnA%>%
+  select(Qid, QDate, ADate, AScore)
+
+etime <- time%>%
+  mutate(Etime= ADate-QDate)
+
+### DATA LOSS HERE
+etime1 <- etime%>% 
+  filter(Etime >= 0)
+
+ggplot(etime1)+
+  geom_point(mapping= aes(x=Etime, y=AScore))
+
+```
+
 ## Other Important Features (SUMMARY OF INDIVIDAL)
 
 ---
