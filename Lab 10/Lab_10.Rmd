@@ -40,3 +40,16 @@ QnA <- QnA%>%
   select(Qid, QTitle, QDate, QScore, QUserId, QBody, 
          Aid, ADate, AScore, AUserId, ABody)
 ```
+
+## Timeliness of a Post (GROUP)
+## Other Important Features (SUMMARY OF INDIVIDAL)
+
+---
+
+### Chris
+
+### James
+
+### Amanda
+
+### Anna (If answers were higher voted than question)
