@@ -10,3 +10,33 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # IT'S ALMOST SPRING BREAK (AND I'M READY TO GIVE 0% EFFORT ON THIS LAB)
+```{r, eval= FALSE}
+# Load Both Parts of this Data
+answers <- read_csv("Answers_trunc.csv", col_names = TRUE)%>%
+  select (Id, OwnerUserId, CreationDate, ParentId, Score, Body)
+
+questions <- read_csv("Questions_trunc.csv", col_name= TRUE)%>%
+  select(Id, OwnerUserId, CreationDate, Score, Title, Body)
+
+## Join if you want (run all code)
+answersj <- answers%>%
+  rename(AnswerId= Id, Id= ParentId)
+
+QnA <- full_join(questions, answersj, by= "Id")%>%
+  rename(QDate= CreationDate.x,
+         QScore= Score.x,
+         QTitle= Title,
+         QBody= Body.x,
+         ADate= CreationDate.y,
+         AScore= Score.y,
+         ABody= Body.y,
+         AUserId= OwnerUserId.y,
+         QUserId= OwnerUserId.x,
+         Aid= AnswerId,
+         Qid= Id
+         )
+  
+QnA <- QnA%>%
+  select(Qid, QTitle, QDate, QScore, QUserId, QBody, 
+         Aid, ADate, AScore, AUserId, ABody)
+```
