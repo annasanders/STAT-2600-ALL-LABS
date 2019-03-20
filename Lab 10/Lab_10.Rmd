@@ -12,11 +12,15 @@ knitr::opts_chunk$set(echo = TRUE)
 # IT'S ALMOST SPRING BREAK (AND I'M READY TO GIVE 0% EFFORT ON THIS LAB)
 ```{r, eval= FALSE}
 # Load Both Parts of this Data
+library(tidyverse)
+library(lubridate)
 answers <- read_csv("Answers_trunc.csv", col_names = TRUE)%>%
   select (Id, OwnerUserId, CreationDate, ParentId, Score, Body)
+View(answers)
 
 questions <- read_csv("Questions_trunc.csv", col_name= TRUE)%>%
   select(Id, OwnerUserId, CreationDate, Score, Title, Body)
+View(questions)
 
 ## Join if you want (run all code)
 answersj <- answers%>%
@@ -66,6 +70,19 @@ ggplot(etime1)+
 
 ### James
 
-### Amanda
+### Amanda 
+__Questions:__ Do questions that include a question mark generally receive more upvotes than questions that do not include a question mark?
+
+```{r, eval=FALSE}
+questions %>% mutate()
+```
+
+
+
+__Answers:__ Do answers that use "I statements get more upvotes than ones that don't?"
+
+```{r, eval=FALSE}
+
+```
 
 ### Anna (If answers were higher voted than question)
