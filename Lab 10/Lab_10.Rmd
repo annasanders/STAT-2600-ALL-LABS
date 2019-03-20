@@ -86,3 +86,16 @@ __Answers:__ Do answers that use "I statements get more upvotes than ones that d
 ```
 
 ### Anna (If answers were higher voted than question)
+Feature: Your Question Sucks!
+
+```{r, eval=FALSE}
+updoot <- QnA%>%
+  mutate(Diff= AScore-QScore)
+
+updoot1 <- updoot%>%
+  filter(Diff > 0)
+
+ggplot (updoot1)+
+  geom_point(mapping=aes(x=Diff, y=QScore, color=AScore))
+
+```
