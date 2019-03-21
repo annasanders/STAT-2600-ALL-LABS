@@ -74,7 +74,10 @@ ggplot(etime1)+
 __Questions:__ Do questions that include a question mark generally receive more upvotes than questions that do not include a question mark?
 
 ```{r, eval=FALSE}
-questions %>% mutate()
+questions1 <- questions %>% mutate(questionMarks = str_detect(Title, "\\?"))
+#View(questions1)
+questions2 <- questions1 %>% aggregate(questions1, questionMarks = TRUE, FUN=mean)
+#meanQuestionMarkScore <- aggregate(questions1summarise(questions1, avgScore = mean())
 ```
 
 
