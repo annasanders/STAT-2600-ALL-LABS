@@ -99,6 +99,11 @@ updoot1 <- updoot%>%
   filter(Diff > 0)
 
 ggplot (updoot1)+
-  geom_point(mapping=aes(x=Diff, y=QScore, color=AScore))
+  geom_point(mapping=aes(x=Diff, y=QScore, color=AScore))+
+  labs(x= "Difference in Answer Score and Question Score", y= "Question Score", title= "What Questions Have Answers Rated Higher than the Question?")+
+  scale_x_continuous(limits= c(0,2000))+
+  scale_y_continuous(limits= c(0,2000))+
+  scale_fill_manual(name= "Answer Score")+
+  scale_color_gradient(low="blue", high="red")
 
 ```
