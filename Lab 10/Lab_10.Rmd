@@ -76,7 +76,12 @@ __Questions:__ Do questions that include a question mark generally receive more 
 ```{r, eval=FALSE}
 questions1 <- questions %>% mutate(questionMarks = str_detect(Title, "\\?"))
 #View(questions1)
-questions2 <- questions1 %>% aggregate(questions1, questionMarks = TRUE, FUN=mean)
+questions2 <- questions1 %>% 
+  select(Score, questionMarks)%>%
+  group_by(questionMarks)%>%
+  summarise(mean= mean(Score))
+View(questions2)
+#ggplot(data=questions2, aes(x=questionMarks, y=avgScore)) + geom_col()
 #meanQuestionMarkScore <- aggregate(questions1summarise(questions1, avgScore = mean())
 ```
 
