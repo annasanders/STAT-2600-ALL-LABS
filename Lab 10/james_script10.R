@@ -33,7 +33,16 @@ view(QnA)
 
 questions<- questions%>%
   mutate(wc=str_length(Body),title_wc=str_length(Title))%>%
-  mutate(l_body=str_to_lower(Body))%>%
-  mutate(q_count=sum(str_count(l_body,c('who','what','when','why','how'))))
-view(questions)
+  mutate(test=title_wc/wc)
 
+view(questions)
+ggplot(data=questions)+geom_point(aes(x=test,y=Score))+labs(x='Title Word Count / Body Word Count',y='Score',title='Title and Body Length Vs. Score')
+
+answersj<-answersj%>%
+  mutate(q=str_detect(Body,'\\?'))
+view(answersj)
+
+ggplot(data=answersj)+geom_density(aes(x=Score))+facet_wrap(~q)
+answersj2<-answersj%>%
+  filter(Score<100)
+ggplot(data=answersj2)+geom_histogram(aes(x=Score,color=q),binwidth = 10)+labs(x="Score",y="Count",color="Contains ?",title='Effect of Asking Questions in Answer')
