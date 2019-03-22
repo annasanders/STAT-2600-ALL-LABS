@@ -112,6 +112,13 @@ I chose to analyze this feature because, in my experience, the answers that link
 Again, I think the reason that people who included links in their responses had a much higher average upvotes is due to them reffering to other sources when they know they are unable to adequately answer a specific portion of the question
 
 ### James
+__Questions:__ Does the ratio of word count for the title and body affect the score? The feature I analyzed was this ratio. I don't believe there will be a strong correlation with this feature and scores, but I do believe that it's something to observe. Questions that have titles that are longer than their bodies have a ratio that is greater than one, and questions that have titles shorter than their bodies have a ratio less than one. My expectation is higher scored questions have a ratio less than 1. 
+![](Plots/jamesPlot1.png)
+One can clearly see that there is some "correlation." As this ratio approaches 0, the range of scores increases. However, this could be due to short titles and descriptive body paragraphs. 
+
+__Answers:__ Do answers that have question marks in them get more upvotes? The feature I analyzed was a catergorical variable, that outputs TRUE if there is a "?" and FALSE if not. I thought this was a reasonable feature because one would assume that the best answers don't actually respond with questions. 
+![](Plots/jamesPlot2.png)
+For this plot, I actually limited my scores to 0-100 get a better representation of the majority of answers. There is also some correlation here. As the score increases, the percentage of answers not having a question mark increases. Just like the feature for questions, this isn't a great feature if one wanted strong correlation. Also, because there are so many answers that get 0-1 upvotes, this feature might be best suited for answers that actually got higher scores. 
 
 ### Amanda 
 __Questions:__ Do questions that include a question mark generally receive more upvotes than questions that do not include a question mark?
@@ -149,3 +156,4 @@ ggplot (updoot1)+
 Summary blah blah blah: 
 
 Chris: I tidyed the data by filtering through variable I didn't need. I then separated all the answers into ones that did and didn't contain a link to another source. After that, I averaged the scores/ upvotes for the respective groups with respect to links and then plotted the results using geom_bar. 
+James: I used dplyr and string functions for my features. I used geom_point and geom_histogram for my plots. 
