@@ -45,6 +45,8 @@ As you can see from the plot above, time does not really play into the overall s
 
 ## Other Important Features (SUMMARY OF INDIVIDAL)
 If someone refers to a link in their answer, they are more likely to get a better score/upvote.
+If someone uses a question mark in their question, it would tend to get a better score.
+There is a small coorelation between using first person in answers and getting worse scores, but not a huge one.
 
 ---
 
@@ -103,15 +105,46 @@ For this plot, I actually limited my scores to 0-100 get a better representation
 ### Amanda 
 __Questions:__ Do questions that include a question mark generally receive more upvotes than questions that do not include a question mark?
 
+![](Plots/amandaQuestion.png)
+
 ```{r, eval=FALSE}
-questions %>% mutate()
+questions1 <- questions %>% mutate(questionMarks = str_detect(Title, "\\?"))
+#View(questions1)
+questions2 <- questions1 %>% 
+  select(Score, questionMarks)%>%
+  group_by(questionMarks)%>%
+  summarise(mean= mean(Score))
+#View(questions2)
+ggplot(data=questions2, aes(x=questionMarks, y=mean, fill=questionMarks)) + geom_col() +labs(title="Mean Scores for Questions With and Without Question Marks", x="Question Marks", y="Mean Score") + theme(legend.position="none")
 ```
+
+This graph looks at how scores for questions may vary based on whether or not they used a question mark in the question. "TRUE" indicates that the question did have a question mark in it while "FALSE" indicates that the question did not have a question mark in it.
+
+I used geom_col() so I could plot the means for each category directly next to eachother. First, I added the feature of a boolean variable that states whether or not the question has a question mark. Then I summarised the data to get the mean score for all the questions with and without question marks, and also added color and labels to the graph to make it more aesthetically pleasing. 
+
+From this graph, it is clear that questions with question marks received on average, higher scores than questions without question marks.
+
 
 __Answers:__ Do answers that use "I statements get more upvotes than ones that don't?"
 
-```{r, eval=FALSE}
+![](Plots/amandaAnswer.png)
 
+```{r, eval=FALSE}
+answers1 <- answers %>% mutate(firstPerson = str_detect(Body, "I"))
+#View(questions1)
+answers2 <- answers1 %>% 
+  select(Score, firstPerson)%>%
+  group_by(firstPerson)%>%
+  summarise(mean1= mean(Score))
+#View(questions2)
+ggplot(data=answers2, aes(x=firstPerson, y=mean1, fill=firstPerson)) + geom_col() +labs(title="Mean Scores for Answers With and Without First Person", x="First Person", y="Mean Score") + theme(legend.position="none")
 ```
+
+This graph looks at how scores for answers change based on whether or not the answer used first person or not. I wanted to look at this because I thought it could be interesting to see if the type of point-of-view that a person used would affect how people reacted to their answers. Do people feel a stronger connection to answers that use "I" or a weaker one?
+
+To make this graph, I created a new feature that is a boolean variable that says "TRUE" if the answer uses first person and "FALSE" if the answer does not have it. I then summarised the data to extract the mean score for all questions with and without first person, adding colors and labels to make it more aesthetically pleasing. 
+
+From this graph, it is clear that answers that don't use "I" statements have slightly higher answers. However, the difference is not that big, especially compared to the huge difference between scores in questions that did or didn't use question marks. I would be interested to see if this difference is statistically significant or not.
 
 ### Anna
 __Question:__ Why are answers sometimes scored higher than questions?
