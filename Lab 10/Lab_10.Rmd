@@ -9,9 +9,8 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# IT'S ALMOST SPRING BREAK (AND I'M READY TO GIVE 0% EFFORT ON THIS LAB)
-
-## Timeliness of a Post (GROUP)
+# Fourm Data
+## Timeliness of a Post
 ```{r, eval=FALSE}
 library(hms)
 
@@ -43,17 +42,18 @@ ggplot(etime2)+
 
 As you can see from the plot above, time does not really play into the overall score of an answer post unless the answer is made within a 50 day range (2400:00:00 denotes 100 days have passed). Even looking at a smaller timescale (168:00:00is one week), the conclusion that the less time that elapses between a question and answer could possibly increase answer scores.
 
-## Other Important Features (SUMMARY OF INDIVIDAL)
+## Other Important Features
 If someone refers to a link in their answer, they are more likely to get a better score/upvote.
 If someone uses a question mark in their question, it would tend to get a better score.
-There is a small coorelation between using first person in answers and getting worse scores, but not a huge one.
+There is a small correlation between using first person in answers and getting worse scores, but not a huge one.
+Some answers score higher than the question, but it is unlikely and for large differences, both the question and answers have to be scored highly. 
 
 ---
 
 ### Chris
-__Question:__ do answers that contain a link in them get more upvotes? 
+__Question:__ Do answers that contain a link in them get more upvotes? 
 
-![](plots/chrislab10.png)
+![](plots/Chrislab10plot.png)
 
 ```{r, eval=FALSE}
 
@@ -68,7 +68,7 @@ score_wlink <- containslink %>%
   transform(Score = as.numeric(Score)) %>%
   summarise(mean_score = mean(Score))
 
-#average score which contain links and then average scores of ones that dont contain links and compare.
+#average score which contains links and then average scores of ones that don't contain links and compare.
 
 doesntcontainlink <- links %>%
   filter(!str_detect(Body,"http")) %>%
@@ -90,17 +90,20 @@ From the data, we can see that, on average, answers that provide a link to suppo
 
 I chose to analyze this feature because, in my experience, the answers that link to other articles are more intricate. Those answers tend to be very detailed, and the links are to either references, or to another article that can answer a specific aspect of the question in more detail. I was curious if the people who linked other sources would get higher upvotes because of this. 
 
-Again, I think the reason that people who included links in their responses had a much higher average upvotes is due to them reffering to other sources when they know they are unable to adequately answer a specific portion of the question
+Again, I think the reason that people who included links in their responses had much higher average upvotes is due to them referring to other sources when they know they are unable to adequately answer a specific portion of the question
 
 ### James
 __Questions:__ Does the ratio of word count for the title and body affect the score? The feature I analyzed was this ratio. I don't believe there will be a strong correlation with this feature and scores, but I do believe that it's something to observe. Questions that have titles that are longer than their bodies have a ratio that is greater than one, and questions that have titles shorter than their bodies have a ratio less than one. My expectation is higher scored questions have a ratio less than 1. 
+
 ![](Plots/jamesPlot1.png)
+
 One can clearly see that there is some "correlation." As this ratio approaches 0, the range of scores increases. However, this could be due to short titles and descriptive body paragraphs. 
 
-__Answers:__ Do answers that have question marks in them get more upvotes? The feature I analyzed was a catergorical variable, that outputs TRUE if there is a "?" and FALSE if not. I thought this was a reasonable feature because one would assume that the best answers don't actually respond with questions. 
+__Answers:__ Do answers that have question marks in them get more upvotes? The feature I analyzed was a categorical variable, that outputs TRUE if there is a "?" and FALSE if not. I thought this was a reasonable feature because one would assume that the best answers don't actually respond with questions. 
 
 ![](Plots/jamesPlot2.png)
-For this plot, I actually limited my scores to 0-100 get a better representation of the majority of answers. There is also some correlation here. As the score increases, the percentage of answers not having a question mark Just like the feature for questions, this isn't a great feature if one wanted strong correlation. Also, because there are so many answers that get 0-1 upvotes, this feature might be best suited for answers that actually got higher scores. 
+
+For this plot, I actually limited my scores to 0-100 get a better representation of the majority of answers. There is also some correlation here. As the score increases, the percentage of answers not having a question mark Just like the feature for questions, this isn't a great feature if one wanted a strong correlation. Also, because there are so many answers that get 0-1 upvotes, this feature might be best suited for answers that actually got higher scores. 
 
 ### Amanda 
 __Questions:__ Do questions that include a question mark generally receive more upvotes than questions that do not include a question mark?
@@ -120,7 +123,7 @@ ggplot(data=questions2, aes(x=questionMarks, y=mean, fill=questionMarks)) + geom
 
 This graph looks at how scores for questions may vary based on whether or not they used a question mark in the question. "TRUE" indicates that the question did have a question mark in it while "FALSE" indicates that the question did not have a question mark in it.
 
-I used geom_col() so I could plot the means for each category directly next to eachother. First, I added the feature of a boolean variable that states whether or not the question has a question mark. Then I summarised the data to get the mean score for all the questions with and without question marks, and also added color and labels to the graph to make it more aesthetically pleasing. 
+I used geom_col() so I could plot the means for each category directly next to each other. First, I added the feature of a boolean variable that states whether or not the question has a question mark. Then I summarised the data to get the mean score for all the questions with and without question marks, and also added color and labels to the graph to make it more aesthetically pleasing. 
 
 From this graph, it is clear that questions with question marks received on average, higher scores than questions without question marks.
 
@@ -162,7 +165,7 @@ questions <- read_csv("Questions_trunc.csv", col_name= TRUE)%>%
   select(Id, OwnerUserId, CreationDate, Score, Title, Body)
 View(questions)
 
-#Join Funciton
+#Join Function
 answersj <- answers%>%
   rename(AnswerId= Id, Id= ParentId)
 
@@ -203,7 +206,7 @@ ggplot (updoot1)+
 ```
 ![](Plots/Anna's Plot.png)
 
-From the graph, you can see that there is a postive relationship between question score and the difference, meaning that the qustion has to be generally highly scored for an answer to have an even higher score. Similarly, most of the points where this happens only have a difference below 500 points. 
+From the graph, you can see that there is a positive relationship between question score and the difference, meaning that the question has to be generally highly scored for an answer to have an even higher score. Similarly, most of the points where this happens only have a difference below 500 points. 
 
 This factor would be particularly useful if one wanted to research more into these cases as the overall probability that an answer would score higher than its question is around 3%. 
 
@@ -215,6 +218,6 @@ __Chris:__ I tidyed the data by filtering through variable I didn't need. I then
 
 __James:__ I used dplyr and string functions for my features. I used geom_point and geom_histogram for my plots. 
 
-__Amanda:__
+__Amanda:__ See above section
 
 __Anna:__ I used a full join and a geom point to represent this new feature.
