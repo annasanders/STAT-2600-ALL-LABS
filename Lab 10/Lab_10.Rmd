@@ -38,8 +38,8 @@ ggplot(etime2)+
   labs(x= "Time Elapsed", y= "Answer Score", 
        title= "Time Elapsed and Answer Score")
 ```
-![]()
-![]()
+![](Plots/Group Plot 1.png)
+![](Plots/Group Plot 2.png)
 
 As you can see from the plot above, time does not really play into the overall score of an answer post unless the answer is made within a 50 day range (2400:00:00 denotes 100 days have passed). Even looking at a smaller timescale (168:00:00is one week), the conclusion that the less time that elapses between a question and answer could possibly increase answer scores.
 
@@ -168,9 +168,11 @@ ggplot (updoot1)+
   scale_fill_manual(name= "Answer Score")+
   scale_color_gradient(low="blue", high="red")
 ```
-![]()
+![](Plots/Anna's Plot.png)
 
-From the graph, you can see that 
+From the graph, you can see that there is a postive relationship between question score and the difference, meaning that the qustion has to be generally highly scored for an answer to have an even higher score. Similarly, most of the points where this happens only have a difference below 500 points. 
+
+This factor would be particularly useful if one wanted to research more into these cases as the overall probability that an answer would score higher than its question is around 3%. 
 
 ---
 
