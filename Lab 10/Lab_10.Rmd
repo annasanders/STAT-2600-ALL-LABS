@@ -14,6 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # Load Both Parts of this Data
 library(tidyverse)
 library(lubridate)
+library(stringr)
 answers <- read_csv("Answers_trunc.csv", col_names = TRUE)%>%
   select (Id, OwnerUserId, CreationDate, ParentId, Score, Body)
 View(answers)
@@ -64,9 +65,50 @@ ggplot(etime1)+
 
 ## Other Important Features (SUMMARY OF INDIVIDAL)
 
+
 ---
 
 ### Chris
+question: do answers that contain a link in them get more upvotes? 
+
+![](plots/chrislab10.png)
+
+```{r, eval=FALSE}
+
+links <- answersj %>%
+  select("Score", "Body")
+
+containslink <- links %>%
+  filter(str_detect(Body, "http")) %>%
+  select(Score)
+
+score_wlink <- containslink %>%
+  transform(Score = as.numeric(Score)) %>%
+  summarise(mean_score = mean(Score))
+
+#average score which contain links and then average scores of ones that dont contain links and compare.
+
+doesntcontainlink <- links %>%
+  filter(!str_detect(Body,"http")) %>%
+  select(Score)
+
+score_wolink <- doesntcontainlink %>%
+  transform(Score = as.numeric(Score)) %>%
+  summarise(mean_score = mean(Score))
+
+scorestotal = full_join(score_wlink, score_wolink) %>%
+  mutate(Type = c("with link", "without link"))
+
+ggplot(scorestotal) + 
+  geom_col(aes(x = Type, y = mean_score, fill = Type)) + labs(x = "Does the answer include a link?", y = "Mean upvote", title = "Correlation between including links in answer and average upvotes") 
+
+```
+
+From the data, we can see that, on average, answers that provide a link to support their response receive a better score (16.53 upvotes on average) than those that do not (10.21 upvotes on average). To be exact answers that include links are 6.32 upvotes higher on average. 
+
+I chose to analyze this feature because, in my experience, the answers that link to other articles are more intricate. Those answers tend to be very detailed, and the links are to either references, or to another article that can answer a specific aspect of the question in more detail. I was curious if the people who linked other sources would get higher upvotes because of this. 
+
+Again, I think the reason that people who included links in their responses had a much higher average upvotes is due to them reffering to other sources when they know they are unable to adequately answer a specific portion of the question
 
 ### James
 
