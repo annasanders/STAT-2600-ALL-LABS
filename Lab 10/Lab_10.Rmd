@@ -44,7 +44,7 @@ ggplot(etime2)+
 As you can see from the plot above, time does not really play into the overall score of an answer post unless the answer is made within a 50 day range (2400:00:00 denotes 100 days have passed). Even looking at a smaller timescale (168:00:00is one week), the conclusion that the less time that elapses between a question and answer could possibly increase answer scores.
 
 ## Other Important Features (SUMMARY OF INDIVIDAL)
-If someone refers to a link in their answer, they are more likely to get a better score/upvote.
+If someone refers to a link in their answer, they are more likely to get a better score/upvote. We also found that some answers are scored higher than questions, but those answers are in the minority.
 
 ---
 
@@ -117,7 +117,7 @@ __Answers:__ Do answers that use "I statements get more upvotes than ones that d
 __Question:__ Why are answers sometimes scored higher than questions?
 I found this interesting because in most cases, you would expect the opposite (questions scored higher than answers) or an equal amount, as people score both questions and answers on relevancy to their life.
 
-I first used the full join function to join the entire data set together by Id and Parent Id. I then created a category that reported the difference in answer score and question score. After that, I filtered the data so that the tibble would only show questions with answers scored higher than the original post. To plot the relation, I used a geom_point function 
+I first used the full join function to join the entire data set together by Id and Parent Id. I then created a category that reported the difference in answer score and question score. After that, I filtered the data so that the tibble would only show questions with answers scored higher than the original post. To plot the relation, I used a geom_point function to make the plot. The plot cuts off some data, but those were clearly outliers.
 
 ```{r, eval=FALSE}
 #Reading the Files
@@ -184,4 +184,4 @@ __James:__ I used dplyr and string functions for my features. I used geom_point 
 
 __Amanda:__
 
-__Anna:__
+__Anna:__ I used a full join and a geom point to represent this new feature.
