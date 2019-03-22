@@ -142,3 +142,10 @@ ggplot (updoot1)+
   geom_point(mapping=aes(x=Diff, y=QScore, color=AScore))
 
 ```
+
+
+
+
+Summary blah blah blah: 
+
+Chris: I tidyed the data by filtering through variable I didn't need. I then separated all the answers into ones that did and didn't contain a link to another source. After that, I averaged the scores/ upvotes for the respective groups with respect to links and then plotted the results using geom_bar. 
