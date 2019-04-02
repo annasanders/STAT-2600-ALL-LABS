@@ -12,3 +12,52 @@ knitr::opts_chunk$set(echo = TRUE)
 # Some lab or something
 
 # Team stuff (James and Anna will do it this week, next week is Chris and Amanda (good luck on your matrix test))
+```{r, eval=FALSE}
+install.packages("babynames")
+library(babynames)
+babynames<- view(babynames)
+
+filter(babynames, str_detect(name, "Ra[ey]?ch"), year==1988)%>%
+  summarise(sum(n))
+
+filter(babynames, sex=="F", year==1990)%>%
+  summarise(sum(n))
+
+ariel<-babynames%>%
+  filter(str_detect(name, "Ar[iy]+.l"))%>%
+  group_by(year)%>%
+  summarize(sum(n))
+anames <-babynames%>%
+  filter(str_detect(name, "^A"))%>%
+  group_by(year)%>%
+  summarize(sum(n))
+
+ggplot()+
+  geom_line(ariel, mapping=aes(x=year, y=`sum(n)`))+
+  geom_vline(xintercept= 1989, col="blue")+
+  geom_line(anames, mapping=aes(x=year, y=`sum(n)`))
+```
+---
+
+## Chris
+
+## Amanda
+
+## James
+
+## Anna
+```{r, eval=FALSE}
+myname <- babynames%>%
+  filter(str_detect(babynames$name, "Anna"))
+```
+
+
+# What we did
+
+__Chris:__
+
+__Amanda:__
+
+__James:__
+
+__Anna:__ 
