@@ -1,0 +1,14 @@
+---
+title: "Lab 11"
+author: "Data Me Pls"
+date: "April 2, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Some lab or something
+
+# Team stuff (James and Anna will do it this week, next week is Chris and Amanda (good luck on your matrix test))
