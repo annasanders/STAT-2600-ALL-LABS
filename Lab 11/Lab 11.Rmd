@@ -37,6 +37,10 @@ ggplot()+
   geom_vline(xintercept= 1989, col="blue")+
   geom_line(anames, mapping=aes(x=year, y=`sum(n)`))
 ```
+### Ariel and Rachel
+
+### _The Littel_ Mermaid Effecd
+
 ---
 
 ## Chris
@@ -47,8 +51,27 @@ ggplot()+
 
 ## Anna
 ```{r, eval=FALSE}
-myname <- babynames%>%
-  filter(str_detect(babynames$name, "Anna"))
+myname<- babynames%>%
+  filter(str_detect(name, "Anna$"))%>%
+  group_by(year)%>%
+  summarize(sum(n))
+
+myname<- myname%>%
+  rename(Count= `sum(n)`, Year= year)
+
+anames <-babynames%>%
+  filter(str_detect(name, "^Ann"))%>%
+  group_by(year)%>%
+  summarise(sum(n))
+
+anames<- anames%>%
+  rename(Count= `sum(n)`, Year= year)
+
+ggplot()+
+  geom_line(myname, mapping=aes(x= Year, y= Count, color="Anna"))+
+  geom_line(anames, mapping=aes(x= Year, y= Count, color= "'Ann'"))+
+  geom_vline(xintercept= 1999, col="Green")+
+  labs(title= "Popularity of Anna and 'Ann' Names", color= "Name")
 ```
 
 
