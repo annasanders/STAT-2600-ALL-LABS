@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Some lab or something
+# The Name Game
 
 # Team stuff (James and Anna will do it this week, next week is Chris and Amanda (good luck on your matrix test))
 ```{r, eval=FALSE}
@@ -17,17 +17,24 @@ install.packages("babynames")
 library(babynames)
 babynames<- view(babynames)
 
-filter(babynames, str_detect(name, "Ra[ey]?ch"), year==1988)%>%
-  summarise(sum(n))
+fnames<- babynames%>%
+  filter(sex=="F")
 
-filter(babynames, sex=="F", year==1990)%>%
+rachel<- fnames%>%
+  filter(str_detect(name, "Ra[ey]?ch"))
+  group_by(year)%>%
   summarise(sum(n))
-
-ariel<-babynames%>%
-  filter(str_detect(name, "Ar[iy]+.l"))%>%
+  
+ariel<-fnames%>%
+  filter(str_detect(name, "Ar[iy]+.l"))
   group_by(year)%>%
   summarize(sum(n))
-anames <-babynames%>%
+  
+fnamescount<- babynames%>%
+  filter(sex=="F", year== 1990)%>%
+  summarise(sum(str_detect(name, "Ra[ey]?ch") == T))
+
+asnames <-babynames%>%
   filter(str_detect(name, "^A"))%>%
   group_by(year)%>%
   summarize(sum(n))
@@ -37,9 +44,43 @@ ggplot()+
   geom_vline(xintercept= 1989, col="blue")+
   geom_line(anames, mapping=aes(x=year, y=`sum(n)`))
 ```
-### Ariel and Rachel
 
-### _The Littel_ Mermaid Effecd
+## Ariel and Rachel
+```{r, eval=FALSE}
+fnamescount<- babynames%>%
+  filter(sex=="F", year== 2017)%>%
+  summarise(sum(str_detect(name, "Ar[iy]+.l") == T))
+
+fnamestotal<- fnames%>%
+  filter(year== 2017)%>%
+  summarise(sum(n))
+```
+__Versions of Ariel and Rachel:__
+
+Year  |Ariel    |Rachel 
+------|---------|---------
+1973  |3        |14
+1988  |9        |22
+1990  |10       |19
+
+__Probability of Ariel and Rachel:__
+
+Year  |Ariel     |Rachel 
+------|----------|---------
+1973  |3/1458168 |14/1458168
+1988  |9/1780268 |22/1780268
+1990  |10/1898046|19/1898046
+2017  |20/1711811|7/1711811
+
+## _The Littel_ Mermaid Effect
+```{r, eval=FALSE}
+
+
+```
+
+---
+
+## Group Histogram
 
 ---
 
