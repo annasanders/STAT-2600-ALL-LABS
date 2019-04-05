@@ -93,7 +93,7 @@ For this plot, we decided to look at the four most popular names in the years 19
 ```{r, eval=FALSE}
 
 amandaCount <-babynames %>%
-  filter(str_detect(name, "Amanda"), sex== "F")%>%
+  filter(str_detect(name, "Amanda$"), sex== "F")%>%
   group_by(year)%>%
   summarise(sum(n)) %>% rename(count = 'sum(n)')
 
@@ -117,8 +117,9 @@ This graph compares the number of people named Amanda each year from 1880-2017 t
 ```{r, eval=FALSE}
 
 amanda <- babynames %>% 
-  filter(str_detect(name, "Amanda"), sex=="F") %>% 
+  filter(str_detect(name, "Amanda$"), sex=="F") %>% 
   group_by(year)
+
 
 ggplot(data=amanda)+
   geom_col(aes(x=year, y=prop), position = "dodge")+
@@ -131,7 +132,11 @@ ggplot(data=amanda)+
 
 ```
 
-This graph shows how the proportion of females named Amanda changed over the years, from 1880 to 2017. 
+This graph shows how the proportion of females named Amanda changed over the years, from 1880 to 2017. The number of females named Amanda peaked in 1987 when the proportion of the population named Amanda was 0.02229977.
+By the time I was born in 1998, which is depicted by the red line on the graph, the name "Amanda" was on its decline in terms of usage, with a proportion of 0.00563052.
+In 2017, the name "Amanda" got even less popular, with the proportion of people with this name being 0.00050883.
+Looking 19 years before my birthday in 1979, the popularity of my name was increasing pretty dramatically, with the proportion of the population with that name being 0.01852846.
+Describing the overall trend of the graph, the name starts with a proportion of about .0025, then decreases steadily until about 1960, when the proportion of the population named "Amanda" increases dramatically for 30 years. Then it decreases pretty dramatically, and by 2017 the proportion of people named "Amanda" is even less than it was in 1880.
 
 ## James
 
@@ -188,7 +193,7 @@ OVERALL DISTRIBUTION
 
 __Chris:__
 
-__Amanda:__
+__Amanda:__ For my first graph that compares the popularity of my name to other names that start with "Ama", I first created two new datasets from the babynames dataset. I used filter to get only the names that were "Amanda" in one dataset, and that started with "Ama" in the other dataset. I grouped each set by year and used the summarise function to get the total number of people with names that fit these limitations for each year. I also used the rename function to rename the count for total number of people with names like this every year. Then, I used geom_line for each dataset so I could plot two different lines from two different sets onto the same graph, color-coding each line and changing the names of the labels so the graph is easier to understand. For the second graph, which is looking at how the proportion of the population with my name changes over the years, I used filter and group_by again to limit and organize my data. Then I created a histogram that shows the proportion of people with my name for every year from 1880-2017. I used the geom_vline function to creat vertical lines that indicate my birth year, 19 years after my birth year (2017), and 19 years before my birth year (1979). I also changed the labels on my graph to make it easier to understand.
 
 __James:__
 
