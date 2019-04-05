@@ -74,9 +74,10 @@ ggplot()+
   geom_line(anames, mapping=aes(x=year, y=`sum(n)`))
 ```
 
-TO DO:
--other names over time (prop)
--plot and describe plot
+__Popularity of Ariel versus other names:__
+![](Plots/ariel_vs_pop.png)
+For this plot, we decided to look at the four most popular names in the years 1988-1990. These names were Amanda, Ashely, Jessica, and Sarah. From the plot, it's immediately clear that the proportion of those popular names have been decreasing while the proportion of Ariel names have been increasing. 
+
 
 ---
 
