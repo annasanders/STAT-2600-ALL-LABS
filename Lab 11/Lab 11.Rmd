@@ -1,11 +1,11 @@
 ---
-title: "Lab 11"
+  title: "Lab 11"
 author: "Data Me Pls"
 date: "April 2, 2019"
 output: html_document
 ---
-
-```{r setup, include=FALSE}
+  
+  ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -40,7 +40,7 @@ __Versions of Ariel and Rachel:__
 
 Year  |Ariel    |Rachel 
 ------|---------|---------
-1973  |3        |14
+  1973  |3        |14
 1988  |9        |22
 1990  |10       |19
 
@@ -48,7 +48,7 @@ __Probability of Ariel and Rachel:__
 
 Year  |Ariel     |Rachel 
 ------|----------|---------
-1973  |3/1458168 |14/1458168
+  1973  |3/1458168 |14/1458168
 1988  |9/1780268 |22/1780268
 1990  |10/1898046|19/1898046
 2017  |20/1711811|7/1711811
@@ -59,7 +59,7 @@ ariel<- fnames%>%
   filter(str_detect(name, "Ar[iy]+.l"))%>%
   group_by(year)%>%
   summarize(sum(n))
-  
+
 asnamesp<- babynames%>%
   filter(str_detect(name, "^A"))%>%
   group_by(year)%>%
@@ -84,6 +84,36 @@ For this plot, we decided to look at the four most popular names in the years 19
 ---
 
 ## Group Histogram (TO DO AT THE END)
+```{r, eval= FALSE}
+#Filtering our years and summing total n
+ournames<- babynames%>%
+filter(between(year, 1997, 1999))%>%
+group_by(name)%>%
+mutate(Total= sum(n))
+
+#Getting rid of multiple data
+ournames2<- ournames%>%
+filter(year==1999)%>%
+mutate(Prop= Total/10994443)
+
+#Counting totals of all Years  
+ournames3<- babynames%>%
+filter(between(year, 1997, 1999))%>%
+mutate(oTotal=sum(n))
+
+ggplot(ournames2)+
+geom_histogram(mapping=aes(x=Prop), bins=50)+
+scale_x_continuous(limits=c(-0.0001,0.0025))+
+geom_vline(xintercept= 0, col="Red")+
+geom_vline(xintercept= 0, col="Yellow")+
+geom_vline(xintercept= 0, col="Green")+
+geom_vline(xintercept= 0, col="Blue")+
+labs(title= "Total Count of Proportion of Names from 1997-1999", y= "Count", x="Proportion")
+
+```
+!![](Group Plot 2.png)
+
+We decided to do a histogram of the total count of the proportion of all names in 1997-1999. The graph below shows four lines representing our own name proportions. Since the data manipulations created a lot of extra data (i.e. each year would have multiple names with the correct total amount), we decided to use only the names from 1999 because the total amount of names was the largest, and thus the amount of missed names (names used in 1997 or 1998 but not 1999) would be less likely. 
 
 ---
 
@@ -95,22 +125,22 @@ For this plot, we decided to look at the four most popular names in the years 19
 ```{r, eval=FALSE}
 
 amandaCount <-babynames %>%
-  filter(str_detect(name, "Amanda$"), sex== "F")%>%
-  group_by(year)%>%
-  summarise(sum(n)) %>% rename(count = 'sum(n)')
+filter(str_detect(name, "Amanda$"), sex== "F")%>%
+group_by(year)%>%
+summarise(sum(n)) %>% rename(count = 'sum(n)')
 
 simNames <- babynames %>% 
-  filter(str_detect(name, "^Ama"), sex=='F') %>% 
-  group_by(year) %>% 
-  summarise(sum(n)) %>% 
-  rename(count = 'sum(n)')
+filter(str_detect(name, "^Ama"), sex=='F') %>% 
+group_by(year) %>% 
+summarise(sum(n)) %>% 
+rename(count = 'sum(n)')
 
 ggplot()+
-  geom_line(amandaCount, mapping=aes(x= year, y=count, color="Amanda"))+
-  geom_line(simNames, mapping=aes(x= year, y= count, color= "Ama"))+
-  xlab("Year")+
-  ylab("Count of Names")+
-  ggtitle("Number of 'Amanda' Names Versus 'Ama' Names")
+geom_line(amandaCount, mapping=aes(x= year, y=count, color="Amanda"))+
+geom_line(simNames, mapping=aes(x= year, y= count, color= "Ama"))+
+xlab("Year")+
+ylab("Count of Names")+
+ggtitle("Number of 'Amanda' Names Versus 'Ama' Names")
 
 ```
 
@@ -138,9 +168,13 @@ ggplot(data=amanda)+
 
 This graph shows how the proportion of females named Amanda changed over the years, from 1880 to 2017. The number of females named Amanda peaked in 1987 when the proportion of the population named Amanda was 0.02229977.
 By the time I was born in 1998, which is depicted by the red line on the graph, the name "Amanda" was on its decline in terms of usage, with a proportion of 0.00563052.
+
 In 2017, the name "Amanda" got even less popular, with the proportion of people with this name being 0.00050883.
 Looking 19 years before my birthday in 1979, the popularity of my name was increasing pretty dramatically, with the proportion of the population with that name being 0.01852846.
+
 Describing the overall trend of the graph, the name starts with a proportion of about .0025, then decreases steadily until about 1960, when the proportion of the population named "Amanda" increases dramatically for 30 years. Then it decreases pretty dramatically, and by 2017 the proportion of people named "Amanda" is even less than it was in 1880.
+
+For my first graph that compares the popularity of my name to other names that start with "Ama", I first created two new datasets from the babynames dataset. I used filter to get only the names that were "Amanda" in one dataset, and that started with "Ama" in the other dataset. I grouped each set by year and used the summarise function to get the total number of people with names that fit these limitations for each year. I also used the rename function to rename the count for total number of people with names like this every year. Then, I used geom_line for each dataset so I could plot two different lines from two different sets onto the same graph, color-coding each line and changing the names of the labels so the graph is easier to understand. For the second graph, which is looking at how the proportion of the population with my name changes over the years, I used filter and group_by again to limit and organize my data. Then I created a histogram that shows the proportion of people with my name for every year from 1880-2017. I used the geom_vline function to creat vertical lines that indicate my birth year, 19 years after my birth year (2017), and 19 years before my birth year (1979). I also changed the labels on my graph to make it easier to understand.
 
 ## James
 
@@ -183,22 +217,16 @@ ggplot()+
 
 
 ggplot(myname2)+
-  geom_histogram(mapping=aes(x=prop), bins=14)
+  geom_histogram(mapping=aes(x=prop), bins=14)+
+  geom_vline(xintercept= 0.00467474, col="Red")+
+  annotate("Label", x = 0.01, y = 40, label = "Proportion for My Birth Year")+
+  labs(title= "Histogram of Proportion of Anna's", x= "Proportion", y="Count")
 ```
-HSITOGRAM THING
+![](Plots/Anna's Plot 1.png)
+    
+![](Plots/Anna's Plot 2.png)
 
-Percentile and Proportion Section:
-words words words
+As you can see from the plots above, during my birth year, the overall proportion of my name related to other 'Ann' names (histogram) was low in general for the name Anna and for my birth year, however, the general trend of the name Anna follows the general trend of all 'Ann' names.
 
-OVERALL DISTRIBUTION
-
-
-# What we did
-
-__Chris:__
-
-__Amanda:__ For my first graph that compares the popularity of my name to other names that start with "Ama", I first created two new datasets from the babynames dataset. I used filter to get only the names that were "Amanda" in one dataset, and that started with "Ama" in the other dataset. I grouped each set by year and used the summarise function to get the total number of people with names that fit these limitations for each year. I also used the rename function to rename the count for total number of people with names like this every year. Then, I used geom_line for each dataset so I could plot two different lines from two different sets onto the same graph, color-coding each line and changing the names of the labels so the graph is easier to understand. For the second graph, which is looking at how the proportion of the population with my name changes over the years, I used filter and group_by again to limit and organize my data. Then I created a histogram that shows the proportion of people with my name for every year from 1880-2017. I used the geom_vline function to creat vertical lines that indicate my birth year, 19 years after my birth year (2017), and 19 years before my birth year (1979). I also changed the labels on my graph to make it easier to understand.
-
-__James:__
-
-__Anna:__ 
+# What We Did
+See above sections associated with our names.
