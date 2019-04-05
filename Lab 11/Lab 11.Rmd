@@ -235,7 +235,7 @@ words words words
 
 # What we did
 
-__Chris:__
+__Chris:__ I filtered the data to find baby names that were similar to Chris. I found the total count of Chris names in every year and plotted these. I then found the proportion of Chris names to all names. I also compared names that started with "Chr" to those that were actually Chris or Christopher. I plotted these findings to visualize the relationships. I also showed where my birth year fit in to the data and the peak prooprtion of Chris names in the population. 
 
 __Amanda:__
 
