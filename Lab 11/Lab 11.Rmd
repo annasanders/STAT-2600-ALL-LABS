@@ -90,6 +90,8 @@ For this plot, we decided to look at the four most popular names in the years 19
 ## Chris
 
 ## Amanda
+
+![](Plots/amandaPlot1.png)
 ```{r, eval=FALSE}
 
 amandaCount <-babynames %>%
@@ -114,6 +116,8 @@ ggplot()+
 
 This graph compares the number of people named Amanda each year from 1880-2017 to the number of people who had a name that started with "Ama". From this graph, it's pretty clear that there are not a lot of female names that start with "Ama" besides the name "Amanda". Around the year 2000, the number of names that started with "Ama" other than "Amanda" increased. Other than that, almost all of the names that started with "Ama" were people named Amanda, which can be seen due to the fact that the lines for each name are almost overlapping at most points on the graph.
 
+
+![](Plots/AmandaPlot2.png)
 ```{r, eval=FALSE}
 
 amanda <- babynames %>% 
