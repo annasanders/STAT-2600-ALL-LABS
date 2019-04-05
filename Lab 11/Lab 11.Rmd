@@ -177,6 +177,40 @@ Describing the overall trend of the graph, the name starts with a proportion of 
 For my first graph that compares the popularity of my name to other names that start with "Ama", I first created two new datasets from the babynames dataset. I used filter to get only the names that were "Amanda" in one dataset, and that started with "Ama" in the other dataset. I grouped each set by year and used the summarise function to get the total number of people with names that fit these limitations for each year. I also used the rename function to rename the count for total number of people with names like this every year. Then, I used geom_line for each dataset so I could plot two different lines from two different sets onto the same graph, color-coding each line and changing the names of the labels so the graph is easier to understand. For the second graph, which is looking at how the proportion of the population with my name changes over the years, I used filter and group_by again to limit and organize my data. Then I created a histogram that shows the proportion of people with my name for every year from 1880-2017. I used the geom_vline function to creat vertical lines that indicate my birth year, 19 years after my birth year (2017), and 19 years before my birth year (1979). I also changed the labels on my graph to make it easier to understand.
 
 ## James
+![](Plots/james_plot1.png)
+From the plot, it is clear that the name James and names starting with "Jam" had roughly equal proportions up until the year 1960. From then, the names starting with "Jam" had a higher proportion than James. One interesting trend is that after the huge decline starting around 1940, there has been an upward trend around the year 2000. I was born in 1997, so the rate of proportion has been increasing sense then. 
+![](Plots/jamesplot2.png)
+Here is a plot of the proportion of James names from 1975 to 2017. Like the plot before, the line is trending towards concave up. 
+![](Plots/james_plot4.png)
+Here is a plot showing the relative percentile change of the proportion of "James" names relative to all baby names. From this plot, it's immediately clear that "James" is a very popular name. Having a percentile above 80% at all times with minor variation indicates that there are few names that are more popular than "James." This graph doesn't account for females with the name "James."
+
+```{r,eval=FALSE}
+james<-babynames%>%
+  filter(str_detect(name, "^James$")==1,sex=="M")
+
+jam<-babynames%>%
+  filter(str_detect(name, "^Jam.")==1,sex=="M")%>%
+  group_by(year)%>%
+  summarize(prop=sum(prop))%>%
+  
+view(jam)
+ggplot()+geom_line(data=jam,aes(x=year,y=prop,color='Start with Jam'))+geom_line(data=james,aes(x=year,y=prop,color='James'))
+
+pop_james_a<-james%>%
+  filter(between(year,1975,2017))
+view(pop_james_a)
+
+ggplot()+geom_line(data=pop_james_a,mapping=aes(x=year,y=prop))+labs(x='Year',y='Proportion',title='Proportion of the name James from 1975 to 2017')
+
+#Quantile calculations
+babynamest<-babynames%>%
+  arrange(desc(prop))%>%
+  mutate(j=ifelse(name=='James',row_number(),0))%>%
+  filter(name=='James')%>%
+  mutate(perct = (1924665-j)/1924665)
+view(babynamest)
+ggplot()+geom_smooth(data=babynamest,mapping=aes(x=year,y=perct))+labs(x='Year',y='Percentile',title='Relative Percentile of Proportion of James')
+```
 
 ## Anna 
 ```{r, eval=FALSE}
@@ -228,7 +262,7 @@ ggplot(myname2)+
 
 As you can see from the plots above, during my birth year, the overall proportion of my name related to other 'Ann' names (histogram) was low in general for the name Anna and for my birth year, however, the general trend of the name Anna follows the general trend of all 'Ann' names. 
 
-Overall, Anna and Ann names are losing popularity comparivitly. It is important to note, however, Anna as a name has never been particularly popular.
+Overall, Anna and Ann names are losing popularity comparatively. It is important to note, however, Anna as a name has never been particularly popular.
 
 I chose to use both a line plot and a histogram to best represent the change in total Ann and Anna names as well as the change in proportion of Anna to other Ann names. I used Anna$ to filter to my name as that would give me only the name Anna with the exact spelling I use. I also decided to filter only the name with my gender, as it would give a clearer picture of the overall count and proportion (as Males named Anna are outliers). Similarly, when comparing my name to all Ann names (not just female Ann names), it could make the proportion look a bit off as there are many male Ann names. 
 
