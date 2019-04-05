@@ -135,6 +135,10 @@ ggplot()+
 
 ```
 
+<<<<<<< HEAD
+=======
+![](Plots/chrisplot1lab11.png)
+>>>>>>> master
 In the above plot, we can see that the name Chris and Christopher was fairly unpopulat until about 1940, and then the name Christopher grew much faster than Chris. The name of just Chris spiked at 1960 and then decreased while the name Christopher kept increasing. Presumably, the legal name of Christopher became much more common than just Chris. 
 
 ```{r, eval = FALSE}
@@ -160,8 +164,13 @@ ggplot(data=chris)+
 
 
 ```
+<<<<<<< HEAD
 In the above plot, we can see the proportion of the name Chris compared to all other names from 1880 to 2017. We see the highest porportion in 1984. My birth year, 1998 is also noted. 
 
+=======
+![](Plots/chrisplot2lab11.png)
+In the above plot, we can see the proportion of the name Chris compared to all other names from 1880 to 2017. We see the highest porportion in 1984. My birth year, 1998 is also noted. 
+>>>>>>> master
 ## Amanda
 
 ![](Plots/amandaPlot1.png)
