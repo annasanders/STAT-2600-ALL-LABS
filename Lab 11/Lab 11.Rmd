@@ -75,7 +75,9 @@ ggplot()+
 ```
 
 __Popularity of Ariel versus other names:__
+
 ![](Plots/ariel_vs_pop.png)
+
 For this plot, we decided to look at the four most popular names in the years 1988-1990. These names were Amanda, Ashely, Jessica, and Sarah. From the plot, it's immediately clear that the proportion of those popular names have been decreasing while the proportion of Ariel names have been increasing. 
 
 
@@ -88,7 +90,6 @@ For this plot, we decided to look at the four most popular names in the years 19
 ## Chris
 
 ## Amanda
-
 ```{r, eval=FALSE}
 
 amandaCount <-babynames %>%
@@ -175,9 +176,12 @@ ggplot()+
 ggplot(myname2)+
   geom_histogram(mapping=aes(x=prop), bins=14)
 ```
+HSITOGRAM THING
 
 Percentile and Proportion Section:
 words words words
+
+OVERALL DISTRIBUTION
 
 
 # What we did
