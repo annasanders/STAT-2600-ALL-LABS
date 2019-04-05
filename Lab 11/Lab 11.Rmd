@@ -1,17 +1,15 @@
 ---
-  title: "Lab 11"
+title: "Lab 11"
 author: "Data Me Pls"
 date: "April 2, 2019"
 output: html_document
 ---
   
-  ```{r setup, include=FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # The Name Game
-
-# Team stuff (James and Anna will do it this week, next week is Chris and Amanda (good luck on your matrix test))
 ```{r, eval=FALSE}
 install.packages("babynames")
 library(tidyverse)
@@ -19,7 +17,7 @@ library(babynames)
 babynames<- view(babynames)
 ```
 
-## Ariel and Rachel (DONE)
+## Ariel and Rachel
 ```{r, eval=FALSE}
 babynames<- view(babynames)
 
@@ -40,7 +38,7 @@ __Versions of Ariel and Rachel:__
 
 Year  |Ariel    |Rachel 
 ------|---------|---------
-  1973  |3        |14
+1973  |3        |14
 1988  |9        |22
 1990  |10       |19
 
@@ -48,7 +46,7 @@ __Probability of Ariel and Rachel:__
 
 Year  |Ariel     |Rachel 
 ------|----------|---------
-  1973  |3/1458168 |14/1458168
+1973  |3/1458168 |14/1458168
 1988  |9/1780268 |22/1780268
 1990  |10/1898046|19/1898046
 2017  |20/1711811|7/1711811
@@ -103,17 +101,19 @@ mutate(oTotal=sum(n))
 
 ggplot(ournames2)+
 geom_histogram(mapping=aes(x=Prop), bins=50)+
-scale_x_continuous(limits=c(-0.0001,0.0025))+
-geom_vline(xintercept= 0, col="Red")+
-geom_vline(xintercept= 0, col="Yellow")+
-geom_vline(xintercept= 0, col="Green")+
-geom_vline(xintercept= 0, col="Blue")+
-labs(title= "Total Count of Proportion of Names from 1997-1999", y= "Count", x="Proportion")
+geom_vline(xintercept= 0.002350005, col="Red")+
+geom_vline(xintercept= 0.002996878, col="Yellow")+
+geom_vline(xintercept= 0.005345064, col="Green")+
+geom_vline(xintercept= 0.007447853, col="Blue")+
+labs(title= "Total Count of Proportion of Names from 1997-1999", y= "Count", x="Proportion")+
+annotate("Label", x = 0.0045, y = 2000, label = "Red= Anna, Yellow= Amanda, Green= James, Blue= Christopher")
 
 ```
-!![](Group Plot 2.png)
+![](Group Plot 2.png) 
 
 We decided to do a histogram of the total count of the proportion of all names in 1997-1999. The graph below shows four lines representing our own name proportions. Since the data manipulations created a lot of extra data (i.e. each year would have multiple names with the correct total amount), we decided to use only the names from 1999 because the total amount of names was the largest, and thus the amount of missed names (names used in 1997 or 1998 but not 1999) would be less likely. 
+
+For this graph, we decided to also not take gender into account. We also filtered our results by our exact name, not by a general version. 
 
 ---
 
@@ -230,7 +230,7 @@ As you can see from the plots above, during my birth year, the overall proportio
 
 Overall, Anna and Ann names are losing popularity comparivitly. It is important to note, however, Anna as a name has never been particularly popular.
 
-I chose to use both a line plot and a histogram to best represent the change in total Ann and Anna names as well as the change in proportion of Anna to other Ann names. I used Anna$ to filter to my name as that would give me only the name Anna with the exact spelling I use. 
+I chose to use both a line plot and a histogram to best represent the change in total Ann and Anna names as well as the change in proportion of Anna to other Ann names. I used Anna$ to filter to my name as that would give me only the name Anna with the exact spelling I use. I also decided to filter only the name with my gender, as it would give a clearer picture of the overall count and proportion (as Males named Anna are outliers). Similarly, when comparing my name to all Ann names (not just female Ann names), it could make the proportion look a bit off as there are many male Ann names. 
 
 # What We Did
 See above sections associated with our names.
