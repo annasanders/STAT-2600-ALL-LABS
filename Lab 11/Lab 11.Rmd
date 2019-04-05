@@ -1,221 +1,6 @@
-<<<<<<< HEAD
 ---
 title: "Lab 11"
-author: "Data Me Pls"
-date: "April 2, 2019"
-output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# The Name Game
-
-# Team stuff (James and Anna will do it this week, next week is Chris and Amanda (good luck on your matrix test))
-```{r, eval=FALSE}
-install.packages("babynames")
-library(tidyverse)
-library(babynames)
-babynames<- view(babynames)
-```
-
-## Ariel and Rachel (DONE)
-```{r, eval=FALSE}
-babynames<- view(babynames)
-
-fnames<- babynames%>%
-  filter(sex=="F")
-
-# Changed the years and name string ("Ra[ey]?ch")
-fnamescount<- fnames%>%
-  filter(year== 2017)%>%
-  summarise(sum(str_detect(name, "Ar[iy]+.l") == T))
-
-fnamestotal<- fnames%>%
-  filter(year== 2017)%>%
-  summarise(sum(n))
-```
-
-__Versions of Ariel and Rachel:__
-
-Year  |Ariel    |Rachel 
-------|---------|---------
-1973  |3        |14
-1988  |9        |22
-1990  |10       |19
-
-__Probability of Ariel and Rachel:__
-
-Year  |Ariel     |Rachel 
-------|----------|---------
-1973  |3/1458168 |14/1458168
-1988  |9/1780268 |22/1780268
-1990  |10/1898046|19/1898046
-2017  |20/1711811|7/1711811
-
-## _The Littel_ Mermaid Effect
-```{r, eval=FALSE}
-ariel<- fnames%>%
-  filter(str_detect(name, "Ar[iy]+.l"))%>%
-  group_by(year)%>%
-  summarize(sum(n))
-  
-asnamesp<- babynames%>%
-  filter(str_detect(name, "^A"))%>%
-  group_by(year)%>%
-  summarise(Prop= mean(str_detect(name, "Ar[iy]+.l")))
-
-fnamesp<- fnames%>%
-  group_by(name)
-
-ggplot()+
-  geom_line(ariel, mapping=aes(x=year, y=`sum(n)`))+
-  geom_vline(xintercept= 1989, col="blue")+
-  geom_line(anames, mapping=aes(x=year, y=`sum(n)`))
-```
-
-__Popularity of Ariel versus other names:__
-![](Plots/ariel_vs_pop.png)
-For this plot, we decided to look at the four most popular names in the years 1988-1990. These names were Amanda, Ashely, Jessica, and Sarah. From the plot, it's immediately clear that the proportion of those popular names have been decreasing while the proportion of Ariel names have been increasing. 
-
-
----
-
-## Group Histogram (TO DO AT THE END)
-
----
-
-## Chris
-
-```{r, eval=FALSE}
-
-chrisnames1 <-babynames %>%
-  filter(str_detect(name, c("[CK]hris$", "[CK]hristopher")), sex== "M")%>%
-  group_by(year) %>%
-  summarise(sum(n)) %>% rename(count = 'sum(n)')
-
-simNames <- babynames %>% 
-  filter(str_detect(name, "^Ama"), sex=='F') %>% 
-  group_by(year) %>% 
-  summarise(sum(n)) %>% 
-  rename(count = 'sum(n)')
-
-ggplot()+
-  geom_line(amandaCount, mapping=aes(x= year, y=count, color="Amanda"))+
-  geom_line(simNames, mapping=aes(x= year, y= count, color= "Ama"))+
-  xlab("Year")+
-  ylab("Count of Names")+
-  ggtitle("Number of 'Amanda' Names Versus 'Ama' Names")
-
-```
-
-## Amanda
-
-```{r, eval=FALSE}
-
-amandaCount <-babynames %>%
-  filter(str_detect(name, "Amanda"), sex== "F")%>%
-  group_by(year)%>%
-  summarise(sum(n)) %>% rename(count = 'sum(n)')
-
-simNames <- babynames %>% 
-  filter(str_detect(name, "^Ama"), sex=='F') %>% 
-  group_by(year) %>% 
-  summarise(sum(n)) %>% 
-  rename(count = 'sum(n)')
-
-ggplot()+
-  geom_line(amandaCount, mapping=aes(x= year, y=count, color="Amanda"))+
-  geom_line(simNames, mapping=aes(x= year, y= count, color= "Ama"))+
-  xlab("Year")+
-  ylab("Count of Names")+
-  ggtitle("Number of 'Amanda' Names Versus 'Ama' Names")
-
-```
-
-This graph compares the number of people named Amanda each year from 1880-2017 to the number of people who had a name that started with "Ama". From this graph, it's pretty clear that there are not a lot of female names that start with "Ama" besides the name "Amanda". Around the year 2000, the number of names that started with "Ama" other than "Amanda" increased. Other than that, almost all of the names that started with "Ama" were people named Amanda, which can be seen due to the fact that the lines for each name are almost overlapping at most points on the graph.
-
-```{r, eval=FALSE}
-
-amanda <- babynames %>% 
-  filter(str_detect(name, "Amanda"), sex=="F") %>% 
-  group_by(year)
-
-ggplot(data=amanda)+
-  geom_col(aes(x=year, y=prop), position = "dodge")+
-  xlab("Year")+
-  ylab("Proportion of Names")+
-  geom_vline(xintercept= 1998, col="Red")+
-  geom_vline(xintercept= 2017, col="Green")+
-  geom_vline(xintercept= 1979, col="Blue")+
-  ggtitle("Proportion of Names That Are 'Amanda' Throughout the Years")
-
-```
-
-This graph shows how the proportion of females named Amanda changed over the years, from 1880 to 2017. 
-
-## James
-
-## Anna 
-```{r, eval=FALSE}
-#Filtering
-myname<- babynames%>%
-  filter(str_detect(name, "Anna$"), sex== "F")%>%
-  group_by(year)%>%
-  summarize(sum(n))
-
-myname<- myname%>%
-  rename(Count= `sum(n)`, Year= year)
-
-myname2<- babynames%>%
-  filter(str_detect(name, "Anna$"), sex== "F")
-
-anames <-babynames%>%
-  filter(str_detect(name, "^Ann"), sex== "F")%>%
-  group_by(year)%>%
-  summarise(sum(n))
-
-anames<- anames%>%
-  rename(Count= `sum(n)`, Year= year)
-
-#Proportion & Quantile
-anamesp <-babynames%>%
-  filter(str_detect(name, "^Ann"), sex== "F")%>%
-  group_by(year)%>%
-  summarise(Prop= mean(str_detect(name, "Anna$")))
-
-quantile(myname2$prop, c(0.25,0.5,0.75,1))
-
-#ggplot
-ggplot()+
-  geom_line(myname, mapping=aes(x= Year, y= Count, color="Anna"))+
-  geom_line(anames, mapping=aes(x= Year, y= Count, color= "'Ann'"))+
-  geom_vline(xintercept= 1999, col="Green")+
-  labs(title= "Popularity of Anna and 'Ann' Names", color= "Name")
-
-
-ggplot(myname2)+
-  geom_histogram(mapping=aes(x=prop), bins=14)
-```
-
-Percentile and Proportion Section:
-words words words
-
-
-# What we did
-
-__Chris:__
-
-__Amanda:__
-
-__James:__
-
-__Anna:__ 
-=======
----
-title: "Lab 11"
-author: "Data Me Pls"
+author: "Data Me Pls: James, Chris, Amanda, Anna"
 date: "April 2, 2019"
 output: html_document
 ---
@@ -225,13 +10,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # The Name Game
-```{r, eval=FALSE}
-install.packages("babynames")
-library(tidyverse)
-library(babynames)
-babynames<- view(babynames)
-```
-
 ## Ariel and Rachel
 ```{r, eval=FALSE}
 babynames<- view(babynames)
@@ -293,10 +71,9 @@ __Popularity of Ariel versus other names:__
 
 For this plot, we decided to look at the four most popular names in the years 1988-1990. These names were Amanda, Ashely, Jessica, and Sarah. From the plot, it's immediately clear that the proportion of those popular names have been decreasing while the proportion of Ariel names have been increasing. 
 
-
 ---
 
-## Group Histogram (TO DO AT THE END)
+## Group Histogram
 ```{r, eval= FALSE}
 #Filtering our years and summing total n
 ournames<- babynames%>%
@@ -324,7 +101,7 @@ labs(title= "Total Count of Proportion of Names from 1997-1999", y= "Count", x="
 annotate("Label", x = 0.0045, y = 2000, label = "Red= Anna, Yellow= Amanda, Green= James, Blue= Christopher")
 
 ```
-![](Group Plot 2.png) 
+![](Plots/Group Plot 2.png) 
 
 We decided to do a histogram of the total count of the proportion of all names in 1997-1999. The graph below shows four lines representing our own name proportions. Since the data manipulations created a lot of extra data (i.e. each year would have multiple names with the correct total amount), we decided to use only the names from 1999 because the total amount of names was the largest, and thus the amount of missed names (names used in 1997 or 1998 but not 1999) would be less likely. 
 
@@ -333,6 +110,57 @@ For this graph, we decided to also not take gender into account. We also filtere
 ---
 
 ## Chris
+```{r, eval=FALSE}
+
+chrisnames <-babynames %>%
+  filter(str_detect(name, "[CK]hris$"), sex== "M")%>%
+  group_by(year) %>%
+  summarise(sum(n)) %>% rename(count = 'sum(n)')
+
+
+christophernames <- babynames %>%
+  filter(str_detect(name, "[CK]hristopher"), sex== "M") %>%
+  group_by(year) %>%
+  summarise(sum(n)) %>% rename(count = 'sum(n)')
+
+allchris <- left_join(chrisnames,christophernames, by = 'year') %>%
+  rowSums()
+
+ggplot()+
+  geom_line(chrisnames, mapping=aes(x= year, y=count, color="Chris"))+
+  geom_line(christophernames, mapping=aes(x= year, y= count, color= "Christopher"))+
+  xlab("Year")+
+  ylab("Count of Names")+
+  ggtitle("Number of 'Chris' Names Versus 'Christopher' Names") 
+
+```
+
+In the above plot, we can see that the name Chris and Christopher was fairly unpopulat until about 1940, and then the name Christopher grew much faster than Chris. The name of just Chris spiked at 1960 and then decreased while the name Christopher kept increasing. Presumably, the legal name of Christopher became much more common than just Chris. 
+
+```{r, eval = FALSE}
+
+chris <- babynames %>% 
+  filter(str_detect(name, "[Ck]hris"), sex=="M") %>% 
+  group_by(year)
+
+#Proportion & Quantile
+proportion <- babynames %>%
+  filter(str_detect(name, "^Chr"), sex== "M")%>%
+  group_by(year)%>%
+  summarise(Prop= mean(str_detect(name, "[CK]hristopher"))+ mean(str_detect(name, "[CK]hris$")))
+
+ggplot(data=chris)+
+  geom_col(aes(x=year, y=prop), position = "dodge")+
+  xlab("Year")+
+  ylab("Proportion of Names")+
+  geom_vline(xintercept= 1998, col="Red")+
+  geom_vline(xintercept= 2017, col="Green")+
+  geom_vline(xintercept= 1984, col="Blue")+
+  ggtitle("Proportion of Names That Are 'Chris' variations Throughout the Years")
+
+
+```
+In the above plot, we can see the proportion of the name Chris compared to all other names from 1880 to 2017. We see the highest porportion in 1984. My birth year, 1998 is also noted. 
 
 ## Amanda
 
@@ -360,7 +188,6 @@ ggtitle("Number of 'Amanda' Names Versus 'Ama' Names")
 ```
 
 This graph compares the number of people named Amanda each year from 1880-2017 to the number of people who had a name that started with "Ama". From this graph, it's pretty clear that there are not a lot of female names that start with "Ama" besides the name "Amanda". Around the year 2000, the number of names that started with "Ama" other than "Amanda" increased. Other than that, almost all of the names that started with "Ama" were people named Amanda, which can be seen due to the fact that the lines for each name are almost overlapping at most points on the graph.
-
 
 ![](Plots/AmandaPlot2.png)
 ```{r, eval=FALSE}
@@ -393,10 +220,15 @@ For my first graph that compares the popularity of my name to other names that s
 
 ## James
 ![](Plots/james_plot1.png)
+
 From the plot, it is clear that the name James and names starting with "Jam" had roughly equal proportions up until the year 1960. From then, the names starting with "Jam" had a higher proportion than James. One interesting trend is that after the huge decline starting around 1940, there has been an upward trend around the year 2000. I was born in 1997, so the rate of proportion has been increasing sense then. 
+
 ![](Plots/jamesplot2.png)
+
 Here is a plot of the proportion of James names from 1975 to 2017. Like the plot before, the line is trending towards concave up. 
+
 ![](Plots/james_plot4.png)
+
 Here is a plot showing the relative percentile change of the proportion of "James" names relative to all baby names. From this plot, it's immediately clear that "James" is a very popular name. Having a percentile above 80% at all times with minor variation indicates that there are few names that are more popular than "James." This graph doesn't account for females with the name "James."
 
 ```{r,eval=FALSE}
@@ -483,4 +315,3 @@ I chose to use both a line plot and a histogram to best represent the change in 
 
 # What We Did
 See above sections associated with our names.
->>>>>>> master
