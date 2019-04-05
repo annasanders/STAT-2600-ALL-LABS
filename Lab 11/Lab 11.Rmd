@@ -168,8 +168,6 @@ In the above plot, we can see the proportion of the name Chris compared to all o
 
 Overall, we see that the name Chris gained significant popularity after the 1940's and blew up to be an extremely popular name for males. The name hit its peak in 1984 and has been decreasing in popularity ever since, but its still a very relevant name. In 1998, my birth year, the proportion of Chris and all its variations was lower than its peak (1% roughly in 1998), but compared to all names, this is a super high proportion of the population. 
 
-I 
-
 ## Amanda
 
 ![](Plots/amandaPlot1.png)
