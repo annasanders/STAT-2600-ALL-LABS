@@ -87,6 +87,28 @@ For this plot, we decided to look at the four most popular names in the years 19
 
 ## Chris
 
+```{r, eval=FALSE}
+
+chrisnames1 <-babynames %>%
+  filter(str_detect(name, c("[CK]hris$", "[CK]hristopher")), sex== "M")%>%
+  group_by(year) %>%
+  summarise(sum(n)) %>% rename(count = 'sum(n)')
+
+simNames <- babynames %>% 
+  filter(str_detect(name, "^Ama"), sex=='F') %>% 
+  group_by(year) %>% 
+  summarise(sum(n)) %>% 
+  rename(count = 'sum(n)')
+
+ggplot()+
+  geom_line(amandaCount, mapping=aes(x= year, y=count, color="Amanda"))+
+  geom_line(simNames, mapping=aes(x= year, y= count, color= "Ama"))+
+  xlab("Year")+
+  ylab("Count of Names")+
+  ggtitle("Number of 'Amanda' Names Versus 'Ama' Names")
+
+```
+
 ## Amanda
 
 ```{r, eval=FALSE}
