@@ -226,7 +226,11 @@ ggplot(myname2)+
     
 ![](Plots/Anna's Plot 2.png)
 
-As you can see from the plots above, during my birth year, the overall proportion of my name related to other 'Ann' names (histogram) was low in general for the name Anna and for my birth year, however, the general trend of the name Anna follows the general trend of all 'Ann' names.
+As you can see from the plots above, during my birth year, the overall proportion of my name related to other 'Ann' names (histogram) was low in general for the name Anna and for my birth year, however, the general trend of the name Anna follows the general trend of all 'Ann' names. 
+
+Overall, Anna and Ann names are losing popularity comparivitly. It is important to note, however, Anna as a name has never been particularly popular.
+
+I chose to use both a line plot and a histogram to best represent the change in total Ann and Anna names as well as the change in proportion of Anna to other Ann names. I used Anna$ to filter to my name as that would give me only the name Anna with the exact spelling I use. 
 
 # What We Did
 See above sections associated with our names.
