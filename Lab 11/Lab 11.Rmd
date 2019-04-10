@@ -313,13 +313,7 @@ ggplot(myname2)+
     
 ![](Plots/Anna's Plot 2.png)
 
-<<<<<<< HEAD
-Percentile and Proportion Section:
-words words words
-
-=======
 As you can see from the plots above, during my birth year, the overall proportion of my name related to other 'Ann' names (histogram) was low in general for the name Anna and for my birth year, however, the general trend of the name Anna follows the general trend of all 'Ann' names. 
->>>>>>> master
 
 Overall, Anna and Ann names are losing popularity comparatively. It is important to note, however, Anna as a name has never been particularly popular.
 
