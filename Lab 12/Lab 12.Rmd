@@ -50,7 +50,7 @@ perm_cor <- function(perms = 1000, x, y)
     # Step 2:
     # Randomly mix up the values in the vector "y"
     
-    corr_mat[[i]] = cor(x,mylist[[i]])
+    corr_mat[[i]] = 0.58 + cor(x,mylist[[i]])
     # Step 3:
     # Compute the correlation between x and the randomly mixed
     # up y-vector. Store this value in the vector from step 1.
@@ -62,7 +62,7 @@ perm_cor <- function(perms = 1000, x, y)
   return(corr_mat)
 }
 
-correlation <- as.tibble(0.58+perm_cor(x=life_exp,y=gdp_percap))
+correlation <- as.tibble(perm_cor(x=life_exp,y=gdp_percap))
 
 props <- as.tibble(quantile(perm_cor(x=gdp_percap,y=life_exp)))
 
@@ -70,7 +70,7 @@ real_cor <- cor(gdp_percap,life_exp)
 
 
 ggplot(correlation, aes(x=value))+geom_histogram() + labs(x= "correlation", y = "count", title = "correlation between GDP per capita and life expectency")+ geom_vline(xintercept = real_cor, col = "Blue")
-```
+s```
 ```
 The plot shows a normal distribution of data when tested over 100 random samples. The mean of the sample data is centered around zero which would imply that the two factors are uncorrelated. This being said, some generated samples show a weak positive and a weak negative linear correlation. 
 
