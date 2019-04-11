@@ -14,6 +14,8 @@ library(gapminder)
 
 gapminder <- gapminder
 
+##so is the values the life expectancies, the two groups are two different countries, and the size is the amount of years we have data for??
+
 perm_mean <- function(perms = 1000, values, n1)
 {
   ## Variables ##
