@@ -5,6 +5,7 @@ date: "April 5, 2019"
 output: html_document
 ---
 
+question this answers is: is there a correlation between the GDP per Capita and life expectency. 
 ```{r, eval=FASLE}
 
 
@@ -64,5 +65,6 @@ correlation <- as.tibble(perm_cor(x=gdp_percap,y=life_exp))
 ggplot(correlation, aes(x=V1))+geom_histogram()
 ```
 ```
+The plot shows a normal distribution of data when tested over 100 random samples. The mean of the sample data is centered around zero which would imply that the two factors are uncorrelated. This being said, some generated samples show a weak positive and a weak negative linear correlation. 
 
 # When will it end
