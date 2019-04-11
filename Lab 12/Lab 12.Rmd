@@ -5,52 +5,6 @@ date: "April 5, 2019"
 output: html_document
 ---
 
-#Two-Sample Permutation Test
-
-__Question:__ 
-```{r, eval=FASLE}
-library(tidyverse)
-library(gapminder)
-
-gapminder <- gapminder
-
-perm_mean <- function(perms = 1000, values, n1)
-{
-  ## Variables ##
-  # perms: The number of permutations 
-  # values (num): 
-  # n1 (int): Size of group 1
-  ###############
-  
-  # Step 1:
-  # Create vector of zeroes of length "perms" to store
-  # permuted mean differnces
-  mean_vect <- meanVector(0,1000,1)
-  
-  # Loop throught number of permutations
-  for (i in c(1:perms))
-  {
-    # Step 2:
-    # Randomly separate vector "values" into disjoint 
-    # groups of size "n1" and "length(values) - n1" respectively
-    
-    
-    # Step 3:
-    # Compute the sample means for the two groups from 
-    # step 2
-    
-    # Step 4: 
-    # Compute the difference in sample means, store the
-    # value in the vector from step 1
-    
-  }
-  
-  # Step 5:
-  # Return new updated vector, created in step 1
-  
-}
-```
-
 question this answers is: is there a correlation between the GDP per Capita and life expectency. 
 ```{r, eval=FASLE}
 
@@ -81,7 +35,8 @@ perm_cor <- function(perms = 1000, x, y)
   # y: Vector 2 - for computing correlation
   ###############
   
-  corr_mat <- matrix(0,1000,1)
+  corr_mat <- matrix(0,length(perms),1)
+  mylist <- rep(list(0,1000))
   # Step 1:
   # Create vector of zeroes of length "perms" to store
   # permuted mean differnces
@@ -89,12 +44,12 @@ perm_cor <- function(perms = 1000, x, y)
   # Loop throught number of permutations
   for (i in c(1:perms))
   {
-    rsamp <- sample(y, length(y), replace = FALSE)
+    mylist[[i]] <- sample(y, length(y), replace = FALSE)
     
     # Step 2:
     # Randomly mix up the values in the vector "y"
     
-    corr_mat[[i]] = cor(x,rsamp)
+    corr_mat[[i]] = cor(x,mylist[[i]])
     # Step 3:
     # Compute the correlation between x and the randomly mixed
     # up y-vector. Store this value in the vector from step 1.
@@ -106,9 +61,14 @@ perm_cor <- function(perms = 1000, x, y)
   return(corr_mat)
 }
 
-correlation <- as.tibble(perm_cor(x=gdp_percap,y=life_exp))
+correlation <- as.tibble(0.58+perm_cor(x=life_exp,y=gdp_percap))
 
-ggplot(correlation, aes(x=V1))+geom_histogram()
+props <- as.tibble(quantile(perm_cor(x=gdp_percap,y=life_exp)))
+
+real_cor <- cor(gdp_percap,life_exp)
+
+
+ggplot(correlation, aes(x=value))+geom_histogram() + labs(x= "correlation", y = "count", title = "correlation between GDP per capita and life expectency")+ geom_vline(xintercept = real_cor, col = "Blue")
 ```
 ```
 The plot shows a normal distribution of data when tested over 100 random samples. The mean of the sample data is centered around zero which would imply that the two factors are uncorrelated. This being said, some generated samples show a weak positive and a weak negative linear correlation. 
