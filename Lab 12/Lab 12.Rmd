@@ -28,6 +28,8 @@ life_exp <- gapminder %>%
 life_exp <- life_exp$lifeExp
 gdp_percap <- gdp_percap$gdpPercap
 
+real_cor <- cor(gdp_percap,life_exp)
+
 perm_cor <- function(perms = 1000, x, y)
 {
   ## Variables ##
@@ -50,7 +52,7 @@ perm_cor <- function(perms = 1000, x, y)
     # Step 2:
     # Randomly mix up the values in the vector "y"
     
-    corr_mat[[i]] = 0.58 + cor(x,mylist[[i]])
+    corr_mat[[i]] = real_cor + cor(x,mylist[[i]])
     # Step 3:
     # Compute the correlation between x and the randomly mixed
     # up y-vector. Store this value in the vector from step 1.
