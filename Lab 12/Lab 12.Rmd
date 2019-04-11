@@ -5,6 +5,52 @@ date: "April 5, 2019"
 output: html_document
 ---
 
+#Two-Sample Permutation Test
+
+__Question:__ 
+```{r, eval=FASLE}
+library(tidyverse)
+library(gapminder)
+
+gapminder <- gapminder
+
+perm_mean <- function(perms = 1000, values, n1)
+{
+  ## Variables ##
+  # perms: The number of permutations 
+  # values (num): 
+  # n1 (int): Size of group 1
+  ###############
+  
+  # Step 1:
+  # Create vector of zeroes of length "perms" to store
+  # permuted mean differnces
+  mean_vect <- meanVector(0,1000,1)
+  
+  # Loop throught number of permutations
+  for (i in c(1:perms))
+  {
+    # Step 2:
+    # Randomly separate vector "values" into disjoint 
+    # groups of size "n1" and "length(values) - n1" respectively
+    
+    
+    # Step 3:
+    # Compute the sample means for the two groups from 
+    # step 2
+    
+    # Step 4: 
+    # Compute the difference in sample means, store the
+    # value in the vector from step 1
+    
+  }
+  
+  # Step 5:
+  # Return new updated vector, created in step 1
+  
+}
+```
+
 question this answers is: is there a correlation between the GDP per Capita and life expectency. 
 ```{r, eval=FASLE}
 
