@@ -6,7 +6,7 @@ date: "April 5, 2019"
 output: html_document
 ---
 
-question this answers is: is there a correlation between the GDP per Capita and life expectency. 
+question: is there a correlation between the GDP per Capita and life expectency? 
 ```{r, eval=FASLE}
 
 
@@ -74,7 +74,7 @@ real_cor <- cor(gdp_percap,life_exp)
 ggplot(correlation, aes(x=value))+geom_histogram() + labs(x= "correlation", y = "count", title = "correlation between GDP per capita and life expectency")+ geom_vline(xintercept = real_cor, col = "Blue")
 ```
 ```
-The plot shows a normal distribution of data when tested over 100 random samples. The mean of the sample data is centered around zero which would imply that the two factors are uncorrelated. This being said, some generated samples show a weak positive and a weak negative linear correlation. 
+The plot shows a normal distribution of data when tested over 100 random samples. The mean of the sample data is roughly centered around 0.58 which would imply that the two factors are moderately correlated. One standard deviation of the data is roughly 0.024, so the correlation is pretty invariant. A blue vertical line is plotted to show where the actual correlation between the data is (without permutation tests). Since our permutation tests are done 1000 times, the central limit theorem holds on our data being approximated by a normal distribution as yields accurate data for the calculated correlation between life expectency and GDP per capita. The median data statistic for the permutation test is 0.5857 and the 1st quadrant begins at 0.5695 while the third quadrant begins as 0.6014, so since the actual correlation lies within this data, we would reject the null hypothesis which says that the correlation of the data is zero. 
 
 # When will it end
 =======
