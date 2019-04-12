@@ -146,3 +146,5 @@ The plot shows a normal distribution of data when tested over 100 random samples
 #What We Did
 
 __Amanda:__ I created a function that took random samples of life expectancies and calculated the average difference in life expectancies for all of these samples. I then calculated for the standard deviation, z-score, and mean difference in life expectancy between countries in the Americas versus the entire world. Then, I used histogram to plot these differences in means of life expectancy, also adding a blue line to indicate the difference in life expectancy between countries in the Americas against the normal distribution of the differences in means of life expectancies for the whole world. 
+
+Chris: I created a function that took in both life expectencyand GDP per capita vectors. Then, I used 1000 permutations of randomizing the life expectency vector and computed the correlation between those and the original GDP per capita vector and stored those in an empty matrix. I then plotted these computed correlations and plotted them in a histogram and then plotted the actual data correlation as a vertical line on the histogram.
