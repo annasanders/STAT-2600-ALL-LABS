@@ -1,6 +1,6 @@
 ---
 title: "Lab 12"
-author: "Data Me Pls: James, Amanda, Chris, Anna"
+author: "Data Me Pls: Amanda, Chris, James, Anna"
 date: "April 5, 2019"
 output: html_document
 ---
@@ -13,14 +13,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 __Question:__ How does the average life expectancy for the American countries compare to that of other countries around the world?
 
-![](plots/means.png)
+![](plots/means 2.png)
 
 ```{r, eval=FALSE}
 library(tidyverse)
 library(gapminder)
 
 gapminder <- gapminder
-life_expectancy <- gapminder %>% select(lifeExp)
+life_expectancy <- gapminder2 %>% select(lifeExp)
 life_expectancy <- life_expectancy$lifeExp
 
 
@@ -70,7 +70,7 @@ ggplot(means, aes(x=V1 ))+geom_histogram()+
   ggtitle("Difference in Means of Life Expectancy")
 ```
 
-This graph illustrates a normal distribution of differences in mean life expectancies from random samples, where the normal distribution is centered at zero. This shows that when taking random samples of life expectancies, the difference in all the life expectancies averages out to zero, which we would expect. Then, after calculating for the mean life expectancy of countries in North and South America, that was plotted with the blue line, demonstrating that the mean life expectancy in American countries is significantly higher than that of all countries. Specifically, on average, the life expectancies in the Americas are about 5.18 years longer than the mean life expectancy for the whole world.
+This graph illustrates a normal distribution of differences in mean life expectancies from random samples, where the normal distribution is centered at zero. This shows that when taking random samples of life expectancies, the difference in all the life expectancies averages out to zero, which we would expect. Then, after calculating for the mean life expectancy of countries in North and South America, that was plotted with the blue line, demonstrating that the mean life expectancy in American countries is slightly lower than that of all countries. Specifically, on average, the life expectancies in the Americas are about 1 year sorter than the mean life expectancy for the whole world.
 
 We created a function that took random samples of life expectancies and calculated the average difference in life expectancies for all of these samples. We then calculated for the standard deviation, z-score, and mean difference in life expectancy between countries in the Americas versus the entire world. Then, we used histogram to plot these differences in means of life expectancy, also adding a blue line to indicate the difference in life expectancy between countries in the Americas against the normal distribution of the differences in means of life expectancies for the whole world. 
 
@@ -147,9 +147,4 @@ ggplot(correlation, aes(x=value))+geom_histogram() + labs(x= "correlation", y = 
 
 The plot shows a normal distribution of data when tested over 1000 random samples. The mean of the sample data is roughly centered around 0.634 which would imply that the two factors are moderately to highly correlated. One standard deviation of the data is roughly 0.018, so the correlation is pretty invariant. A blue vertical line is plotted to show where the actual correlation between the data is (without permutation tests). Since our permutation tests are done 1000 times, the central limit theorem holds on our data being approximated by a normal distribution as yields accurate data for the calculated correlation between life expectency and GDP per capita. The median data statistic for the permutation test is 0.6336 and the 1st quadrant begins at 0.6226 while the third quadrant begins as 0.6453, so since the actual correlation lies within this data, we would reject the null hypothesis which says that the correlation of the data is zero. 
 
-<<<<<<< HEAD
-#What We Did
-
-__Amanda:__ I created a function that took random samples of life expectancies and calculated the average difference in life expectancies for all of these samples. I then calculated for the standard deviation, z-score, and mean difference in life expectancy between countries in the Americas versus the entire world. Then, I used histogram to plot these differences in means of life expectancy, also adding a blue line to indicate the difference in life expectancy between countries in the Americas against the normal distribution of the differences in means of life expectancies for the whole world. 
-
-Chris: I created a function that took in both life expectencyand GDP per capita vectors. Then, I used 1000 permutations of randomizing the life expectency vector and computed the correlation between those and the original GDP per capita vector and stored those in an empty matrix. I then plotted these computed correlations and plotted them in a histogram and then plotted the actual data correlation as a vertical line on the histogram. I then adapted these functions and plots to the new gapminder_unfiltered data with tweaking just the import part. 
+We created a function that took in both life expectencyand GDP per capita vectors. Then, we used 1000 permutations of randomizing the life expectency vector and computed the correlation between those and the original GDP per capita vector and stored those in an empty matrix. We then plotted these computed correlations and plotted them in a histogram and then plotted the actual data correlation as a vertical line on the histogram. We then adapted these functions and plots to the new gapminder_unfiltered data with tweaking just the import part. 
