@@ -9,4 +9,75 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Stuff
+
+## Amanda
+
+## James
+
+## Chris
+
+## Anna
+
+__Question:__ Is there a correlation between Life Expectancy and Population Size?
+```{r, Eval=FALSE}
+library(tidyverse)
+library(gapminder)
+
+gapminder <- gapminder
+
+pop_size <- gapminder%>%
+  select(pop)
+
+life_exp <- gapminder %>%
+  select(lifeExp)
+
+life_exp <- life_exp$lifeExp
+pop_size <- pop_size$pop
+
+real_cor <- cor(pop_size,life_exp)
+
+perm_cor <- function(perms = 1000, x, y)
+{
+  ## Variables ##
+  # perms: The number of permutations 
+  # x: Vector 1 - for computing correlation
+  # y: Vector 2 - for computing correlation
+  ###############
+  
+  corr_mat <- matrix(0,length(perms),1)
+  mylist <- rep(list(0,1000))
+  # Step 1:
+  # Create vector of zeroes of length "perms" to store
+  # permuted mean differnces
+  
+  # Loop throught number of permutations
+  for (i in c(1:perms))
+  {
+    mylist[[i]] <- sample(y, length(y), replace = FALSE)
+    
+    # Step 2:
+    # Randomly mix up the values in the vector "y"
+    
+    corr_mat[[i]] = real_cor + cor(x,mylist[[i]])
+    # Step 3:
+    # Compute the correlation between x and the randomly mixed
+    # up y-vector. Store this value in the vector from step 1.
+    
+  }
+  
+  # Step 4:
+  # Return new updated vector, created in step 1
+  return(map_int(corr_mat, ))
+}
+
+correlation <- as.tibble(perm_cor(x=life_exp,y=pop_size))
+
+props <- as.tibble(quantile(perm_cor(x=pop_size,y=life_exp)))
+
+standard_dev <- sd(perm_cor(x=life_exp,y=pop_size))
+
+summary(correlation)
+
+
+ggplot(correlation, aes(x=value))+geom_histogram() + labs(x= "correlation", y = "count", title = "correlation between GDP per capita and life expectency")+ geom_vline(xintercept = real_cor, col = "Blue")
+```
