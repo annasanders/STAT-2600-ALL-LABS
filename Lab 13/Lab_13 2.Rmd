@@ -11,6 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r, eval=FALSE}
+library(readxl)
 Indicator_HDI <- read_excel("Indicator_HDI.xlsx")
 
 ```
