@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r, eval=FALSE}
+library(tidyverse)
 library(gapminder)
 gapminder <- gapminder
 
@@ -29,7 +30,8 @@ Indicator_HDI3 <- transform(Indicator_HDI3, year=as.numeric(year))
 
 gapminder2 <- full_join(Indicator_HDI3, gapminder, by= c("country", "year"))
 
-gapminter3 <- gapminder2
+gapminder3 <- gapminder2%>%
+  na.omit()
 
 #This entire dataset only has the year 2007 as it was the only year both gapminder and the hdi were recorded. We will all compare two continent groupings (e.g. Asia and America) to see if there is a significant difference between the histogram and the true data.
 ```
