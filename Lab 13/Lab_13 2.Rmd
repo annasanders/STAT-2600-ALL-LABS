@@ -10,12 +10,28 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r, eval=FALSE}
+library(gapminder)
+gapminder <- gapminder
+
+#Run this code to get the new data
 library(readxl)
 Indicator_HDI <- read_excel("Indicator_HDI.xlsx")
 
 Indicator_HDI2 <- Indicator_HDI%>%
   na.omit()
 
+Indicator_HDI3 <- gather(Indicator_HDI2, key="year", values=
+         `1980`,`1990`,`2000`,`2005`,`2006`,`2007`,`2008`,`2009`,`2011`)
+
+names(Indicator_HDI3) <- c("country", "year", "HDI")
+
+Indicator_HDI3 <- transform(Indicator_HDI3, year=as.numeric(year))
+
+gapminder2 <- full_join(Indicator_HDI3, gapminder, by= c("country", "year"))
+
+gapminter3 <- gapminder2
+
+#This entire dataset only has the year 2007 as it was the only year both gapminder and the hdi were recorded. We will all compare two continent groupings (e.g. Asia and America) to see if there is a significant difference between the histogram and the true data.
 ```
 
 ## Amanda
@@ -33,101 +49,15 @@ HIV <- HIVprevalence %>% filte
 
 ## Anna
 
-__Question:__ Is there a correlation between Life Expectancy and Population Size?
+__Question:__ Is there a correlation between 
 ```{r, Eval=FALSE}
-library(tidyverse)
-library(gapminder)
+gapminder4 <- gapminder3%>%
+  filter(continent== "Asia"| continent== "America")
 
-gapminder <- gapminder
+hdi <- gapminder4%>%
+  select(HDI)
 
-pop_size <- gapminder%>%
-  select(pop)
-
-life_exp <- gapminder %>%
-  select(lifeExp)
-
-life_exp <- life_exp$lifeExp
-pop_size <- pop_size$pop
-
-real_cor <- cor(pop_size,life_exp)
-
-perm_cor <- function(perms = 1000, x, y)
-{
-  ## Variables ##
-  # perms: The number of permutations 
-  # x: Vector 1 - for computing correlation
-  # y: Vector 2 - for computing correlation
-  ###############
-  
-  corr_mat <- matrix(0,length(perms),1)
-  mylist <- rep(list(0,1000))
-  # Step 1:
-  # Create vector of zeroes of length "perms" to store
-  # permuted mean differnces
-  
-  # Loop throught number of permutations
-  for (i in c(1:perms))
-  {
-    mylist[[i]] <- sample(y, length(y), replace = FALSE)
-    
-    # Step 2:
-    # Randomly mix up the values in the vector "y"
-    
-    corr_mat[[i]] = real_cor + cor(x,mylist[[i]])
-    # Step 3:
-    # Compute the correlation between x and the randomly mixed
-    # up y-vector. Store this value in the vector from step 1.
-    
-  }
-  
-  # Step 4:
-  # Return new updated vector, created in step 1
-  return(map_int(corr_mat, ))
-}
-
-correlation <- as.tibble(perm_cor(x=life_exp,y=pop_size))
-
-props <- as.tibble(quantile(perm_cor(x=pop_size,y=life_exp)))
-
-standard_dev <- sd(perm_cor(x=life_exp,y=pop_size))
-
-summary(correlation)
-
-
-ggplot(correlation, aes(x=value))+geom_histogram() + labs(x= "correlation", y = "count", title = "correlation between GDP per capita and life expectency")+ geom_vline(xintercept = real_cor, col = "Blue")
-```
-=======
----
-title: "Lab 13"
-author: "Data Me Pls: Amanda, James, Chris, Anna"
-date: "April 12, 2019"
-output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-
-## Amanda
-
-## James
-
-## Chris
-
-## Anna
-
-__Question:__ Is there a correlation between Life Expectancy and Population Size?
-```{r, Eval=FALSE}
-library(tidyverse)
-library(gapminder)
-
-gapminder <- gapminder
-
-pop_size <- gapminder%>%
-  select(pop)
-
-life_exp <- gapminder %>%
+life_exp <- gapminder4%>%
   select(lifeExp)
 
 life_exp <- life_exp$lifeExp
@@ -143,10 +73,8 @@ perm_cor <- function(perms = 1000, x, y)
   for (i in c(1:perms))
   {
     mylist[[i]] <- sample(y, length(y), replace = FALSE)
-    
     corr_mat[[i]] = real_cor + cor(x,mylist[[i]])
   }
-  
   return(corr_mat)
 }
 
