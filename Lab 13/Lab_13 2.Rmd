@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ---
 title: "Lab 13"
 author: "Data Me Pls: Amanda, James, Chris, Anna"
@@ -13,6 +12,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, eval=FALSE}
 library(readxl)
 Indicator_HDI <- read_excel("Indicator_HDI.xlsx")
+
+Indicator_HDI2 <- Indicator_HDI%>%
+  na.omit()
 
 ```
 
@@ -159,4 +161,3 @@ summary(correlation)
 
 ggplot(correlation, aes(x=value))+geom_histogram() + labs(x= "correlation", y = "count", title = "correlation between GDP per capita and life expectency")+ geom_vline(xintercept = real_cor, col = "Blue")
 ```
->>>>>>> master
