@@ -15,6 +15,45 @@ knitr::opts_chunk$set(echo = TRUE)
 ## James
 
 ## Chris
+```{r, Eval=FALSE}
+hdi <- gapminder3%>%
+  select(HDI)
+
+life_exp <- gapminder3%>%
+  select(lifeExp)
+
+life_exp <- life_exp$lifeExp
+hdi <- hdi$HDI
+
+real_cor <- cor(hdi,life_exp)
+
+perm_cor <- function(perms = 1000, x, y)
+{
+  corr_mat <- matrix(0,length(perms),1)
+  mylist <- rep(list(0,1000))
+  
+  for (i in c(1:perms))
+  {
+    mylist[[i]] <- sample(y, length(y), replace = FALSE)
+    corr_mat[[i]] = real_cor + cor(x,mylist[[i]])
+  }
+  return(corr_mat)
+  
+}
+
+hdigdp <- as.tibble(perm_cor(x=hdi, y=gdp))
+
+map_dbl(hdigdp, median)
+
+
+props <- as.tibble(quantile(hdigdp$value))
+
+standard_dev <- sd(hdigdp$value)
+
+summary(hdigdp)
+
+ggplot(hdigdp, aes(x=value))+geom_histogram() + labs(x= "correlation", y = "count", title = "correlation between GDP per capita and HDI")+ geom_vline(xintercept = real_cor, col = "Blue")
+```
 
 ## Anna
 
