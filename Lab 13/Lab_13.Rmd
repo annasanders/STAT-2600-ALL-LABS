@@ -18,47 +18,50 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Anna
 
-__Question:__ Is there a correlation between Life Expectancy and Population Size?
+__Question:__ Is there a correlation between HDI and Life Expectancy?
+
+This question is important becausehigher life expectancy is though to be indiciative of more development in a country. In this way, we need to prove that there is a positive correlation between HDIand Life Expectancy. I chose to use a two sample correlation test to prove that there is a positive correlation.
+
 ```{r, Eval=FALSE}
-library(tidyverse)
-library(gapminder)
+hdi <- gapminder3%>%
+  select(HDI)
 
-gapminder <- gapminder
-
-pop_size <- gapminder%>%
-  select(pop)
-
-life_exp <- gapminder %>%
+life_exp <- gapminder3%>%
   select(lifeExp)
 
 life_exp <- life_exp$lifeExp
-pop_size <- pop_size$pop
+hdi <- hdi$HDI
 
-real_cor <- cor(pop_size,life_exp)
+real_cor <- cor(hdi,life_exp)
 
 perm_cor <- function(perms = 1000, x, y)
 {
   corr_mat <- matrix(0,length(perms),1)
   mylist <- rep(list(0,1000))
-
+  
   for (i in c(1:perms))
   {
     mylist[[i]] <- sample(y, length(y), replace = FALSE)
-    
     corr_mat[[i]] = real_cor + cor(x,mylist[[i]])
   }
-  
   return(corr_mat)
+  
 }
 
-correlation <- as.tibble(perm_cor(x=life_exp,y=pop_size))
+hdilife<-perm_cor(x=hdi, y=life_exp)
 
-props <- as.tibble(quantile(perm_cor(x=pop_size,y=life_exp)))
+map_dbl(hdilife2, median)
 
-standard_dev <- sd(perm_cor(x=life_exp,y=pop_size))
+hdilife2 <- as.tibble(hdilife)
 
-summary(correlation)
+props <- as.tibble(quantile(hdilife))
 
+standard_dev <- sd(hdilife)
 
-ggplot(correlation, aes(x=value))+geom_histogram() + labs(x= "correlation", y = "count", title = "correlation between GDP per capita and life expectency")+ geom_vline(xintercept = real_cor, col = "Blue")
+summary(hdilife2)
+
+ggplot(hdilife2, aes(x=value))+
+  geom_histogram()+
+  labs(x= "correlation", y = "count", title = "Correlation Between HDI and life expectency")+
+  geom_vline(xintercept = real_cor, col = "Blue")
 ```
