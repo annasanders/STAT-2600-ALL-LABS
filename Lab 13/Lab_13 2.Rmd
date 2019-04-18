@@ -40,7 +40,7 @@ view(gapminder3)
 
 ## Amanda
 
-__Question:__ Is there a significant difference between the mean Human Development Index in American countries versus the mean HDI for the world?
+__Question:__ Is there a significant difference between the mean Human Development Index in the United States and Canada versus the mean HDI for the world?
 
 ```{r, Eval=FALSE}
 hdi <- gapminder3 %>% select(HDI)
@@ -65,8 +65,8 @@ perm_mean <- function(perms = 1000, values, n1)
   # Return new updated vector, created in step 1
   return(mean_mat)
 }
-hdiAmerica <- gapminder3 %>% filter(continent=="Americas") %>% select(HDI)
-means <- as.tibble(perm_mean(values = hdi, n1 = 23))
+hdiAmerica <- gapminder3 %>% filter(country=="Canada" | country=="United States") %>% select(HDI)
+means <- as.tibble(perm_mean(values = hdi, n1 = 2))
 summary(hdiAmerica)
 summary(hdi)
 #view(hdiAmerica)
