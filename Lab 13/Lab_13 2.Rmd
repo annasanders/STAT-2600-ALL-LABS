@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Is North America More Developed than the Rest of the World?
 ```{r, eval=FALSE}
 library(tidyverse)
 library(gapminder)
@@ -37,6 +38,8 @@ view(gapminder3)
 #This entire dataset only has the year 2007 as it was the only year both gapminder and the hdi were recorded. We will all compare two continent groupings (e.g. Asia and America) to see if there is a significant difference between the histogram and the true data.
 
 ```
+Using HDI as a measure for development, we are attempting to find an answer to whether or not The United States and Canada are more developed than the rest of the world. James, Chris, and Anna's sections attempt to show correlation between HDI and Population, GDP Per Capita, Life Expectancy. 
+
 
 ## Amanda
 
