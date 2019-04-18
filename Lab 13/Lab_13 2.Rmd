@@ -40,12 +40,12 @@ view(gapminder3)
 
 ## Amanda
 
-__Question:__ Is there a significant difference between the Human Development Index in American countries versus in Asian ones?
+__Question:__ Is there a significant difference between the mean Human Development Index in American countries versus the mean HDI for the world?
 
 ```{r, Eval=FALSE}
 hdi <- gapminder3 %>% select(HDI)
 hdi <- hdi$HDI
-
+#view(hdi)
 
 perm_mean <- function(perms = 1000, values, n1)
 {
@@ -65,16 +65,18 @@ perm_mean <- function(perms = 1000, values, n1)
   # Return new updated vector, created in step 1
   return(mean_mat)
 }
-life_expAm <- gapminder %>% filter(continent=="Americas") %>% select(lifeExp)
-means <- as.tibble(perm_mean(values = life_expectancy, n1 = 300))
-summary(life_expAm)
-summary(life_expectancy)
+hdiAmerica <- gapminder3 %>% filter(continent=="Americas") %>% select(HDI)
+means <- as.tibble(perm_mean(values = hdi, n1 = 23))
+summary(hdiAmerica)
+summary(hdi)
+#view(hdiAmerica)
 
-realDiff <- mean(life_expAm$lifeExp)-mean(life_expectancy)
+realDiff <- mean(hdiAmerica$HDI)-mean(hdi)
 
-stdD <- sqrt((sd(life_expAm$lifeExp))^2/length(life_expAm$lifeExp) + (sd(life_expectancy))^2/length(life_expectancy))
+stdD <- sqrt((sd(hdiAmerica$HDI))^2/length(hdiAmerica$HDI) + (sd(hdi))^2/length(hdi))
 zScore <- realDiff/stdD
 zScore
+# zScore = 1.793
 ggplot(means, aes(x=V1 ))+geom_histogram()+
   xlab("Means")+
   geom_vline(xintercept = realDiff, color = "blue", size = .3)+
