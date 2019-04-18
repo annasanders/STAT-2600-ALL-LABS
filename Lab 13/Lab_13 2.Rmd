@@ -1,3 +1,137 @@
+<<<<<<< HEAD
+---
+title: "Lab 13"
+author: "Data Me Pls: Amanda, James, Chris, Anna"
+date: "April 12, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, eval=FALSE}
+library(tidyverse)
+library(gapminder)
+gapminder <- gapminder
+
+#Run this code to get the new data
+library(readxl)
+Indicator_HDI <- read_excel("Indicator_HDI.xlsx")
+
+Indicator_HDI2 <- Indicator_HDI%>%
+  na.omit()
+
+Indicator_HDI3 <- gather(Indicator_HDI2, key="year", values=
+         `1980`,`1990`,`2000`,`2005`,`2006`,`2007`,`2008`,`2009`,`2011`)
+
+names(Indicator_HDI3) <- c("country", "year", "HDI")
+
+Indicator_HDI3 <- transform(Indicator_HDI3, year=as.numeric(year))
+
+gapminder2 <- full_join(Indicator_HDI3, gapminder, by= c("country", "year"))
+
+gapminder3 <- gapminder2%>%
+  na.omit()
+view(gapminder3)
+
+#This entire dataset only has the year 2007 as it was the only year both gapminder and the hdi were recorded. We will all compare two continent groupings (e.g. Asia and America) to see if there is a significant difference between the histogram and the true data.
+
+```
+
+## Amanda
+
+__Question:__ Is there a significant difference between the mean Human Development Index in the United States and Canada versus the mean HDI for the world?
+
+```{r, Eval=FALSE}
+hdi <- gapminder3 %>% select(HDI)
+hdi <- hdi$HDI
+#view(hdi)
+
+perm_mean <- function(perms = 1000, values, n1)
+{
+  # Create vector of zeroes of length "perms" to store permuted mean differnces
+  mean_mat <- matrix(0,1000,1)
+  # Loop throught number of permutations
+  for (i in c(1:perms))
+  {
+    randomSamp <- sample(values, length(values)-n1, replace = FALSE)
+    randomSamp2 <- sample(values, n1, replace = FALSE)
+    # Compute the sample means for the two groups from step 2
+    mean1 <- mean(randomSamp)
+    mean2 <- mean(randomSamp2)
+    # Compute the difference in sample means, store the value in the vector from step 1
+    mean_mat[[i]] <- (mean1-mean2)
+  }
+  # Return new updated vector, created in step 1
+  return(mean_mat)
+}
+hdiAmerica <- gapminder3 %>% filter(country=="Canada" | country=="United States") %>% select(HDI)
+means <- as.tibble(perm_mean(values = hdi, n1 = 2))
+summary(hdiAmerica)
+summary(hdi)
+#view(hdiAmerica)
+
+realDiff <- mean(hdiAmerica$HDI)-mean(hdi)
+
+stdD <- sqrt((sd(hdiAmerica$HDI))^2/length(hdiAmerica$HDI) + (sd(hdi))^2/length(hdi))
+zScore <- realDiff/stdD
+zScore
+# zScore = 1.793
+ggplot(means, aes(x=V1 ))+geom_histogram()+
+  xlab("Means")+
+  geom_vline(xintercept = realDiff, color = "blue", size = .3)+
+  ylab("Number")+
+  ggtitle("Difference in Means of Life Expectancy")
+```
+
+## James
+
+## Chris
+
+## Anna
+
+__Question:__ Is there a correlation between 
+```{r, Eval=FALSE}
+gapminder4 <- gapminder3%>%
+  filter(continent== "Asia"| continent== "America")
+
+hdi <- gapminder4%>%
+  select(HDI)
+
+life_exp <- gapminder4%>%
+  select(lifeExp)
+
+life_exp <- life_exp$lifeExp
+pop_size <- pop_size$pop
+
+real_cor <- cor(pop_size,life_exp)
+
+perm_cor <- function(perms = 1000, x, y)
+{
+  corr_mat <- matrix(0,length(perms),1)
+  mylist <- rep(list(0,1000))
+
+  for (i in c(1:perms))
+  {
+    mylist[[i]] <- sample(y, length(y), replace = FALSE)
+    corr_mat[[i]] = real_cor + cor(x,mylist[[i]])
+  }
+  return(corr_mat)
+}
+
+correlation <- as.tibble(perm_cor(x=life_exp,y=pop_size))
+
+props <- as.tibble(quantile(perm_cor(x=pop_size,y=life_exp)))
+
+standard_dev <- sd(perm_cor(x=life_exp,y=pop_size))
+
+summary(correlation)
+
+
+ggplot(correlation, aes(x=value))+geom_histogram() + labs(x= "correlation", y = "count", title = "correlation between GDP per capita and life expectency")+ geom_vline(xintercept = real_cor, col = "Blue")
+```
+=======
 ---
 title: "Lab 13"
 author: "Data Me Pls: Amanda, James, Chris, Anna"
@@ -135,3 +269,4 @@ summary(correlation)
 ggplot(correlation, aes(x=value))+geom_histogram() + labs(x= "correlation", y = "count", title = "correlation between GDP per capita and life expectency")+ geom_vline(xintercept = real_cor, col = "Blue")
 ```
 
+>>>>>>> master
