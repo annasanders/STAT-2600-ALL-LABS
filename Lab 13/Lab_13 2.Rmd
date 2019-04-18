@@ -32,17 +32,54 @@ gapminder2 <- full_join(Indicator_HDI3, gapminder, by= c("country", "year"))
 
 gapminder3 <- gapminder2%>%
   na.omit()
+view(gapminder3)
 
 #This entire dataset only has the year 2007 as it was the only year both gapminder and the hdi were recorded. We will all compare two continent groupings (e.g. Asia and America) to see if there is a significant difference between the histogram and the true data.
+
 ```
 
 ## Amanda
 
-```{r, Eval=FALSE}
-HIVprevalence <- read_excel("Downloads/HIVprevalence.xlsx")
-View(HIVprevalence) 
+__Question:__ Is there a significant difference between the Human Development Index in American countries versus in Asian ones?
 
-HIV <- HIVprevalence %>% filte
+```{r, Eval=FALSE}
+hdi <- gapminder3 %>% select(HDI)
+hdi <- hdi$HDI
+
+
+perm_mean <- function(perms = 1000, values, n1)
+{
+  # Create vector of zeroes of length "perms" to store permuted mean differnces
+  mean_mat <- matrix(0,1000,1)
+  # Loop throught number of permutations
+  for (i in c(1:perms))
+  {
+    randomSamp <- sample(values, length(values)-n1, replace = FALSE)
+    randomSamp2 <- sample(values, n1, replace = FALSE)
+    # Compute the sample means for the two groups from step 2
+    mean1 <- mean(randomSamp)
+    mean2 <- mean(randomSamp2)
+    # Compute the difference in sample means, store the value in the vector from step 1
+    mean_mat[[i]] <- (mean1-mean2)
+  }
+  # Return new updated vector, created in step 1
+  return(mean_mat)
+}
+life_expAm <- gapminder %>% filter(continent=="Americas") %>% select(lifeExp)
+means <- as.tibble(perm_mean(values = life_expectancy, n1 = 300))
+summary(life_expAm)
+summary(life_expectancy)
+
+realDiff <- mean(life_expAm$lifeExp)-mean(life_expectancy)
+
+stdD <- sqrt((sd(life_expAm$lifeExp))^2/length(life_expAm$lifeExp) + (sd(life_expectancy))^2/length(life_expectancy))
+zScore <- realDiff/stdD
+zScore
+ggplot(means, aes(x=V1 ))+geom_histogram()+
+  xlab("Means")+
+  geom_vline(xintercept = realDiff, color = "blue", size = .3)+
+  ylab("Number")+
+  ggtitle("Difference in Means of Life Expectancy")
 ```
 
 ## James
