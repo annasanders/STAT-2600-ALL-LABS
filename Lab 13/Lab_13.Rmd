@@ -47,14 +47,13 @@ __Question:__ Is there a significant difference between the mean Human Developme
 
 This question is important because when talking about the development of countries around the world, the Human Development Index accounts for education systems, life expectancy, and per capita income. These are measures that can determine how developed a place is. For example, better education, higher life expectancies, and higher per capita incomes indicate a country with more developed economies and health systems. Since we are trying to see if the United States and Canada are more developed than the rest of the world, generally speaking, comparing the mean HDIs for these two countries to the rest of the world is a strong indicator of how developed they are compared to the rest of the world.
 
-![]()
+![](hdiMurica.png)
 
 ```{r, Eval=FALSE}
 library(tidyverse)
 library(gapminder)
 hdi <- gapminder3 %>% select(HDI)
 hdi <- hdi$HDI
-#view(hdi)
 
 perm_mean <- function(perms = 1000, values, n1)
 {
@@ -63,9 +62,6 @@ perm_mean <- function(perms = 1000, values, n1)
   for (i in c(1:perms))
   {
     
-    # Step 2:
-    # Randomly separate vector "values" into disjoint 
-    # groups of size "n1" and "length(values) - n1" respectively
     randomSamp<-sample(length(values),n1)
     randomSamp2<-vector('integer',length(values))
     g1<-values[randomSamp]
@@ -73,41 +69,28 @@ perm_mean <- function(perms = 1000, values, n1)
     { 
       if (is.element(j,randomSamp)==FALSE) randomSamp2[j]<-j 
     }
-    #REMOVE ALL 0s WITH TRUE FALSE VECTOR
+  
     tf<-randomSamp2>0
     randomSamp2<-randomSamp2[tf]
     g2<-values[randomSamp2]
     
     g1_m<-mean(g1)
     g2_m<-mean(g2)
-    # Step 4: 
-    # Compute the difference in sample means, store the
-    # value in the vector from step 1
+   
     d<- g1_m - g2_m
     p[i]<-d
-    
-    #randomSamp <- sample(values, length(values)-n1, replace = FALSE)
-    #randomSamp2 <- sample(values, n1, replace = FALSE)
-    #mean1 <- mean(randomSamp)
-    #mean2 <- mean(randomSamp2)
-    #mean_mat[[i]] <- (mean1-mean2)
-    
-    
   }
   return(p)
 }
 hdiAmerica <- gapminder3 %>% filter(country=="Canada" | country=="United States") %>% select(HDI)
 
 means <- as.tibble(perm_mean(values = hdi, n1 = 2))
-#view(means)
 summary(hdiAmerica)
 summary(hdi)
-#view(hdiAmerica)
 
 realDiff <- mean(hdiAmerica$HDI)-mean(hdi)
 
 map_dbl(means, mean)
-#view(means)
 
 stdD <- sqrt((sd(hdiAmerica$HDI))^2/length(hdiAmerica$HDI) + (sd(hdi))^2/length(hdi))
 zScore <- realDiff/stdD
