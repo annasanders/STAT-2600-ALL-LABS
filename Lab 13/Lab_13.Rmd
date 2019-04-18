@@ -12,6 +12,53 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Amanda
 
+__Question:__ Is there a significant difference between the mean Human Development Index in American countries versus the mean HDI for the world?
+
+This question is important because when talking about the development of countries around the world, the Human Development Index accounts for education systems, life expectancy, and per capita income. These are measures that can determine how developed a place is. For example, better education, higher life expectancies, and higher per capita incomes indicate a country with more developed economies and health systems. Since we are trying to see if the United States and Canada are more developed than the rest of the world, generally speaking, comparing the mean HDIs for these two countries to the rest of the world is a strong indicator of how developed they are compared to the rest of the world.
+
+```{r, Eval=FALSE}
+hdi <- gapminder3 %>% select(HDI)
+hdi <- hdi$HDI
+#view(hdi)
+
+perm_mean <- function(perms = 1000, values, n1)
+{
+  mean_mat <- matrix(0,1000,1)
+
+  for (i in c(1:perms))
+  {
+    randomSamp <- sample(values, length(values)-n1, replace = FALSE)
+    randomSamp2 <- sample(values, n1, replace = FALSE)
+    mean1 <- mean(randomSamp)
+    mean2 <- mean(randomSamp2)
+    mean_mat[[i]] <- (mean1-mean2)
+  }
+  return(mean_mat)
+}
+hdiAmerica <- gapminder3 %>% filter(country=="Canada" | country=="United States") %>% select(HDI)
+means <- as.tibble(perm_mean(values = hdi, n1 = 2))
+summary(hdiAmerica)
+summary(hdi)
+view(hdiAmerica)
+
+realDiff <- mean(hdiAmerica$HDI)-mean(hdi)
+
+map_dbl(means, mean)
+#view(means)
+
+stdD <- sqrt((sd(hdiAmerica$HDI))^2/length(hdiAmerica$HDI) + (sd(hdi))^2/length(hdi))
+zScore <- realDiff/stdD
+zScore
+# zScore = 12.67035
+ggplot(means, aes(x=V1 ))+geom_histogram()+
+  xlab("Means")+
+  geom_vline(xintercept = realDiff, color = "blue", size = .3)+
+  ylab("Number")+
+  ggtitle("Difference in Means of Life Expectancy")
+```
+
+This graph depicts a pretty normal distribution of mean differences in HDIs between randomly selected countries around the world, indicating that there is no significant difference between means of HDIs when places are randomly chosen to be compared. The blue line on the graph indicates the mean difference in HDI from United States and Canada compared to the rest of the world. Because This line is about 12.67 standard deviations away from zero (where the normal distribution is centered), it appears that there is a significant difference between the HDI for the United States and Canada versus the rest of the world. The HDI tends to be higher in United States and Canada compared to the rest of the world.
+
 ## James
 
 ## Chris
@@ -19,13 +66,13 @@ knitr::opts_chunk$set(echo = TRUE)
 hdi <- gapminder3%>%
   select(HDI)
 
-life_exp <- gapminder3%>%
-  select(lifeExp)
+gdp<- gapminder3%>%
+  select(gdpPercap)
 
-life_exp <- life_exp$lifeExp
+gdp <- life_exp$gdpPercap
 hdi <- hdi$HDI
 
-real_cor <- cor(hdi,life_exp)
+real_cor <- cor(hdi,gdp)
 
 perm_cor <- function(perms = 1000, x, y)
 {
