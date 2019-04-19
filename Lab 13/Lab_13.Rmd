@@ -53,9 +53,9 @@ __Question:__ Is there a significant difference between the mean Human Developme
 
 This question is important because when talking about the development of countries around the world, the Human Development Index accounts for education systems, life expectancy, and per capita income. These are measures that can determine how developed a place is. For example, better education, higher life expectancies, and higher per capita incomes indicate a country with more developed economies and health systems. Since we are trying to see if the United States and Canada are more developed than the rest of the world, generally speaking, comparing the mean HDIs for these two countries to the rest of the world is a strong indicator of how developed they are compared to the rest of the world.
 
-![](hdiMurica.png)
+![](Plots/hdiMurica.png)
 
-```{r, Eval=FALSE}
+```{r, eval=FALSE}
 library(tidyverse)
 library(gapminder)
 hdi <- gapminder3 %>% select(HDI)
@@ -114,8 +114,8 @@ This graph depicts a pretty normal distribution of mean differences in HDIs betw
 ## James
 __Question:__ Is there a correlation between HDI and Population? 
  
-This question is important as HDI should not be influcenced by Population in any way. Countries with higher or lower populations should not be though of as less or more developed because development has little to do with population size. I chose to use a two sample correlation test to prove that there is no correlation. 
-```{r, Eval=FALSE} 
+This question is important as HDI should not be influenced by Population in any way. Countries with higher or lower populations should not be thought of as less or more developed because development has little to do with population size. I chose to use a two-sample correlation test to prove that there is no correlation. 
+```{r, eval=FALSE} 
 hdi <- gapminder3%>% 
   select(HDI) 
  
@@ -163,7 +163,8 @@ ggplot(hdipop2, aes(x=value))+
 This graph shows that the real correlation and the correlations from random samplings were both around 0. While the result is not statistically significant (i.e. both values are around the same), both values are around 0, which means that there is likely no (or a zero) correlation between HDI and Population.
 
 __Table of Values__
-Summary |Value
+
+Summary |Value   
 --------|--------
  Min.   |-0.30999  
  1st Qu.|-0.08884  
@@ -178,8 +179,8 @@ __Actuall Correlation:-0.02143__
 
 __Question:__ Is there a correlation between HDI and GDP Per Capita?
 
-This question is important since HDI should be heavily influenced by GDP per Capita as higher GDP per capita directly implies a more developed country where their populations are better off. In this way, we need to prove that there is a positive correlation between HDI and GDP per capita. I chose to use a two sample correlation test to prove that there is a positive correlation.
-```{r, Eval=FALSE}
+This question is important since HDI should be heavily influenced by GDP per Capita as higher GDP per capita directly implies a more developed country where their populations are better off. In this way, we need to prove that there is a positive correlation between HDI and GDP per capita. I chose to use a two-sample correlation test to prove that there is a positive correlation.
+```{r, eval=FALSE}
 hdi <- gapminder3%>%
   select(HDI)
 
@@ -225,6 +226,7 @@ This graph shows that the real correlation and the correlations from random samp
 
 
 __Table of Values__
+
 Summary |Value
 --------|--------
  Min.   |0.4916  
@@ -241,9 +243,9 @@ Summary |Value
 
 __Question:__ Is there a correlation between HDI and Life Expectancy?
 
-This question is important becausehigher life expectancy is though to be indiciative of more development in a country. In this way, we need to prove that there is a positive correlation between HDIand Life Expectancy. I chose to use a two sample correlation test to prove that there is a positive correlation.
+This question is important because higher life expectancy is thought to be indicative of more development in a country. In this way, we need to prove that there is a positive correlation between HDI and Life Expectancy. I chose to use a two-sample correlation test to prove that there is a positive correlation.
 
-```{r, Eval=FALSE}
+```{r, eval=FALSE}
 hdi <- gapminder3%>%
   select(HDI)
 
@@ -288,9 +290,11 @@ ggplot(hdilife2, aes(x=value))+
 ```
 
 ![](Plots/Anna's Plot.png)
+
 This graph shows that the real correlation and the correlations from random samplings were both around 0.9. While the result is not statistically significant (i.e. both values are around the same), both values are around 0.9, which means that there is likely a large correlation between HDI and Life Expectancy.
 
 __Table of Values__
+
 Summary |Value
 --------|--------
  Min.   |0.5633  
