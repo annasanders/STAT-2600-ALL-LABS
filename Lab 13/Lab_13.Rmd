@@ -106,96 +106,67 @@ ggplot(means, aes(x=value ))+geom_histogram()+
 This graph depicts a pretty normal distribution of mean differences in HDIs between randomly selected countries around the world, indicating that there is no significant difference between means of HDIs when places are randomly chosen to be compared. The blue line on the graph indicates the mean difference in HDI from United States and Canada compared to the rest of the world. Because This line is about 12.67 standard deviations away from zero (where the normal distribution is centered), it appears that there is a significant difference between the HDI for the United States and Canada versus the rest of the world. The HDI tends to be higher in United States and Canada compared to the rest of the world.
 
 ## James
+__Question:__ Is there a correlation between HDI and Population? 
+ 
+This question is important as HDI should not be influcenced by Population in any way. Countries with higher or lower populations should not be though of as less or more developed because development has little to do with population size. I chose to use a two sample correlation test to prove that there is no correlation. 
+```{r, Eval=FALSE} 
+hdi <- gapminder3%>% 
+  select(HDI) 
+ 
+pop <- gapminder3%>% 
+  select(pop) 
+ 
+pop <- pop$pop 
+hdi <- hdi$HDI 
+ 
+real_corpop <- cor(hdi,pop) 
+ 
+perm_cor <- function(perms = 1000, x, y) 
+{ 
+  corr_mat <- matrix(0,length(perms),1) 
+  mylist <- rep(list(0,1000)) 
+   
+  for (i in c(1:perms)) 
+  { 
+    mylist[[i]] <- sample(y, length(y), replace = FALSE) 
+    corr_mat[[i]] = real_cor + cor(x,mylist[[i]]) 
+  } 
+  return(corr_mat) 
+   
+} 
+ 
+hdipop<-perm_cor(x=hdi, y=pop) 
+ 
+map_dbl(hdipop2, median) 
+ 
+hdipop2 <- as.tibble(hdipop) 
+ 
+props <- as.tibble(quantile(hdipop)) 
+ 
+standard_dev <- sd(hdipop) 
+ 
+summary(hdipop2) 
+ 
+ggplot(hdipop2, aes(x=value))+ 
+  geom_histogram()+ 
+  labs(x= "correlation", y = "count", title = "Correlation Between HDI and Population")+ 
+  geom_vline(xintercept = real_corpop, col = "Blue") 
+``` 
+![](Plots/James Plot.png)
+ 
+This graph shows that the real correlation and the correlations from random samplings were both around 0. While the result is not statistically significant (i.e. both values are around the same), both values are around 0, which means that there is likely no (or a zero) correlation between HDI and Population.
 
-```{r, Eval=FALSE}
-library(tidyverse)
-library(gapminder)
-data<-gapminder
-
-perm_mean <- function(perms, values, n1)
-{
-  ## Variables ##
-  # perms: The number of permutations 
-  # values (num): 
-  # n1 (int): Size of group 1
-  ###############
-  
-  # Step 1:
-  # Create vector of zeroes of length "perms" to store
-  # permuted mean differnces
-  p<-vector("double",1000)
-  
-  # Loop throught number of permutations
-  for (i in c(1:perms))
-  {
-    # Step 2:
-    # Randomly separate vector "values" into disjoint 
-    # groups of size "n1" and "length(values) - n1" respectively
-    rows1<-sample(length(values),n1)
-    rows2<-vector('integer',length(values))
-    g1<-values[rows1]
-    for(j in seq(1:length(values))) 
-    { 
-      if (is.element(j,rows1)==FALSE) rows2[j]<-j 
-    }
-    #REMOVE ALL 0s WITH TRUE FALSE VECTOR
-    tf<-rows2>0
-    rows2<-rows2[tf]
-    g2<-values[rows2]
-    
-    # Step 3:
-    # Compute the sample means for the two groups from 
-    # step 2
-    g1_m<-median(g1)
-    g2_m<-median(g2)
-    # Step 4: 
-    # Compute the difference in sample means, store the
-    # value in the vector from step 1
-    d<- g1_m - g2_m
-    p[i]<-d
-  }
-  
-  # Step 5:
-  # Return new updated vector, created in step 1
-  return(p)
-}
-f_data<-perm_mean(1000,data$lifeExp,500)
-ggplot(data=as.tibble(f_data))+geom_histogram(aes(f_data))
-
-asia<-gapminder%>%
-  filter(continent=='Asia',year==1967|year==1997)%>%
-  select(continent,country,year,lifeExp)%>%
-  group_by(country)%>%
-  mutate(diff=abs(lifeExp[[1]]-lifeExp[[2]]))%>%
-  ungroup(country)
-  
-asia_sum<-gapminder%>%
-  filter(continent=='Asia',year==1967|year==1997)%>%
-  select(continent,country,year,lifeExp)%>%
-  group_by(country)%>%
-  mutate(diff=abs(lifeExp[[1]]-lifeExp[[2]]))%>%
-  ungroup(country)%>%
-  summarize(med=median(diff))
-view(asia)
-
-med_vec<-vector('double',1000)
-
-perm<-function(country,le67,le97){
-  diff<-vector('double',4)
-  diff[1]<-0
-  diff[2]<-0
-  diff[3]<-le67-le97
-  diff[4]<-le97-le67
-  return(diff)
-}
-for(i in c(1:1000)){
-  asia_diff<-vector('double',33)
-  for(j in c(1:33)){
-    asia_diff[j]<-sample(perm(asia[2*j,2],asia[2*j-1,4],asia[2*j,4]),1)
-  }
-  med_vec[[i]]<-median(asia_diff)
-}
-```
+__Table of Values__
+Summary |Value
+--------|--------
+ Min.   |-0.30999  
+ 1st Qu.|-0.08884  
+ Median |-0.01661  
+ Mean   |-0.01756  
+ 3rd Qu.| 0.05666  
+ Max.   | 0.21164  
+ 
+__Actuall Correlation:-0.02143__
 
 ## Chris
 ```{r, Eval=FALSE}
@@ -287,3 +258,18 @@ ggplot(hdilife2, aes(x=value))+
   labs(x= "correlation", y = "count", title = "Correlation Between HDI and life expectency")+
   geom_vline(xintercept = real_cor, col = "Blue")
 ```
+
+![](Plots/Anna's Plot.png)
+This graph shows that the real correlation and the correlations from random samplings were both around 0.9. While the result is not statistically significant (i.e. both values are around the same), both values are around 0.9, which means that there is likely a large correlation between HDI and Life Expectancy.
+
+__Table of Values__
+Summary |Value
+--------|--------
+ Min.   |0.5633  
+ 1st Qu.|0.8317  
+ Median |0.9024  
+ Mean   |0.9008  
+ 3rd Qu.|0.9677  
+ Max.   |1.2657  
+ 
+__Actuall Correlation: 0.89548__
