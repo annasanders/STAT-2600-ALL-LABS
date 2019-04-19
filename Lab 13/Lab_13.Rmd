@@ -44,7 +44,7 @@ view(gapminder3)
 ```
 Using HDI as a measure for development, we are attempting to find an answer to whether or not The United States and Canada are more developed than the rest of the world. James, Chris, and Anna's sections attempt to show correlation between HDI and Population, GDP Per Capita, Life Expectancy. Amanda's section compares the mean HDI of the United States and Canada to the mean HDI for the world to see if there is a significant difference between the two. 
 
-__Conclusion:__ From all of our findings, it is clear that North America, specifically the United States and Canada, is more developed than the rest of the world. Overall, the United States and Canada combined have a mean Human Development Index that is significantly larger than that of the rest of the world, indicating that they are more developed in the areas related to life expectancy, per capita income, and education. We also tested a possible confounding variable for HDI: population size, and we discovered that this has no significant correlation to the HDI for a country, indicating that this will not skew our results.
+__Conclusion:__ From all of our findings, it is clear that North America, specifically the United States and Canada, is more developed than the rest of the world. Overall, the United States and Canada combined have a mean Human Development Index that is significantly larger than that of the rest of the world, indicating that they are more developed in the areas related to life expectancy, per capita income, and education. We also tested a possible confounding variable for HDI: population size, and we discovered that this has no significant correlation to the HDI for a country, indicating that this will not skew our results. Finally, we established a basis for a few significant contributing factors towards HDI-- namely Life Expectancy and GDP per Capita. This allowed us to superficially answer the question: why are some countries less developed than the United States and Canada.
 
 
 ## Amanda
@@ -175,6 +175,10 @@ Summary |Value
 __Actuall Correlation:-0.02143__
 
 ## Chris
+
+__Question:__ Is there a correlation between HDI and GDP Per Capita?
+
+This question is important since HDI should be heavily influenced by GDP per Capita as higher GDP per capita directly implies a more developed country where their populations are better off. In this way, we need to prove that there is a positive correlation between HDI and GDP per capita. I chose to use a two sample correlation test to prove that there is a positive correlation.
 ```{r, Eval=FALSE}
 hdi <- gapminder3%>%
   select(HDI)
@@ -215,6 +219,24 @@ summary(hdigdp)
 ggplot(hdigdp, aes(x=value))+geom_histogram() + labs(x= "correlation", y = "count", title = "correlation between GDP per capita and HDI")+ geom_vline(xintercept = real_cor, col = "Blue")
 ```
 
+![](Plots/chrislab13.png)
+
+This graph shows that the real correlation and the correlations from random samplings were both around 0.845. Both the real correlation and the sample from hypothesis testing values are around 0.85, which means that there is likely a large correlation between HDI and GDP per capita. The hypothesis testing verifies this large positive correlation.
+
+
+__Table of Values__
+Summary |Value
+--------|--------
+ Min.   |0.4916  
+ 1st Qu.|0.7818  
+ Median |0.8505  
+ Mean   |0.8516  
+ 3rd Qu.|0.9189  
+ Max.   |1.2731
+ 
+ 
+ __Actuall Correlation: 0.8454__
+ 
 ## Anna
 
 __Question:__ Is there a correlation between HDI and Life Expectancy?
