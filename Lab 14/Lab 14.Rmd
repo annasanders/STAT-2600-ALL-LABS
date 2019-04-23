@@ -9,7 +9,12 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# It's rewind time (is this what you wanted)---
+# It's rewind time (is this what you wanted)
+```{r, eval=FALSE}
+library(tidyverse)
+source("http://www.openintro.org/stat/data/cdc.R")
+cdc <- as_tibble(cdc)
+```
 
 __Overall Question__: What are the differences between different ages and genders in the amount of exercise per month?
 
@@ -79,7 +84,7 @@ the point in question. In addition, I adjusted the size of the points in the dot
 ```{r, eval=FALSE}
 ggplot(data=cdc,aes(x=hlthplan,y=genhlth))+
       geom_count(aes(color=..n..))+
-      labs(x='Health Plan', y='General Helth', title= 'Health Plan and General    Health',color='People')+
+      labs(x='Health Plan', y='General Helth', title= 'Health Plan and General Health',color='People')+
       scale_x_continuous(breaks=c(0,1),labels=c('No','Yes'))
 ```
 
