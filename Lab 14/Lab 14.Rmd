@@ -41,6 +41,14 @@ __Conclusion__: From this plot, we can conclude that while most people do exerci
 
 __Recommendations__: From this graph, we can see, on average, people of all ages exercice more than they do not. However, there are still a large number of people, particularly around the ages of 30-45, who do not exercise. From this finding, we recommend for doctors and general practitioners to focus on individuals within that age range in order to increase the number of people who exercise. 
 
+----
+We also looked at the percentage of people that wanted to lose weight and exercised versus people that wanted to lose weight and not exercise. These proportions are visualized in the plot below.
+![](Plots/tplot1.png)
+Some interesting probabilities that are associated with this plot are the conditional probabilities of someone going to the gym given that they want to lose weight. For females, this probability is 74%, and for males it is 77%. We also wanted to calculate the percentage of males and females that try to lose weight by going to the gym. For males, this was 42%, and for females it was 52%. To determine if this difference in percentages was statistically significant, we performed a permutation test. 
+![](Plots/tplot2.png)
+This plot contains our approximate distribution of our permutation test and our observed difference. Clearly, this difference is significant. 
+----
+
 ## Height, Weight, and Gender(James)
 ![James' Plot](Plot/height_vs_weight.png)
 
