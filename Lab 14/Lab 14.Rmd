@@ -65,7 +65,7 @@ I used the boxplot geom to create two separate boxplots--one for each gender, an
 This graph helps support our overarching question because it points out how far each gender tends to be from their health goals regarding their weight. It illustrates that most people from both genders weigh more than they would desire, which could play a part in how their exercise patterns work.
 
 ## Weight and Age (Chris)
-Question: HOw do mean weights vary over age groups? Can we model this with an equation? 
+Question: How do mean weights vary over age groups? Can we model this with an equation? 
 
 
 ```{r, eval= FALSE}
