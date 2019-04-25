@@ -12,6 +12,8 @@ knitr::opts_chunk$set(echo = TRUE)
 # It's rewind time (is this what you wanted)
 ```{r, eval=FALSE}
 library(tidyverse)
+library(modelr)
+library(splines)
 source("http://www.openintro.org/stat/data/cdc.R")
 cdc <- as_tibble(cdc)
 ```
@@ -23,11 +25,8 @@ __Why it is important__: There are many generational differences between people.
 
 ![Our Group Plot](Plot/age_vs_exercise.png)
 
-
-```{r, eval=FALSE}
 ggplot(data=cdc,aes(x=age,color=gender))+geom_area(stat="bin")+facet_wrap(~exerany)+
 labs(x='Age',y='Count of People',title='Exercise and Age (0 = No exercise, 1 = Exercise)')
-```
 
 
 __Findings__: In this plot, we can see that more people around the age range of 25-50 exercise than not. 
@@ -40,14 +39,6 @@ In this plot, we can see that more people around the age range of 25-50 exercise
 __Conclusion__: From this plot, we can conclude that while most people do exercise, the largest group of people who do not exercise is between ages 35-40. Furthermore, gender does not largely affect exercise habits as people age.
 
 __Recommendations__: From this graph, we can see, on average, people of all ages exercice more than they do not. However, there are still a large number of people, particularly around the ages of 30-45, who do not exercise. From this finding, we recommend for doctors and general practitioners to focus on individuals within that age range in order to increase the number of people who exercise. 
-
-----
-We also looked at the percentage of people that wanted to lose weight and exercised versus people that wanted to lose weight and not exercise. These proportions are visualized in the plot below.
-![](Plots/tplot1.png)
-Some interesting probabilities that are associated with this plot are the conditional probabilities of someone going to the gym given that they want to lose weight. For females, this probability is 74%, and for males it is 77%. We also wanted to calculate the percentage of males and females that try to lose weight by going to the gym. For males, this was 42%, and for females it was 52%. To determine if this difference in percentages was statistically significant, we performed a permutation test. 
-![](Plots/tplot2.png)
-This plot contains our approximate distribution of our permutation test and our observed difference. Clearly, this difference is significant. 
-----
 
 ## Height, Weight, and Gender(James)
 ![James' Plot](Plot/height_vs_weight.png)
@@ -73,84 +64,103 @@ I used the boxplot geom to create two separate boxplots--one for each gender, an
 
 This graph helps support our overarching question because it points out how far each gender tends to be from their health goals regarding their weight. It illustrates that most people from both genders weigh more than they would desire, which could play a part in how their exercise patterns work.
 
-## Smoke and Age (Chris)
+## Weight and Age (Chris)
+Question: HOw do mean weights vary over age groups? Can we model this with an equation? 
 
-![Chris' Plot](Plot/Chris' Plot.png)
 
 ```{r, eval= FALSE}
  ggplot(data = cdc, aes(x = smoke100, y = age , color = gender))+ geom_dotplot(binaxis = "y" , stackdir = "center", binwidth = 1/20) + labs(x ='Do they smoke?', y = 'age', title = 'Age correlation to smoking')
+
+
+mean_weight <- cdc %>%
+  select(age,weight) %>%
+  group_by(age) %>%
+  summarise(mean_wght = mean(weight))
+
+summary(mean_weight)
+
+mean_weight %>% 
+  ggplot(aes(age, mean_wght)) + 
+  geom_line() + 
+  ggtitle("Full data = ")
+
+
+age_mod1 <- lm(mean_wght ~ age, data = mean_weight)
+age_mod2 <- lm(mean_wght ~ ns(age,2) , data = mean_weight)
+age_mod3 <- lm(mean_wght ~ns(age,3), data = mean_weight)
+
+mean_weight %>% 
+  add_predictions(age_mod1) %>%
+  ggplot(aes(age, pred)) + 
+  geom_line() + 
+  ggtitle("Linear trend + ")
+
+mean_weight %>% 
+  add_predictions(age_mod2) %>%
+  ggplot(aes(age, pred)) + 
+  geom_line() + 
+  ggtitle("Quadratic trend + ")
+
+mean_weight %>% 
+  add_predictions(age_mod3) %>%
+  ggplot(aes(age, pred)) + 
+  geom_line() + 
+  ggtitle("Cubic trend + ")
+
+
+mean_weight %>% 
+  add_residuals(age_mod1) %>% 
+  ggplot(aes(age, resid)) + 
+  geom_hline(yintercept = 0, colour = "white", size = 10) + 
+  geom_line() + 
+  ggtitle("Remaining pattern of linear model")
+
+mean_weight %>% 
+  add_residuals(age_mod2) %>% 
+  ggplot(aes(age, resid)) + 
+  geom_hline(yintercept = 0, colour = "white", size = 10) + 
+  geom_line() + 
+  ggtitle("Remaining pattern of quadratic model")
+
+
+
+
 ```
+![](Plot/lab14_fulldata.png)
+![](Plot/lab14_linearmodel.png)
+![](Plot/lab14_linear_resid.png)
+![](Plot/lab14_quadratic.png)
+![](Plot/lab14_quad_resid.png)
+In this analysis, I used the data to try and figure out the general trends between age and weight. These statistics can be used to determine genreal health relationships among age groups: for instance, obesity is a major contributing factor towards heart disease, and being underweight can cause osteoperosis or anemia. If we can show a relationship between ages and weight, we can better target certain groups to make sure they maintain a healthy level of weight. I tidied the data to only reflect the age and weight of people in the data set. Then, I grouped by age to find the mean weight of each age group from 18-99. After that, I made two functionss: one that finds a linear model of the tidy data, and one that finds a quadrartic model to fit the data by using predictions from the data. After this, I found the residuals of the respective models. I then plotted both the model and their residuals to determine which was better, as well as the full data without a model. This analysis revealed that the Quadratic model was much more accurate as seen on the residual plot. The residual plot of the linear model shows a clear concave-down quadric function that was still present in the data. The residual from the quadratic model showed no clear trend, apart from an increasing periodic trend that is more prominent in older ages. We can hypothesize that this is reflective of noise in the data and in lack of as many data points for older people(50-99) than in younger age groups(18-50). From this, we can see that people in the age group of 40-60 are , on average, the heaviest group, so they should be monitered more closely for diseases that stem from being overweight. We can also see that the 65+ age group loses weight rapidly, so they should be monitored for too quick of weight loss as well and should focus on retaining weight to remain healthy. We can use this to warn groups approaching these age categories to be cognizant of their weight and to try and prevent any drastic changes to preserve their health. 
 
-I created a plot showing how age and smoking are related and how this is segmented by gender. 
-The data showed a few things: first that there were a lot more females than males in the sampled population and 
-second that there were larger groups of people who smoked in the age range of about 35-50. 
-It also showed that a much larger proportion of the age group of 60-75 were smokers. 
-Finally, it showed that those over the age of 80 were primarily non-smokers. 
+__Table:Values__
 
-I used the geom_dotplot function and adjusted the color of the points to reflect the gender of the person behind 
-the point in question. In addition, I adjusted the size of the points in the dotplot to be significantly smaller to handle the bulk of data; the default size was much too large. I also changed the default labels to make the plot easier to read.
+Statistic        |Value
+-----------------|---------------
+      age        |   mean_wght    
+ Min.   :18.00   |Min.   :118.5  
+ 1st Qu.:38.00   |1st Qu.:157.1  
+ Median :58.00   |Median :167.7  
+ Mean   :58.01   |Mean   :162.9  
+ 3rd Qu.:78.00   |3rd Qu.:173.3  
+ Max.   :99.00   |Max.   :184.5  
+
 
 ## General Health and Health Plan (Anna)
-![](Plots/Anna's Plot 1.png) 
-
-![](Plots/Anna's Plot 2.png)
+![Anna's Plot](Plot/Anna's Plot.png) 
 
 ```{r, eval=FALSE}
-# Renaming the genhlth column
-cdc2 <- cdc%>%
-  mutate(genhlth= as.character(cdc$genhlth))
-
-cdc3<- cdc2%>%
-  mutate(hlthnum= as.numeric(str_replace_all(genhlth, c("poor"= "1", "fair"= "2", "^good"= "3", "very good"= "4", "excellent"= "5"))))
-
-cdc4<- cdc3%>%
-  mutate(genhlthf=as.factor(cdc$genhlth))
-
-cdc4$genhlthf%>%
-  fct_relevel("poor", "fair", "good", "very good")%>%
-  levels()
-
-# Statistics
-## Overall
-mean(cdc3$hlthnum)
-sd(cdc3$hlthnum)
-## Yes Health Plan
-cdcno <- cdc3%>%
-  filter(hlthplan== "0")
-mean(cdcno$hlthnum)
-sd(cdcno$hlthnum)
-
-## No Health Plan
-cdcyes <- cdc3%>%
-  filter(hlthplan== "1")
-mean(cdcyes$hlthnum)
-sd(cdcyes$hlthnum)
-
-# New Plots
-ggplot(data=cdc3, aes(x=as.factor(hlthplan), y=hlthnum))+
-  geom_violin()+
-  labs(x="Health Plan", y="General Health", title="Health Plan and General Helath")
-
-ggplot(data=cdc4)+
-  geom_bar(mapping=aes(x=genhlthf, fill=as.factor(hlthplan)))+
-  labs(x="General Health", y="Count", title="General Health and Health Plan")+
-  scale_fill_discrete(name="Health Plan", breaks=c("1", "0"), labels=c("Yes", "No"))+
-  scale_x_discrete(breaks=c("poor","fair","good","very good","excellent"), 
-                   labels=c("Poor", "Fair", "Good", "Very Good", "Excellent"))
-
+ggplot(data=cdc,aes(x=hlthplan,y=genhlth))+
+      geom_count(aes(color=..n..))+
+      labs(x='Health Plan', y='General Helth', title= 'Health Plan and General Health',color='People')+
+      scale_x_continuous(breaks=c(0,1),labels=c('No','Yes'))
 ```
 
-__Statistics of General Heatlh__
+I used the geom_count() function to plot the genhlth and hlthplan variables. I chose to use this plot because the data only contained 10 unique options (hlthplan, although represented numerically, only had two responses). By grouping the same points together, one can better see the relationship between an assessment of general health and whether or not an individual has a health plan or not. 
 
-Health Plan|Mean   |SD
------------|-------|-------
-Overall    |3.64565|1.04859
-Yes        |3.67813|1.041252
-No         |3.42076|1.071586
+To better represent this data, I found a way to both aesthetically mark the amount of individuals represented in a data point by color and size. I also renamed the legend to better label the data. 
 
-I updated the graphs to better represent the data. I also calculated the means and standard deviations for each health plan as well as the overall mean and standard deviation. From these results, I conluded that while having a health plan increased your overall health, it was not by much (0.2 difference in means). Similarly, looking at the first graph, most people have a health plan than do not, so the relation between general health and data could be further explored with more data from individuals who do not have a helath plan. 
-
-I used the recently learned skill of string detection and factors in order to change the genhelth column to numbers in order to calculate mean and standard deviation. 
+The overall finding I was able to see from this graph is that on average, there are more people who have a health plan than who do not and those people have an overall better general than those who do not.
 
 ## Team Contributions
 
