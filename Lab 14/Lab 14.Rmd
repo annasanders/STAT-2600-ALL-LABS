@@ -17,7 +17,7 @@ cdc <- as_tibble(cdc)
 ```
 __Overall Question__: What are the differences between different ages and genders in the amount of exercise per month? 
 
-__Why it is important__: There are many generational differences between people. Even now we see younger generations smoking less than the older ones (see Chris's graph). In order to better prepare all generations for a healthier life, we first need to see the differences between different ages' exercise habits. This will help us make recommendations to both parents of children and health care providers to help increase the overall health of all people. We also want to see the differences between genders in terms of exercise habits and health, as different genders have different body types and therefore do not benefit from the same kinds of exercise in the same way.
+__Why it is important__: There are many generational differences between people. In order to better prepare all generations for a healthier life, we first need to see the differences between different ages' exercise habits. This will help us make recommendations to both parents of children and health care providers to help increase the overall health of all people. We also want to see the differences between genders in terms of exercise habits and health, as different genders have different body types and therefore do not benefit from the same kinds of exercise in the same way. Lastly, identifying the relation between those who want to lose weight and exercise and those who want to lose weight and do not exercise is important, as healthcare providers can help motivate those who want to lose weight and do not exercise to exercise more often (as exercise is liked to weight loss).
 
 ![](Plots/Group Plot 1.png)
 
