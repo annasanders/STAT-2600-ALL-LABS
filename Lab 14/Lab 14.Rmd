@@ -142,6 +142,8 @@ No         |3.42076|1.071586
 
 I updated the graphs to better represent the data. I also calculated the means and standard deviations for each health plan as well as the overall mean and standard deviation. From these results, I conluded that while having a health plan increased your overall health, it was not by much (0.2 difference in means). Similarly, looking at the first graph, most people have a health plan than do not, so the relation between general health and data could be further explored with more data from individuals who do not have a helath plan. 
 
+I used the recently learned skill of string detection and factors in order to change the genhelth column to numbers in order to calculate mean and standard deviation. 
+
 ## Team Contributions
 
 We all spent time working with the graphing capabilities of R and each created our own plot that supports the overarching question of the lab. 
