@@ -51,11 +51,82 @@ I believe that this is best explained by the fact that humans reach a peak in th
 One other interesting aspect is how the slope varies. Initially, for both men and women, the slope is steep, but as weight increases, the slope decreases some.  
 
 ## Weight,  Weight Desire, and Gender(Amanda)
+
+__Question:__ Is there a significant difference between males and females in the distance to their desired weight?
+
+__Relevance:__ This is relevant to our overall question because by looking at how far males and females are to their desired weight, we could find some possible correlations to exercise patterns between males and females. The results from this question could help us figure out where any differences in exercise by gender might be coming from. It could also present some information on the psychology behind the male and female brains: does either gender tend to feel unhappier with their weight and does this have a positive or negative correlation with amount of exercise?
+
 ![Amanda's Plot](/Users/amandaliddle4/Desktop/amandaplot.png) 
 ```{r, eval=FALSE}
-ggplot(data=cdc, mapping = aes(x=gender, y=weight-wtdesire, color = gender)) + geom_boxplot() +
- labs(x='Gender', y= 'Pounds Above Desired Weight', title = 'Distance to Desired Weight Based on Gender') + 
- coord_flip()
+library(tidyverse)
+library(lubridate)
+library(plyr)
+library(dplyr)
+cdc1 <- cdc %>% mutate(distToDesiredWt = weight - wtdesire)
+#view(cdc2)
+
+cdc1 <- cdc1$distToDesiredWt
+cdcF <- cdc %>% filter(gender=="f")
+#view(cdcF)
+cdcM <- cdc %>% filter(gender=="m")
+#view(cdcM)
+
+perm_mean <- function(perms = 1000, values, n1)
+{
+  p<-vector("double",1000)
+
+  for (i in c(1:perms))
+  {
+    
+    randomSamp<-sample(length(values),n1)
+    randomSamp2<-vector('integer',length(values))
+    g1<-values[randomSamp]
+    for(j in seq(1:length(values))) 
+    { 
+      if (is.element(j,randomSamp)==FALSE) randomSamp2[j]<-j 
+    }
+  
+    tf<-randomSamp2>0
+    randomSamp2<-randomSamp2[tf]
+    g2<-values[randomSamp2]
+    
+    g1_m<-mean(g1)
+    g2_m<-mean(g2)
+   
+    d<- g1_m - g2_m
+    p[i]<-d
+  }
+  return(p)
+}
+meansF <- as.tibble(perm_mean(values = cdc1, n1 = 10431))
+meansM <- as.tibble(perm_mean(values = cdc1, n1 = 9569))
+
+summary(cdcM)
+summary(cdcF)
+summary(cdc1)
+
+realDiffM <- mean(cdcM$distToDesiredWtI)-mean(cdc1)
+realDiffF <- mean(cdcF$distToDesiredWt)-mean(cdc1)
+
+
+map_dbl(meansM, mean)
+map_dbl(meansF, mean)
+
+stdDM <- sqrt((sd(cdcM$distToDesiredWt))^2/length(cdcM$distToDesiredWt) + (sd(cdc1))^2/length(cdc1))
+stdDF <- sqrt((sd(cdcF$distToDesiredWt))^2/length(cdcF$distToDesiredWt) + (sd(cdc1))^2/length(cdc1))
+
+zScoreM <- realDiffM/stdDM
+zScoreF <- realDiffF/stdDF
+zScoreM
+zScoreF
+
+ggplot(aes(x=value ))+geom_histogram(data=meansM)+ geom_histogram(data=meansF)
+  xlab("Means")+
+  geom_vline(xintercept = realDiffF, color = "blue", size = .3)+ geom_vline(xintercept=realDiffM, color="red", size = .3)
+  ylab("Number")+
+  ggtitle("Difference in Means of Life Expectancy")
+
+
 ```
 
 I used the boxplot geom to create two separate boxplots--one for each gender, and I looked at how far people tend to be from their desired weight. The x-axis is represented by weight minus desired weight, so positive numbers indicate that a person is above their desired weight. I also switched the coordinates of the boxplot so it would be easier to read, in addition to the label function in order to give the graph a title and labels on both axes. The information on the graph suggests that 75% of both males and females from the study seem to be above their desired weight.ore females tended to be farther away from their desired weight than males.
