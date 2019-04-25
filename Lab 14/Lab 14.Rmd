@@ -1,24 +1,4 @@
 ---
-title: "Lab 14"
-author: "Data Me Pls: James, Amanda, Chris, Anna"
-date: "April 19, 2019"
-output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# It's rewind time (is this what you wanted)
-```{r, eval=FALSE}
-library(tidyverse)
-library(modelr)
-library(splines)
-source("http://www.openintro.org/stat/data/cdc.R")
-cdc <- as_tibble(cdc)
-```
-
----
   title: "Lab 14"
 author: "Data Me Pls: James, Amanda, Chris, Anna"
 date: "April 19, 2019"
@@ -35,13 +15,12 @@ library(tidyverse)
 source("http://www.openintro.org/stat/data/cdc.R")
 cdc <- as_tibble(cdc)
 ```
-
 __Overall Question__: What are the differences between different ages and genders in the amount of exercise per month? 
-  
-  
+
 __Why it is important__: There are many generational differences between people. Even now we see younger generations smoking less than the older ones (see Chris's graph). In order to better prepare all generations for a healthier life, we first need to see the differences between different ages' exercise habits. This will help us make recommendations to both parents of children and health care providers to help increase the overall health of all people. We also want to see the differences between genders in terms of exercise habits and health, as different genders have different body types and therefore do not benefit from the same kinds of exercise in the same way.
 
 ![](Plots/Group Plot 1.png)
+
 ```{r, eval=FALSE}
 ggplot(data=cdc,aes(x=age, fill=as.factor(exerany)))+
   geom_area(stat="bin")+
@@ -49,6 +28,7 @@ ggplot(data=cdc,aes(x=age, fill=as.factor(exerany)))+
   scale_fill_discrete(name= "Exercise", breaks=c("0", "1"), labels=c("No","Yes"))+
   labs(x="Age",y="Count of People",title="Exercise and Age)")
 ```
+
 In this plot, we can see that for both Males and Females, at around the ages of 25-50 and 60-75, there are large amounts of people who do not exercise at all. This is problematic expecially in older ages as exercise become more important in order to be healthier when older.
 
 We also looked at the percentage of people that wanted to lose weight and exercised versus people that wanted to lose weight and not exercise. These proportions are visualized in the plot below.
