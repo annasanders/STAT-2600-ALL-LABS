@@ -23,8 +23,11 @@ __Why it is important__: There are many generational differences between people.
 
 ![Our Group Plot](Plot/age_vs_exercise.png)
 
+
+```{r, eval=FALSE}
 ggplot(data=cdc,aes(x=age,color=gender))+geom_area(stat="bin")+facet_wrap(~exerany)+
 labs(x='Age',y='Count of People',title='Exercise and Age (0 = No exercise, 1 = Exercise)')
+```
 
 
 __Findings__: In this plot, we can see that more people around the age range of 25-50 exercise than not. 
@@ -75,24 +78,69 @@ The data showed a few things: first that there were a lot more females than male
 second that there were larger groups of people who smoked in the age range of about 35-50. 
 It also showed that a much larger proportion of the age group of 60-75 were smokers. 
 Finally, it showed that those over the age of 80 were primarily non-smokers. 
+
 I used the geom_dotplot function and adjusted the color of the points to reflect the gender of the person behind 
 the point in question. In addition, I adjusted the size of the points in the dotplot to be significantly smaller to handle the bulk of data; the default size was much too large. I also changed the default labels to make the plot easier to read.
 
 ## General Health and Health Plan (Anna)
-![Anna's Plot](Plot/Anna's Plot.png) 
+![](Plots/Anna's Plot 1.png) 
+
+![](Plots/Anna's Plot 2.png)
 
 ```{r, eval=FALSE}
-ggplot(data=cdc,aes(x=hlthplan,y=genhlth))+
-      geom_count(aes(color=..n..))+
-      labs(x='Health Plan', y='General Helth', title= 'Health Plan and General Health',color='People')+
-      scale_x_continuous(breaks=c(0,1),labels=c('No','Yes'))
+# Renaming the genhlth column
+cdc2 <- cdc%>%
+  mutate(genhlth= as.character(cdc$genhlth))
+
+cdc3<- cdc2%>%
+  mutate(hlthnum= as.numeric(str_replace_all(genhlth, c("poor"= "1", "fair"= "2", "^good"= "3", "very good"= "4", "excellent"= "5"))))
+
+cdc4<- cdc3%>%
+  mutate(genhlthf=as.factor(cdc$genhlth))
+
+cdc4$genhlthf%>%
+  fct_relevel("poor", "fair", "good", "very good")%>%
+  levels()
+
+# Statistics
+## Overall
+mean(cdc3$hlthnum)
+sd(cdc3$hlthnum)
+## Yes Health Plan
+cdcno <- cdc3%>%
+  filter(hlthplan== "0")
+mean(cdcno$hlthnum)
+sd(cdcno$hlthnum)
+
+## No Health Plan
+cdcyes <- cdc3%>%
+  filter(hlthplan== "1")
+mean(cdcyes$hlthnum)
+sd(cdcyes$hlthnum)
+
+# New Plots
+ggplot(data=cdc3, aes(x=as.factor(hlthplan), y=hlthnum))+
+  geom_violin()+
+  labs(x="Health Plan", y="General Health", title="Health Plan and General Helath")
+
+ggplot(data=cdc4)+
+  geom_bar(mapping=aes(x=genhlthf, fill=as.factor(hlthplan)))+
+  labs(x="General Health", y="Count", title="General Health and Health Plan")+
+  scale_fill_discrete(name="Health Plan", breaks=c("1", "0"), labels=c("Yes", "No"))+
+  scale_x_discrete(breaks=c("poor","fair","good","very good","excellent"), 
+                   labels=c("Poor", "Fair", "Good", "Very Good", "Excellent"))
+
 ```
 
-I used the geom_count() function to plot the genhlth and hlthplan variables. I chose to use this plot because the data only contained 10 unique options (hlthplan, although represented numerically, only had two responses). By grouping the same points together, one can better see the relationship between an assessment of general health and whether or not an individual has a health plan or not. 
+__Statistics of General Heatlh__
 
-To better represent this data, I found a way to both aesthetically mark the amount of individuals represented in a data point by color and size. I also renamed the legend to better label the data. 
+Health Plan|Mean   |SD
+-----------|-------|-------
+Overall    |3.64565|1.04859
+Yes        |3.67813|1.041252
+No         |3.42076|1.071586
 
-The overall finding I was able to see from this graph is that on average, there are more people who have a health plan than who do not and those people have an overall better general than those who do not.
+I updated the graphs to better represent the data. I also calculated the means and standard deviations for each health plan as well as the overall mean and standard deviation. From these results, I conluded that while having a health plan increased your overall health, it was not by much (0.2 difference in means). Similarly, looking at the first graph, most people have a health plan than do not, so the relation between general health and data could be further explored with more data from individuals who do not have a helath plan. 
 
 ## Team Contributions
 
