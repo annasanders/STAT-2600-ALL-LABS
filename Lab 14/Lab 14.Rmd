@@ -1,66 +1,68 @@
-<<<<<<< HEAD
 ---
 title: "Lab 14"
 author: "Data Me Pls: James, Amanda, Chris, Anna"
 date: "April 19, 2019"
 output: html_document
 ---
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# It's rewind time (is this what you wanted)
+# Lab 3 Redo
 ```{r, eval=FALSE}
 library(tidyverse)
 source("http://www.openintro.org/stat/data/cdc.R")
 cdc <- as_tibble(cdc)
 ```
+__Overall Question__: What are the differences between different ages and genders in the amount of exercise per month? 
 
-__Overall Question__: What are the differences between different ages and genders in the amount of exercise per month?
+__Why it is important__: There are many generational differences between people. In order to better prepare all generations for a healthier life, we first need to see the differences between different ages' exercise habits. This will help us make recommendations to both parents of children and health care providers to help increase the overall health of all people. We also want to see the differences between genders in terms of exercise habits and health, as different genders have different body types and therefore do not benefit from the same kinds of exercise in the same way. Lastly, identifying the relation between those who want to lose weight and exercise and those who want to lose weight and do not exercise is important, as healthcare providers can help motivate those who want to lose weight and do not exercise to exercise more often (as exercise is liked to weight loss).
 
+![](Plots/Group Plot 1.png)
 
-__Why it is important__: There are many generational differences between people. Even now we see younger generations smoking less than the older ones (see Chris's graph). In order to better prepare all generations for a healthier life, we first need to see the differences between different ages' exercise habits. This will help us make recommendations to both parents of children and health care providers to help increase the overall health of all people. We also want to see the differences between genders in terms of exercise habits and health, as different genders have different body types and therefore do not benefit from the same kinds of exercise in the same way.
+```{r, eval=FALSE}
+ggplot(data=cdc,aes(x=age, fill=as.factor(exerany)))+
+  geom_area(stat="bin")+
+  facet_wrap(~gender)+
+  scale_fill_discrete(name= "Exercise", breaks=c("0", "1"), labels=c("No","Yes"))+
+  labs(x="Age",y="Count of People",title="Exercise and Age)")
+```
 
-![Our Group Plot](Plot/age_vs_exercise.png)
+In this plot, we can see that for both Males and Females, at around the ages of 25-50 and 60-75, there are large amounts of people who do not exercise at all. This is problematic expecially in older ages as exercise become more important in order to be healthier when older.
 
-ggplot(data=cdc,aes(x=age,color=gender))+geom_area(stat="bin")+facet_wrap(~exerany)+
-labs(x='Age',y='Count of People',title='Exercise and Age (0 = No exercise, 1 = Exercise)')
-
-
-__Findings__: In this plot, we can see that more people around the age range of 25-50 exercise than not. 
-We can also see that over the age of 35-40, the number of people who both do and do not exercise decreases. 
-In addition, we have color coded by gender to see how exercise patterns may differ between males and females, and both groups ended up
-following similar patterns to how their exercise happens change by age. 
-
-In this plot, we can see that more people around the age range of 25-50 exercise than not. We can also see that over the age of 35-40, the number of people who both do and do not exercise decreases.  
-
-__Conclusion__: From this plot, we can conclude that while most people do exercise, the largest group of people who do not exercise is between ages 35-40. Furthermore, gender does not largely affect exercise habits as people age.
-
-__Recommendations__: From this graph, we can see, on average, people of all ages exercice more than they do not. However, there are still a large number of people, particularly around the ages of 30-45, who do not exercise. From this finding, we recommend for doctors and general practitioners to focus on individuals within that age range in order to increase the number of people who exercise. 
-
-----
 We also looked at the percentage of people that wanted to lose weight and exercised versus people that wanted to lose weight and not exercise. These proportions are visualized in the plot below.
+
 ![](Plots/tplot1.png)
-Some interesting probabilities that are associated with this plot are the conditional probabilities of someone going to the gym given that they want to lose weight. For females, this probability is 74%, and for males it is 77%. We also wanted to calculate the percentage of males and females that try to lose weight by going to the gym. For males, this was 42%, and for females it was 52%. To determine if this difference in percentages was statistically significant, we performed a permutation test. 
+
+Some interesting probabilities that are associated with this plot are the conditional probabilities of someone going to the gym given that they want to lose weight. For females, this probability is 74%, and for males it is 77%.
+
+We also wanted to calculate the percentage of males and females that try to lose weight by going to the gym. For males, this was 42%, and for females it was 52%. To determine if this difference in percentages was statistically significant, we performed a permutation test.
+
 ![](Plots/tplot2.png)
-This plot contains our approximate distribution of our permutation test and our observed difference. Clearly, this difference is significant. 
-----
+
+This plot contains our approximate distribution of our permutation test and our observed difference. Clearly, this difference is significant.
+
+We overall recommend that doctors and providers put emphasis on those between the ages of 25 and 75 in order to increase the amount of people who exercise. We also recommend to emphasize excersising as a means to lose weight as there are still a small portiion of people who want to lose weight and do not exercise for whatever reason.
+
+---
 
 ## Height, Weight, and Gender(James)
+
 ![James' Plot](Plots/james_plot1.png)
+
 ![](Plots/james_plot2.png)
+
 I wanted to look at the variablility of height versus weight for both males and females. For each plot, I also included a linear model. I also plotted the residuals for the linear model, which look fine. 
 
 ![](Plots/james_plot3.png)
+
 Above is an overlay of the linear model with the geom_smooth function. Some noticeable features are that the height for both men and women tend to approach an asymptote, but the linear model does not account for that. 
 One other thing that the linear model does not account for is the how the slope varies. Initially, for both men and women, the slope is steep, but as weight increases, the slope decreases some.  
 
-## Weight,  Weight Desire, and Gender(Amanda)
+## Gender and Desired Weight (Amanda)
+Is there a significant difference between males and females in the distance to their desired weight?
 
-__Question:__ Is there a significant difference between males and females in the distance to their desired weight?
-
-__Relevance:__ This is relevant to our overall question because by looking at how far males and females are to their desired weight, we could find some possible correlations to exercise patterns between males and females. The results from this question could help us figure out where any differences in exercise by gender might be coming from. It could also present some information on the psychology behind the male and female brains: does either gender tend to feel unhappier with their weight and does this have a positive or negative correlation with amount of exercise?
+This is relevant to our overall question because by looking at how far males and females are to their desired weight, we could find some possible correlations to exercise patterns between males and females. The results from this question could help us figure out where any differences in exercise by gender might be coming from. It could also present some information on the psychology behind the male and female brains: does either gender tend to feel unhappier with their weight and does this have a positive or negative correlation with amount of exercise?
 
 ![](Plots/manda.png) 
 ```{r, eval=FALSE}
@@ -70,14 +72,13 @@ library(plyr)
 library(dplyr)
 cdc1 <- cdc %>% mutate(distToDesiredWt = weight - wtdesire)
 cdc1$distToDesiredWt <- as.numeric(cdc1$distToDesiredWt)
-#view(cdc1)
+##view(cdc1)
 
-
-
+#Permutation Test
 cdcF <- cdc1 %>% filter(gender=="f")
-#view(cdcF)
+##view(cdcF)
 cdcM <- cdc1 %>% filter(gender=="m")
-#view(cdcM)
+##view(cdcM)
 
 cdc1 <- cdc1$distToDesiredWt
 perm_mean <- function(perms = 1000, values, n1)
@@ -126,10 +127,7 @@ zScoreF <- realDiffF/stdDF
 zScoreM
 zScoreF
 
-```
-
-```{r, eval=FALSE}
-
+# Plots
 ggplot()+geom_histogram(data=meansM, aes(x=value, fill = "lightblue", alpha=.2))+ geom_histogram(data=meansF, aes(x=value, fill = "lightpink", alpha = .2))+
   xlab("Means")+
   geom_vline(xintercept = realDiffF, color = "pink", size = .3)+ geom_vline(xintercept=realDiffM, color="blue", size = .3)+
@@ -138,127 +136,14 @@ ggplot()+geom_histogram(data=meansM, aes(x=value, fill = "lightblue", alpha=.2))
 
 ```
 
-__Graph Explanation:__ To create this graph, I first created a new variable in the dataset that represents how far away each person is to their desired weight. Positive numbers correlate with a person being above their desired weight while negative numbers correlate with a person being below their desired weight. Then, I split by data up based on gender, and did two-sample permutation tests for sample sizes equal to the number of males and number of females to see how the mean distances in desired weights would be expected to be if a random sample was taken from the entire data, which is illustrated by the two normal distributed histograms in the graph. I then calculated what the actual mean distance from desired weight is for each gender and plotted these on the graph, with blue representing males and pink representing females.
+To create this graph, I first created a new variable in the dataset that represents how far away each person is to their desired weight. Positive numbers correlate with a person being above their desired weight while negative numbers correlate with a person being below their desired weight. Then, I split by data up based on gender, and did two-sample permutation tests for sample sizes equal to the number of males and number of females to see how the mean distances in desired weights would be expected to be if a random sample was taken from the entire data, which is illustrated by the two normal distributed histograms in the graph. I then calculated what the actual mean distance from desired weight is for each gender and plotted these on the graph, with blue representing males and pink representing females.
 
-__Conclusions:__ From this graph, it is clear that both males and females are at a significant distance away from their desired weight. However, females tend to be way over their desired weight while males tend to be under theirs. 
-
-## Smoke and Age (Chris)
-
-![Chris' Plot](Plot/Chris' Plot.png)
-
-```{r, eval= FALSE}
- ggplot(data = cdc, aes(x = smoke100, y = age , color = gender))+ geom_dotplot(binaxis = "y" , stackdir = "center", binwidth = 1/20) + labs(x ='Do they smoke?', y = 'age', title = 'Age correlation to smoking')
-```
-
-I created a plot showing how age and smoking are related and how this is segmented by gender. 
-The data showed a few things: first that there were a lot more females than males in the sampled population and 
-second that there were larger groups of people who smoked in the age range of about 35-50. 
-It also showed that a much larger proportion of the age group of 60-75 were smokers. 
-Finally, it showed that those over the age of 80 were primarily non-smokers. 
-I used the geom_dotplot function and adjusted the color of the points to reflect the gender of the person behind 
-the point in question. In addition, I adjusted the size of the points in the dotplot to be significantly smaller to handle the bulk of data; the default size was much too large. I also changed the default labels to make the plot easier to read.
-
-## General Health and Health Plan (Anna)
-![Anna's Plot](Plot/Anna's Plot.png) 
-
-```{r, eval=FALSE}
-ggplot(data=cdc,aes(x=hlthplan,y=genhlth))+
-      geom_count(aes(color=..n..))+
-      labs(x='Health Plan', y='General Helth', title= 'Health Plan and General Health',color='People')+
-      scale_x_continuous(breaks=c(0,1),labels=c('No','Yes'))
-```
-
-I used the geom_count() function to plot the genhlth and hlthplan variables. I chose to use this plot because the data only contained 10 unique options (hlthplan, although represented numerically, only had two responses). By grouping the same points together, one can better see the relationship between an assessment of general health and whether or not an individual has a health plan or not. 
-
-To better represent this data, I found a way to both aesthetically mark the amount of individuals represented in a data point by color and size. I also renamed the legend to better label the data. 
-
-The overall finding I was able to see from this graph is that on average, there are more people who have a health plan than who do not and those people have an overall better general than those who do not.
-
-## Team Contributions
-
-We all spent time working with the graphing capabilities of R and each created our own plot that supports the overarching question of the lab. 
-
-=======
----
-  title: "Lab 14"
-author: "Data Me Pls: James, Amanda, Chris, Anna"
-date: "April 19, 2019"
-output: html_document
----
-  
-  ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# It's rewind time (is this what you wanted)
-```{r, eval=FALSE}
-library(tidyverse)
-source("http://www.openintro.org/stat/data/cdc.R")
-cdc <- as_tibble(cdc)
-```
-__Overall Question__: What are the differences between different ages and genders in the amount of exercise per month? 
-
-__Why it is important__: There are many generational differences between people. In order to better prepare all generations for a healthier life, we first need to see the differences between different ages' exercise habits. This will help us make recommendations to both parents of children and health care providers to help increase the overall health of all people. We also want to see the differences between genders in terms of exercise habits and health, as different genders have different body types and therefore do not benefit from the same kinds of exercise in the same way. Lastly, identifying the relation between those who want to lose weight and exercise and those who want to lose weight and do not exercise is important, as healthcare providers can help motivate those who want to lose weight and do not exercise to exercise more often (as exercise is liked to weight loss).
-
-![](Plots/Group Plot 1.png)
-
-```{r, eval=FALSE}
-ggplot(data=cdc,aes(x=age, fill=as.factor(exerany)))+
-  geom_area(stat="bin")+
-  facet_wrap(~gender)+
-  scale_fill_discrete(name= "Exercise", breaks=c("0", "1"), labels=c("No","Yes"))+
-  labs(x="Age",y="Count of People",title="Exercise and Age)")
-```
-
-In this plot, we can see that for both Males and Females, at around the ages of 25-50 and 60-75, there are large amounts of people who do not exercise at all. This is problematic expecially in older ages as exercise become more important in order to be healthier when older.
-
-We also looked at the percentage of people that wanted to lose weight and exercised versus people that wanted to lose weight and not exercise. These proportions are visualized in the plot below.
-
-![](Plots/tplot1.png)
-
-Some interesting probabilities that are associated with this plot are the conditional probabilities of someone going to the gym given that they want to lose weight. For females, this probability is 74%, and for males it is 77%.
-
-We also wanted to calculate the percentage of males and females that try to lose weight by going to the gym. For males, this was 42%, and for females it was 52%. To determine if this difference in percentages was statistically significant, we performed a permutation test.
-
-![](Plots/tplot2.png)
-
-This plot contains our approximate distribution of our permutation test and our observed difference. Clearly, this difference is significant.
-
-We overall recommend that doctors and providers put emphasis on those between the ages of 25 and 75 in order to increase the amount of people who exercise. We also recommend to emphasize excersising as a means to lose weight as there are still a small portiion of people who want to lose weight and do not exercise for whatever reason.
-
----
-
-## Height, Weight, and Gender(James)
-![James' Plot](Plot/height_vs_weight.png)
-
-Because height and weight are both continuous variables, I used the smooth geom. 
-This allowed me to see the clear relationship between height and weight, and how the slope varies as a function of weight.
-
-Some noticeable features are that the height for both men and women tend to approach an asymptote.
-
-I believe that this is best explained by the fact that humans reach a peak in their height, but can continue to put on weight. 
-
-One other interesting aspect is how the slope varies. Initially, for both men and women, the slope is steep, but as weight increases, the slope decreases some.  
-
-## Weight,  Weight Desire, and Gender(Amanda)
-![Amanda's Plot](/Users/amandaliddle4/Desktop/amandaplot.png) 
-```{r, eval=FALSE}
-ggplot(data=cdc, mapping = aes(x=gender, y=weight-wtdesire, color = gender)) + geom_boxplot() +
- labs(x='Gender', y= 'Pounds Above Desired Weight', title = 'Distance to Desired Weight Based on Gender') + 
- coord_flip()
-```
-
-I used the boxplot geom to create two separate boxplots--one for each gender, and I looked at how far people tend to be from their desired weight. The x-axis is represented by weight minus desired weight, so positive numbers indicate that a person is above their desired weight. I also switched the coordinates of the boxplot so it would be easier to read, in addition to the label function in order to give the graph a title and labels on both axes. The information on the graph suggests that 75% of both males and females from the study seem to be above their desired weight.ore females tended to be farther away from their desired weight than males.
-
-This graph helps support our overarching question because it points out how far each gender tends to be from their health goals regarding their weight. It illustrates that most people from both genders weigh more than they would desire, which could play a part in how their exercise patterns work.
+From this graph, it is clear that both males and females are at a significant distance away from their desired weight. However, females tend to be way over their desired weight while males tend to be under theirs. 
 
 ## Weight and Age (Chris)
 Question: How do mean weights vary over age groups? Can we model this with an equation? 
-
-
 ```{r, eval= FALSE}
  ggplot(data = cdc, aes(x = smoke100, y = age , color = gender))+ geom_dotplot(binaxis = "y" , stackdir = "center", binwidth = 1/20) + labs(x ='Do they smoke?', y = 'age', title = 'Age correlation to smoking')
-
 
 mean_weight <- cdc %>%
   select(age,weight) %>%
@@ -271,7 +156,6 @@ mean_weight %>%
   ggplot(aes(age, mean_wght)) + 
   geom_line() + 
   ggtitle("Full data = ")
-
 
 age_mod1 <- lm(mean_wght ~ age, data = mean_weight)
 age_mod2 <- lm(mean_wght ~ ns(age,2) , data = mean_weight)
@@ -295,7 +179,6 @@ mean_weight %>%
   geom_line() + 
   ggtitle("Cubic trend + ")
 
-
 mean_weight %>% 
   add_residuals(age_mod1) %>% 
   ggplot(aes(age, resid)) + 
@@ -311,15 +194,15 @@ mean_weight %>%
   ggtitle("Remaining pattern of quadratic model")
 
 ```
-![](Plot/lab14_fulldata.png)
+![](Plots/lab14_fulldata.png)
 
-![](Plot/lab14_linearmodel.png)
+![](Plots/lab14_linearmodel.png)
 
-![](Plot/lab14_linear_resid.png)
+![](Plots/lab14_linear_resid.png)
 
-![](Plot/lab14_quadratic.png)
+![](Plots/lab14_quadratic.png)
 
-![](Plot/lab14_quad_resid.png)
+![](Plots/lab14_quad_resid.png)
 
 In this analysis, I used the data to try and figure out the general trends between age and weight. These statistics can be used to determine genreal health relationships among age groups: for instance, obesity is a major contributing factor towards heart disease, and being underweight can cause osteoperosis or anemia. If we can show a relationship between ages and weight, we can better target certain groups to make sure they maintain a healthy level of weight. 
 
@@ -341,11 +224,12 @@ Statistic        |Value
  3rd Qu.:78.00   |3rd Qu.:173.3  
  Max.   :99.00   |Max.   :184.5  
 
-
 ## General Health and Health Plan (Anna)
+Question: What is the relation between General Health and Health?
+
 ![](Plots/Anna's Plot 1.png) 
     
-    ![](Plots/Anna's Plot 2.png)
+![](Plots/Anna's Plot 2.png)
 
 ```{r, eval=FALSE}
 # Renaming the genhlth column
@@ -400,15 +284,13 @@ Overall    |3.64565|1.04859
 Yes        |3.67813|1.041252
 No         |3.42076|1.071586
 
+This question is interesting because one would assume that and individual would have better health when they have a health plan; however this may not be the case. Proving this relation would help provide evidence that having a health plan leads to a healthier life, and would help aid healthcare providers in signing people up for healthcare. Since Obamacare(The Affordable Care Act) is at risk of being repealed, this data is expecailly important as many people in America cannot afford to pay for healthcare, if healthcare does increase general health, support for Obamacare might increase.
+
 I created two graphs to represent this data. The first graph is a bar plot, which shows the overall count of people with each category of general health. The graph is also colored to show if the individual has a health plan or not. The second graph is a violin plot which shows the distribution of of people in each general health category. As you can see from these two graphs, there is a small difference between the general health of those who have and do not have a health plan. Most individuals without a health plan put more "3s" or "Good" as their self-reported general health. 
 
-I also calculated the means and standard deviations for each health plan as well as the overall mean and standard deviation. From these results, I conluded that while having a health plan increased your overall health, it was not by much (0.2 difference in means). Similarly, looking at the first graph, most people have a health plan than do not, so the relation between general health and data could be further explored with more data from individuals who do not have a helath plan. 
+I also calculated the means and standard deviations for each health plan as well as the overall mean and standard deviation. From these results, I conluded that while having a health plan increased your overall health, it was not by much (0.2 difference in means). Similarly, looking at the first graph, most people have a health plan than do not, so the relation between general health and data could be further explored with more data from individuals who do not have a helath plan. For this data, however, I cannot give a recomendaiton on whether or not general health is related to health plan.
 
-I used the recently learned skill of string detection and factors in order to change the genhelth column to numbers in order to calculate mean and standard deviation. 
+I used the recently learned skill of string detection and factors in order to change the genhelth column to numbers in order to calculate mean and standard deviation. I chose not to try a permutation test as because the two means were relativly close and the varation in data was low (0,1 for one variable and 1:5 for the other), I felt like the permutation test would not provide any futher analysis (i.e. no difference).
 
 ## Team Contributions
-
-We all spent time working with the graphing capabilities of R and each created our own plot that supports the overarching question of the lab. 
-
->>>>>>> master
-We all posted our parts to the shared document and wrote summaries/descriptions to go with our data. Anna, Chris, and James worked through plotting the team graph, and Amanda and Anna wrote in an analysis, conclusion, and recommendations for the findings. Amanda then edited thefinal document and did the finishing touches to turning it in. 
+See individual sections. We all worked on the group part together. 
