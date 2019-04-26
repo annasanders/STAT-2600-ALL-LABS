@@ -57,21 +57,24 @@ __Question:__ Is there a significant difference between males and females in the
 
 __Relevance:__ This is relevant to our overall question because by looking at how far males and females are to their desired weight, we could find some possible correlations to exercise patterns between males and females. The results from this question could help us figure out where any differences in exercise by gender might be coming from. It could also present some information on the psychology behind the male and female brains: does either gender tend to feel unhappier with their weight and does this have a positive or negative correlation with amount of exercise?
 
-![Amanda's Plot](/Users/amandaliddle4/Desktop/amandaplot.png) 
+![](Plots/manda.png) 
 ```{r, eval=FALSE}
 library(tidyverse)
 library(lubridate)
 library(plyr)
 library(dplyr)
 cdc1 <- cdc %>% mutate(distToDesiredWt = weight - wtdesire)
-#view(cdc2)
+cdc1$distToDesiredWt <- as.numeric(cdc1$distToDesiredWt)
+#view(cdc1)
 
-cdc1 <- cdc1$distToDesiredWt
-cdcF <- cdc %>% filter(gender=="f")
+
+
+cdcF <- cdc1 %>% filter(gender=="f")
 #view(cdcF)
-cdcM <- cdc %>% filter(gender=="m")
+cdcM <- cdc1 %>% filter(gender=="m")
 #view(cdcM)
 
+cdc1 <- cdc1$distToDesiredWt
 perm_mean <- function(perms = 1000, values, n1)
 {
   p<-vector("double",1000)
@@ -106,12 +109,9 @@ summary(cdcM)
 summary(cdcF)
 summary(cdc1)
 
-realDiffM <- mean(cdcM$distToDesiredWtI)-mean(cdc1)
+realDiffM <- mean(cdcM$distToDesiredWt)-mean(cdc1)
 realDiffF <- mean(cdcF$distToDesiredWt)-mean(cdc1)
 
-
-map_dbl(meansM, mean)
-map_dbl(meansF, mean)
 
 stdDM <- sqrt((sd(cdcM$distToDesiredWt))^2/length(cdcM$distToDesiredWt) + (sd(cdc1))^2/length(cdc1))
 stdDF <- sqrt((sd(cdcF$distToDesiredWt))^2/length(cdcF$distToDesiredWt) + (sd(cdc1))^2/length(cdc1))
@@ -121,18 +121,21 @@ zScoreF <- realDiffF/stdDF
 zScoreM
 zScoreF
 
-ggplot(aes(x=value ))+geom_histogram(data=meansM)+ geom_histogram(data=meansF)
-  xlab("Means")+
-  geom_vline(xintercept = realDiffF, color = "blue", size = .3)+ geom_vline(xintercept=realDiffM, color="red", size = .3)
-  ylab("Number")+
-  ggtitle("Difference in Means of Life Expectancy")
+```
 
+```{r, eval=FALSE}
+
+ggplot()+geom_histogram(data=meansM, aes(x=value, fill = "lightblue", alpha=.2))+ geom_histogram(data=meansF, aes(x=value, fill = "lightpink", alpha = .2))+
+  xlab("Means")+
+  geom_vline(xintercept = realDiffF, color = "pink", size = .3)+ geom_vline(xintercept=realDiffM, color="blue", size = .3)+
+  ylab("Number")+
+  ggtitle("Difference in Means of Distances to Desired Weight Based on Gender")
 
 ```
 
-I used the boxplot geom to create two separate boxplots--one for each gender, and I looked at how far people tend to be from their desired weight. The x-axis is represented by weight minus desired weight, so positive numbers indicate that a person is above their desired weight. I also switched the coordinates of the boxplot so it would be easier to read, in addition to the label function in order to give the graph a title and labels on both axes. The information on the graph suggests that 75% of both males and females from the study seem to be above their desired weight.ore females tended to be farther away from their desired weight than males.
+__Graph Explanation:__ To create this graph, I first created a new variable in the dataset that represents how far away each person is to their desired weight. Positive numbers correlate with a person being above their desired weight while negative numbers correlate with a person being below their desired weight. Then, I split by data up based on gender, and did two-sample permutation tests for sample sizes equal to the number of males and number of females to see how the mean distances in desired weights would be expected to be if a random sample was taken from the entire data, which is illustrated by the two normal distributed histograms in the graph. I then calculated what the actual mean distance from desired weight is for each gender and plotted these on the graph, with blue representing males and pink representing females.
 
-This graph helps support our overarching question because it points out how far each gender tends to be from their health goals regarding their weight. It illustrates that most people from both genders weigh more than they would desire, which could play a part in how their exercise patterns work.
+__Conclusions:__ From this graph, it is clear that both males and females are at a significant distance away from their desired weight. However, females tend to be way over their desired weight while males tend to be under theirs. 
 
 ## Smoke and Age (Chris)
 
