@@ -9,4 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# IM DONE WITH THIS CLASS
+# I WANT TO BE THE VERY BEST
+## LIKE NO ONE EVER WAS
+## TO CATCH THEM IS MY REAL TEST
+## TO TRAIN THEM IS MY CAUSE
