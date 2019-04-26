@@ -39,17 +39,22 @@ __Conclusion__: From this plot, we can conclude that while most people do exerci
 
 __Recommendations__: From this graph, we can see, on average, people of all ages exercice more than they do not. However, there are still a large number of people, particularly around the ages of 30-45, who do not exercise. From this finding, we recommend for doctors and general practitioners to focus on individuals within that age range in order to increase the number of people who exercise. 
 
+----
+We also looked at the percentage of people that wanted to lose weight and exercised versus people that wanted to lose weight and not exercise. These proportions are visualized in the plot below.
+![](Plots/tplot1.png)
+Some interesting probabilities that are associated with this plot are the conditional probabilities of someone going to the gym given that they want to lose weight. For females, this probability is 74%, and for males it is 77%. We also wanted to calculate the percentage of males and females that try to lose weight by going to the gym. For males, this was 42%, and for females it was 52%. To determine if this difference in percentages was statistically significant, we performed a permutation test. 
+![](Plots/tplot2.png)
+This plot contains our approximate distribution of our permutation test and our observed difference. Clearly, this difference is significant. 
+----
+
 ## Height, Weight, and Gender(James)
-![James' Plot](Plot/height_vs_weight.png)
+![James' Plot](Plots/james_plot1.png)
+![](Plots/james_plot2.png)
+I wanted to look at the variablility of height versus weight for both males and females. For each plot, I also included a linear model. I also plotted the residuals for the linear model, which look fine. 
 
-Because height and weight are both continuous variables, I used the smooth geom. 
-This allowed me to see the clear relationship between height and weight, and how the slope varies as a function of weight.
-
-Some noticeable features are that the height for both men and women tend to approach an asymptote.
-
-I believe that this is best explained by the fact that humans reach a peak in their height, but can continue to put on weight. 
-
-One other interesting aspect is how the slope varies. Initially, for both men and women, the slope is steep, but as weight increases, the slope decreases some.  
+![](Plots/james_plot3.png)
+Above is an overlay of the linear model with the geom_smooth function. Some noticeable features are that the height for both men and women tend to approach an asymptote, but the linear model does not account for that. 
+One other thing that the linear model does not account for is the how the slope varies. Initially, for both men and women, the slope is steep, but as weight increases, the slope decreases some.  
 
 ## Weight,  Weight Desire, and Gender(Amanda)
 
