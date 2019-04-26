@@ -99,8 +99,8 @@ perm_mean <- function(perms = 1000, values, n1)
   }
   return(p)
 }
-meansF <- as.tibble(perm_mean(values = cdc1, n1 = 10431))
-meansM <- as.tibble(perm_mean(values = cdc1, n1 = 9569))
+meansF <- as_tibble(perm_mean(values = cdc1, n1 = 10431))
+meansM <- as_tibble(perm_mean(values = cdc1, n1 = 9569))
 
 summary(cdcM)
 summary(cdcF)
