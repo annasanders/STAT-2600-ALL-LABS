@@ -9,7 +9,45 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# I WANT TO BE THE VERY BEST
-## LIKE NO ONE EVER WAS
-## TO CATCH THEM IS MY REAL TEST
-## TO TRAIN THEM IS MY CAUSE
+```{r, eval=FALSE}
+library(tidyverse)
+library(dplyr)
+library(readxl)
+
+# The Whole Data
+pokemon <-read.csv(file= "pokemon.csv")
+
+# Easier to Read Data
+pokemonlite <-pokemon%>%
+  select(pokedex_number, name, type1, type2, generation, is_legendary)
+```
+
+# I WANT TO BE THE VERY BEST (like no one ever was)
+
+Our main question is how to be the best (like no one ever was). Like the famous theme song says:
+" I want to be the very best,
+Like no one ever was. 
+To catch them is my real test, #Catch Rate, Base Egg Steps
+To train them is my cause! #Exp Growth
+
+I will travel across the land, #Generation, Pokedex Number
+Searching far and wide. #Type
+Each Pokemon to understand #Classification, Happiness
+The power that's inside! #Base Total, Against_
+Pokemon! #Height, Weight
+Gotta catch em' all!"
+
+Taking data from the equally famous video game franchise, we are wondering how exactly a trainer can become the best (in the video games at least). Using the paramters set out in the original song (inclucding catch rate, type, power, happines, abilities, and much more), we seek to determine exactly what to do in order to be the very best.
+
+
+#Amanda 
+
+#Chris
+
+#James
+
+#Anna (The power that's inside!)
+```{r, eval=FALSE}
+pokemonpwr <- pokemon%>%
+  select(pokedex_number, name, hp, attack, defense, speed, sp_attack, sp_defense, base_total)
+```
