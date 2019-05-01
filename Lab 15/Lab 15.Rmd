@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 title: "Lab 15"
 author: "Data Me Pls: Chris, James, Amanda, Anna"
@@ -63,3 +64,79 @@ ggplot(data=pokemon1) + geom_col(aes(x=percentage_male, y=capture_rate))
 pokemonpwr <- pokemon%>%
   select(pokedex_number, name, hp, attack, defense, speed, sp_attack, sp_defense, base_total)
 ```
+=======
+---
+title: "Lab 15"
+author: "Data Me Pls: Chris, James, Amanda, Anna"
+date: "April 19, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, eval=FALSE}
+library(tidyverse)
+library(dplyr)
+library(readxl)
+
+# The Whole Data
+pokemon <-read.csv(file= "pokemon.csv")
+
+# Easier to Read Data
+pokemonlite <-pokemon%>%
+  select(pokedex_number, name, type1, type2, generation, is_legendary)
+```
+
+# I WANT TO BE THE VERY BEST (like no one ever was)
+
+Our main question is how to be the best (like no one ever was). Like the famous theme song says:
+" I want to be the very best,
+Like no one ever was. 
+To catch them is my real test, #Catch Rate, Base Egg Steps
+To train them is my cause! #Exp Growth
+
+I will travel across the land, #Generation, Pokedex Number
+Searching far and wide. #Type
+Each Pokemon to understand #Classification, Happiness
+The power that's inside! #Base Total, Against_
+Pokemon! #Height, Weight
+Gotta catch em' all!"
+
+Taking data from the equally famous video game franchise, we are wondering how exactly a trainer can become the best (in the video games at least). Using the paramters set out in the original song (inclucding catch rate, type, power, happines, abilities, and much more), we seek to determine exactly what to do in order to be the very best.
+
+
+https://bulbapedia.bulbagarden.net/wiki/Base_stats
+
+https://bulbapedia.bulbagarden.net/wiki/Catch_rate
+
+https://bulbapedia.bulbagarden.net/wiki/Friendship
+
+#Amanda 
+
+#Chris
+
+#James
+
+#Anna (The power that's inside!)
+```{r, eval=FALSE}
+pokemonpwr <- pokemon%>%
+  select(pokedex_number, name, hp, attack, defense, speed, sp_attack, sp_defense, base_total)
+```
+
+---
+
+#Reflections on Lab 2
+As a team, restate your team's goal(s) and reflect on how well you achieved it. If you could travel back in time, which is one thing you would tell your team to keep doing? Stop doing? Start doing? Discuss this as a team and add it as a section to your Final Project.
+
+Individually, write a paragraph reflecting on: how have your six-month or 5-year goals changed? What did you learn/accomplish in this course? If you could give yourself advice at the beginning of the semester, what would you tell yourself to keep doing, stop doing, and start doing?
+
+__Amanda:__
+
+__Chris:__
+
+__James:__
+
+__Anna:__
+>>>>>>> master
