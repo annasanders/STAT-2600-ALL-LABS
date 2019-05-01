@@ -37,10 +37,22 @@ The power that's inside! #Base Total, Against_
 Pokemon! #Height, Weight
 Gotta catch em' all!"
 
-Taking data from the equally famous video game franchise, we are wondering how exactly a trainer can become the best (in the video games at least). Using the paramters set out in the original song (inclucding catch rate, type, power, happines, abilities, and much more), we seek to determine exactly what to do in order to be the very best.
+Taking data from the equally famous video game franchise, we are wondering how exactly a trainer can become the best (in the video games at least). Using the parameters set out in the original song (inclucding catch rate, type, power, happines, abilities, and much more), we seek to determine exactly what to do in order to be the very best.
 
 
-#Amanda 
+#Amanda (How does gender of a pokemon correlate with the quality of it?)
+```{r, eval=FALSE}
+
+
+pokemon1 <- pokemon %>% select(name, pokedex_number, percentage_male, capture_rate, base_total, base_happiness) %>% mutate(g =ifelse(percentage_male >= 50, "M", ifelse(percentage_male < 50, "F", ifelse(percentage_male == NA, "N"))))
+
+pokemon2 <- pokemon1 %>% filter(name=="Swinub")
+
+#view(pokemon1)
+
+ggplot(data=pokemon1) + geom_col(aes(x=percentage_male, y=capture_rate))
+
+```
 
 #Chris
 
