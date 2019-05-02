@@ -13,6 +13,8 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(dplyr)
 library(readxl)
+library(modelr)
+library(splines)
 
 # The Whole Data
 pokemon <-read.csv(file= "pokemon.csv")
@@ -49,6 +51,71 @@ https://bulbapedia.bulbagarden.net/wiki/Friendship
 #Amanda 
 
 #Chris
+```{r, eval=FALSE}
+
+BestGen <- pokemon%>%
+  select(pokedex_number, name, hp, attack, defense, speed, sp_attack, sp_defense, base_total, generation)%>%
+  group_by(generation) %>%
+  summarise(mean_stats = mean(base_total))
+
+# pokemon number vs base stats (later entry in pokedex means better stats?)
+Pokedex <- pokemon %>%
+  select(pokedex_number,base_total,generation,type1)
+
+pokedex_model1 <- lm(base_total ~ pokedex_number, data = Pokedex)
+pokedex_model10 <- lm(base_total ~ ns(pokedex_number, 10), data = Pokedex)
+pokedex_model800 <- lm(base_total ~ ns(pokedex_number, 800), data = Pokedex)
+
+Pokedex %>% 
+  ggplot(aes(pokedex_number, base_total)) + 
+  geom_line(aes(color = as.factor(generation))) + 
+  ggtitle("Full data") +
+  facet_wrap(~generation)
+
+Pokedex %>% 
+  add_predictions(pokedex_model1) %>%
+  ggplot(aes(pokedex_number, pred)) + 
+  geom_line() + 
+  ggtitle("Linear trend")
+
+Pokedex %>% 
+  add_residuals(pokedex_model1) %>% 
+  ggplot(aes(pokedex_number, resid)) + 
+  geom_hline(yintercept = 0, colour = "white", size = 10) + 
+  geom_point() + 
+  ggtitle("Remaining pattern of linear model")
+
+Pokedex %>% 
+  add_predictions(pokedex_model10) %>%
+  ggplot(aes(pokedex_number, pred)) + 
+  geom_line() + 
+  ggtitle("10th Degree Polynomial model")
+
+Pokedex %>% 
+  add_residuals(pokedex_model10) %>% 
+  ggplot(aes(pokedex_number, resid)) + 
+  geom_hline(yintercept = 0, colour = "white", size = 10) + 
+  geom_point() + 
+  ggtitle("Remaining pattern of 10th degree polynomial")
+
+
+Pokedex %>% 
+  add_predictions(pokedex_model800) %>%
+  ggplot(aes(pokedex_number, pred)) + 
+  geom_line() + 
+  ggtitle("800th Degree Polynomial model")
+
+Pokedex %>% 
+  add_residuals(pokedex_model800) %>% 
+  ggplot(aes(pokedex_number, resid)) + 
+  geom_hline(yintercept = 0, colour = "white", size = 10) + 
+  geom_point() + 
+  ggtitle("Remaining pattern of 800th degree polynomial")
+
+
+```
+Here we can see that, overall, the mean base stats for generations as a whole conclude that generation 4 possesses the strongest pokemon (in terms of overall stats). The generation with the overall weakest pokemon is generation 2. From the model fitting, we see that a linear model shows a increase in power from the pokemon at the start of the pokedex to those at the end, but when we look at the entire data, we see spikes at the beginning of the pokedex for each generation and the end of the pokedex for each generation. This means a linear model is not sufficient since it wont pick up these trends. For this reason, we also showed a 10th degree polynomial to fit the data. The model more accurately reflects the nature of the pokemon rank in the pokedex; however, when we look at the residuals for this model, we see large residuals. For this reason, we created an (impractical) 800th degree polynomial to model the pokedex. When we did this, we see the residuals are very small and dont have much of a trend at all, so we know our model accurately reflects the pokedex and the stats of those pokemon. From this analysis, we know that the pokemon at the beginning and end of the pokedex for each generation are the strongest. This would correlate to the starters and the legendaries of each generation. Overall, the legendary pokemon are stronger than the starters because, after all, they are legendary. With this analysis combined, we see that if you seek to be the very best trainer, you will want to have a team of starter and legendary pokemon from generation 4. If you seek to maximize stats, you will want a team of ALL legendary pokemon from genration 4, but based off of competitive pokemon rules, they ban legendaries, so solely based on max stats of a pokemon, you will want to use starters from generation four in their final evolutions (Torterra, Infernape, and Empoleon). If allowed to use legendaries, the data would reccomend to use legendaries such as Dialga, Palkia or Giritina. The data also conveys that pokemon colser to the end of the pokedex, but not the very end, are also have higher base stats. This is due to the fact that, in the game, pokemon that fill the end of the pokedex are encountered at the victory road right before challenging the elite four and pokemon champion, so naturally, these will be better pokemon. If you are still sticking with generation four being thr strongest, these will be pokemon such as Garchomp and Metagross-- namely pseudolegendary pokemon for their extremely high stats, but for being naturally occuring pokemon and not associated with mythical origins. 
+
 
 #James
 
