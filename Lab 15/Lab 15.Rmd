@@ -42,6 +42,13 @@ Taking data from the equally famous video game franchise, we are wondering how e
 
 
 #Amanda (How does gender of a pokemon correlate with the quality of it?)
+
+Is there a significant difference between base totals of pokemon types that tend to be mostly female versus types that tend to be mostly male versus types that have a 50/50 chance of being either gender?
+
+This question is important in determining how to be the most successful in the game of Pokemon because when catching a Pokemon, a player would want Pokemon with a higher base total, because this means that it overall is better in defense, attack, speed, and other important components to how good of a character it is. Therefore, I want to see if there is a relationship between the likely gender of the Pokemon and how good of a Pokemon it tends to be. This question is also interesting in general in seeing if there is a significant difference in the base totals between genders because this would exemplify that all Pokemon are not created equal.
+
+![](Plots/AmandaPokemon.png) 
+
 ```{r, eval=FALSE}
 
 
@@ -85,7 +92,7 @@ perm_mean <- function(perms = 1000, values, n1)
 }
 meansF <- as_tibble(perm_mean(values = pokemon1, n1 = 53))
 meansM <- as_tibble(perm_mean(values = pokemon1, n1 = 149))
-meansB <- as_tibble(perm_mean(values= pokemon1, n1=501)
+meansB <- as_tibble(perm_mean(values = pokemon1, n1=501))
 
 summary(pokemonM)
 summary(pokemonF)
@@ -104,18 +111,22 @@ stdDB <- sqrt((sd(pokemonB$base_total))^2/length(pokemonB$base_total) + (sd(poke
 zScoreM <- realDiffM/stdDM
 zScoreF <- realDiffF/stdDF
 zScoreB <- realDiffB/stdDB
-zScoreM
-zScoreF
-zScoreB
+#zScoreM = 2.7992
+#zScoreF = -.37173
+#zScoreB = -1.1745
 
 # Plots
-ggplot()+geom_histogram(data=meansM, aes(x=value, fill = "lightblue", alpha=.2))+ geom_histogram(data=meansF, aes(x=value, fill = "lightpink", alpha = .2)) + geom_historgram(data=meansB, aes(x=value, fill= "lightgreen, alpha=.2")) +
+ggplot()+geom_histogram(data=meansM, aes(x=value, fill = "lightblue", alpha=.2))+ geom_histogram(data=meansF, aes(x=value, fill = "lightpink", alpha = .2)) + geom_histogram(data=meansB, aes(x=value, fill= "lightgreen", alpha=.2)) +
   xlab("Means")+
-  geom_vline(xintercept = realDiffF, color = "pink", size = .3)+ geom_vline(xintercept=realDiffM, color="blue", size = .3)+ geom_vline(xintercept=realDiffB, color= "green", size= .3)+
+  geom_vline(xintercept = realDiffF, color = "pink", size = .8)+ geom_vline(xintercept=realDiffM, color="blue", size = .8)+ geom_vline(xintercept=realDiffB, color= "green", size= .8)+
   ylab("Number")+
-  ggtitle("Difference in Means of Base Totals Based on Gender of Pokemon")
+  ggtitle("Difference in Means of Base Totals Based on Gender of Pokemon") + scale_fill_discrete(name = "Gender", labels = c("Mostly Female", "Equally Male and Female", "Mostly Male"))
 
 ```
+
+To create this graph, I first filtered my data to make it easier to read and analyze, only keeping the columns that I would using for the analysis of Pokemon. In my process, I was looking at how mean base totals compare based on the likely gender of Pokemon. The higher the base total, the better the Pokemon. Then, I split by data up based on gender, and did two-sample permutation tests for sample sizes equal to the number of mostly male Pokemon, number of mostly female Pokemon, and number of Pokemon who have a 50/50 chance of being each gender. This was done in order to see how far from average the mean base totals would be expected to be if a random sample were taken from the entire data, which is illustrated by the three normal-distributed histograms in the graph. I then calculated what the actual average distance in mean base total was for each gender and plotted these on the graph, with blue representing mostly males, pink representing mostly females, and green representing Pokemon that have a 50/50 chance of being born as either gender.
+
+From this graph, we can see that both mostly female Pokemon and Pokemon with an equal chance of being each gender have slightly smaller base totals than what would be expected if there were no correlation between gender and base total. However, for these two categories of Pokemon, there z-scores were -0.371 and -1.175, respectively. Since these are both less than two standard deviations away from the mean, these differences are most likely not statistically significant; therefore, we cannot say that these two categories of Pokemon would tend to be less than average. Therefore, in playing the game, a player should not be deterred from catching these kinds of Pokemon because they are not likely to be worse. On the other hand, Pokemon that are mostly male tend to have base totals that are higher than would be expected if there were no correlation between gender and base total. For the mostly male Pokemon, their z-score 2.799, meaning that there is a significant difference in the base totals of the mostly male Pokemon versus the rest of the Pokemon in the game. From this conclusion, if a player were to play the game, it is recommended that they would put more effort and value into catching Pokemon that tend to be male, because this will more likely end up in them having better Pokemon, thus being the best player possible.
 
 #Chris
 
