@@ -45,13 +45,75 @@ Taking data from the equally famous video game franchise, we are wondering how e
 ```{r, eval=FALSE}
 
 
-pokemon1 <- pokemon %>% select(name, pokedex_number, percentage_male, capture_rate, base_total, base_happiness) %>% mutate(g =ifelse(percentage_male >= 50, "M", ifelse(percentage_male < 50, "F", ifelse(percentage_male == NA, "N"))))
+pokemon1 <- pokemon %>% select(name, pokedex_number, percentage_male, capture_rate, base_total, base_happiness) %>% mutate(gender =ifelse(percentage_male > 50, "M", ifelse(percentage_male < 50, "F", ifelse(percentage_male==50, "B", ifelse(percentage_male == NA, "N"))))) %>% na.omit
 
-pokemon2 <- pokemon1 %>% filter(name=="Swinub")
+#Permutation Test
+pokemonF <- pokemon1 %>% filter(gender=="F")
 
-#view(pokemon1)
+pokemonM <- pokemon1 %>% filter(gender=="M")
 
-ggplot(data=pokemon1) + geom_col(aes(x=percentage_male, y=capture_rate))
+pokemonB <- pokemon1 %>% filter(gender=="B")
+
+
+pokemon1 <- pokemon1$base_total
+perm_mean <- function(perms = 1000, values, n1)
+{
+  p<-vector("double",1000)
+
+  for (i in c(1:perms))
+  {
+    
+    randomSamp<-sample(length(values),n1)
+    randomSamp2<-vector('integer',length(values))
+    g1<-values[randomSamp]
+    for(j in seq(1:length(values))) 
+    { 
+      if (is.element(j,randomSamp)==FALSE) randomSamp2[j]<-j 
+    }
+  
+    tf<-randomSamp2>0
+    randomSamp2<-randomSamp2[tf]
+    g2<-values[randomSamp2]
+    
+    g1_m<-mean(g1)
+    g2_m<-mean(g2)
+   
+    d<- g1_m - g2_m
+    p[i]<-d
+  }
+  return(p)
+}
+meansF <- as_tibble(perm_mean(values = pokemon1, n1 = 53))
+meansM <- as_tibble(perm_mean(values = pokemon1, n1 = 149))
+meansB <- as_tibble(perm_mean(values= pokemon1, n1=501)
+
+summary(pokemonM)
+summary(pokemonF)
+summary(pokemonB)
+summary(pokemon1)
+
+realDiffM <- mean(pokemonM$base_total)-mean(pokemon1)
+realDiffF <- mean(pokemonF$base_total)-mean(pokemon1)
+realDiffB <- mean(pokemonB$base_total)-mean(pokemon1)
+
+
+stdDM <- sqrt((sd(pokemonM$base_total))^2/length(pokemonM$base_total) + (sd(pokemon1))^2/length(pokemon1))
+stdDF <- sqrt((sd(pokemonF$base_total))^2/length(pokemonF$base_total) + (sd(pokemon1))^2/length(pokemon1))
+stdDB <- sqrt((sd(pokemonB$base_total))^2/length(pokemonB$base_total) + (sd(pokemon1))^2/length(pokemon1))
+
+zScoreM <- realDiffM/stdDM
+zScoreF <- realDiffF/stdDF
+zScoreB <- realDiffB/stdDB
+zScoreM
+zScoreF
+zScoreB
+
+# Plots
+ggplot()+geom_histogram(data=meansM, aes(x=value, fill = "lightblue", alpha=.2))+ geom_histogram(data=meansF, aes(x=value, fill = "lightpink", alpha = .2)) + geom_historgram(data=meansB, aes(x=value, fill= "lightgreen, alpha=.2")) +
+  xlab("Means")+
+  geom_vline(xintercept = realDiffF, color = "pink", size = .3)+ geom_vline(xintercept=realDiffM, color="blue", size = .3)+ geom_vline(xintercept=realDiffB, color= "green", size= .3)+
+  ylab("Number")+
+  ggtitle("Difference in Means of Base Totals Based on Gender of Pokemon")
 
 ```
 
