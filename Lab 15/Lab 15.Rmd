@@ -1,0 +1,215 @@
+<<<<<<< HEAD
+---
+title: "Lab 15"
+author: "Data Me Pls: Chris, James, Amanda, Anna"
+date: "April 19, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, eval=FALSE}
+library(tidyverse)
+library(dplyr)
+library(readxl)
+
+# The Whole Data
+pokemon <-read.csv(file= "pokemon.csv")
+
+# Easier to Read Data
+pokemonlite <-pokemon%>%
+  select(pokedex_number, name, type1, type2, generation, is_legendary)
+```
+
+# I WANT TO BE THE VERY BEST (like no one ever was)
+
+Our main question is how to be the best (like no one ever was). Like the famous theme song says:
+" I want to be the very best,
+Like no one ever was. 
+To catch them is my real test, #Catch Rate, Base Egg Steps
+To train them is my cause! #Exp Growth
+
+I will travel across the land, #Generation, Pokedex Number
+Searching far and wide. #Type
+Each Pokemon to understand #Classification, Happiness
+The power that's inside! #Base Total, Against_
+Pokemon! #Height, Weight
+Gotta catch em' all!"
+
+Taking data from the equally famous video game franchise, we are wondering how exactly a trainer can become the best (in the video games at least). Using the parameters set out in the original song (inclucding catch rate, type, power, happines, abilities, and much more), we seek to determine exactly what to do in order to be the very best.
+
+
+#Amanda (How does gender of a pokemon correlate with the quality of it?)
+
+Is there a significant difference between base totals of pokemon types that tend to be mostly female versus types that tend to be mostly male versus types that have a 50/50 chance of being either gender?
+
+This question is important in determining how to be the most successful in the game of Pokemon because when catching a Pokemon, a player would want Pokemon with a higher base total, because this means that it overall is better in defense, attack, speed, and other important components to how good of a character it is. Therefore, I want to see if there is a relationship between the likely gender of the Pokemon and how good of a Pokemon it tends to be. This question is also interesting in general in seeing if there is a significant difference in the base totals between genders because this would exemplify that all Pokemon are not created equal.
+
+![](Plots/AmandaPokemon.png) 
+
+```{r, eval=FALSE}
+
+
+pokemon1 <- pokemon %>% select(name, pokedex_number, percentage_male, capture_rate, base_total, base_happiness) %>% mutate(gender =ifelse(percentage_male > 50, "M", ifelse(percentage_male < 50, "F", ifelse(percentage_male==50, "B", ifelse(percentage_male == NA, "N"))))) %>% na.omit
+
+#Permutation Test
+pokemonF <- pokemon1 %>% filter(gender=="F")
+
+pokemonM <- pokemon1 %>% filter(gender=="M")
+
+pokemonB <- pokemon1 %>% filter(gender=="B")
+
+
+pokemon1 <- pokemon1$base_total
+perm_mean <- function(perms = 1000, values, n1)
+{
+  p<-vector("double",1000)
+
+  for (i in c(1:perms))
+  {
+    
+    randomSamp<-sample(length(values),n1)
+    randomSamp2<-vector('integer',length(values))
+    g1<-values[randomSamp]
+    for(j in seq(1:length(values))) 
+    { 
+      if (is.element(j,randomSamp)==FALSE) randomSamp2[j]<-j 
+    }
+  
+    tf<-randomSamp2>0
+    randomSamp2<-randomSamp2[tf]
+    g2<-values[randomSamp2]
+    
+    g1_m<-mean(g1)
+    g2_m<-mean(g2)
+   
+    d<- g1_m - g2_m
+    p[i]<-d
+  }
+  return(p)
+}
+meansF <- as_tibble(perm_mean(values = pokemon1, n1 = 53))
+meansM <- as_tibble(perm_mean(values = pokemon1, n1 = 149))
+meansB <- as_tibble(perm_mean(values = pokemon1, n1=501))
+
+summary(pokemonM)
+summary(pokemonF)
+summary(pokemonB)
+summary(pokemon1)
+
+realDiffM <- mean(pokemonM$base_total)-mean(pokemon1)
+realDiffF <- mean(pokemonF$base_total)-mean(pokemon1)
+realDiffB <- mean(pokemonB$base_total)-mean(pokemon1)
+
+
+stdDM <- sqrt((sd(pokemonM$base_total))^2/length(pokemonM$base_total) + (sd(pokemon1))^2/length(pokemon1))
+stdDF <- sqrt((sd(pokemonF$base_total))^2/length(pokemonF$base_total) + (sd(pokemon1))^2/length(pokemon1))
+stdDB <- sqrt((sd(pokemonB$base_total))^2/length(pokemonB$base_total) + (sd(pokemon1))^2/length(pokemon1))
+
+zScoreM <- realDiffM/stdDM
+zScoreF <- realDiffF/stdDF
+zScoreB <- realDiffB/stdDB
+#zScoreM = 2.7992
+#zScoreF = -.37173
+#zScoreB = -1.1745
+
+# Plots
+ggplot()+geom_histogram(data=meansM, aes(x=value, fill = "lightblue", alpha=.2))+ geom_histogram(data=meansF, aes(x=value, fill = "lightpink", alpha = .2)) + geom_histogram(data=meansB, aes(x=value, fill= "lightgreen", alpha=.2)) +
+  xlab("Means")+
+  geom_vline(xintercept = realDiffF, color = "pink", size = .8)+ geom_vline(xintercept=realDiffM, color="blue", size = .8)+ geom_vline(xintercept=realDiffB, color= "green", size= .8)+
+  ylab("Number")+
+  ggtitle("Difference in Means of Base Totals Based on Gender of Pokemon") + scale_fill_discrete(name = "Gender", labels = c("Mostly Female", "Equally Male and Female", "Mostly Male"))
+
+```
+
+To create this graph, I first filtered my data to make it easier to read and analyze, only keeping the columns that I would using for the analysis of Pokemon. In my process, I was looking at how mean base totals compare based on the likely gender of Pokemon. The higher the base total, the better the Pokemon. Then, I split by data up based on gender, and did two-sample permutation tests for sample sizes equal to the number of mostly male Pokemon, number of mostly female Pokemon, and number of Pokemon who have a 50/50 chance of being each gender. This was done in order to see how far from average the mean base totals would be expected to be if a random sample were taken from the entire data, which is illustrated by the three normal-distributed histograms in the graph. I then calculated what the actual average distance in mean base total was for each gender and plotted these on the graph, with blue representing mostly males, pink representing mostly females, and green representing Pokemon that have a 50/50 chance of being born as either gender.
+
+From this graph, we can see that both mostly female Pokemon and Pokemon with an equal chance of being each gender have slightly smaller base totals than what would be expected if there were no correlation between gender and base total. However, for these two categories of Pokemon, there z-scores were -0.371 and -1.175, respectively. Since these are both less than two standard deviations away from the mean, these differences are most likely not statistically significant; therefore, we cannot say that these two categories of Pokemon would tend to be less than average. Therefore, in playing the game, a player should not be deterred from catching these kinds of Pokemon because they are not likely to be worse. On the other hand, Pokemon that are mostly male tend to have base totals that are higher than would be expected if there were no correlation between gender and base total. For the mostly male Pokemon, their z-score 2.799, meaning that there is a significant difference in the base totals of the mostly male Pokemon versus the rest of the Pokemon in the game. From this conclusion, if a player were to play the game, it is recommended that they would put more effort and value into catching Pokemon that tend to be male, because this will more likely end up in them having better Pokemon, thus being the best player possible.
+
+#Chris
+
+#James
+
+#Anna (The power that's inside!)
+```{r, eval=FALSE}
+pokemonpwr <- pokemon%>%
+  select(pokedex_number, name, hp, attack, defense, speed, sp_attack, sp_defense, base_total)
+```
+=======
+---
+title: "Lab 15"
+author: "Data Me Pls: Chris, James, Amanda, Anna"
+date: "April 19, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, eval=FALSE}
+library(tidyverse)
+library(dplyr)
+library(readxl)
+
+# The Whole Data
+pokemon <-read.csv(file= "pokemon.csv")
+
+# Easier to Read Data
+pokemonlite <-pokemon%>%
+  select(pokedex_number, name, type1, type2, generation, is_legendary)
+```
+
+# I WANT TO BE THE VERY BEST (like no one ever was)
+
+Our main question is how to be the best (like no one ever was). Like the famous theme song says:
+" I want to be the very best,
+Like no one ever was. 
+To catch them is my real test, #Catch Rate, Base Egg Steps
+To train them is my cause! #Exp Growth
+
+I will travel across the land, #Generation, Pokedex Number
+Searching far and wide. #Type
+Each Pokemon to understand #Classification, Happiness
+The power that's inside! #Base Total, Against_
+Pokemon! #Height, Weight
+Gotta catch em' all!"
+
+Taking data from the equally famous video game franchise, we are wondering how exactly a trainer can become the best (in the video games at least). Using the paramters set out in the original song (inclucding catch rate, type, power, happines, abilities, and much more), we seek to determine exactly what to do in order to be the very best.
+
+
+https://bulbapedia.bulbagarden.net/wiki/Base_stats
+
+https://bulbapedia.bulbagarden.net/wiki/Catch_rate
+
+https://bulbapedia.bulbagarden.net/wiki/Friendship
+
+#Amanda 
+
+#Chris
+
+#James
+
+#Anna (The power that's inside!)
+```{r, eval=FALSE}
+pokemonpwr <- pokemon%>%
+  select(pokedex_number, name, hp, attack, defense, speed, sp_attack, sp_defense, base_total)
+```
+
+---
+
+#Reflections on Lab 2
+As a team, restate your team's goal(s) and reflect on how well you achieved it. If you could travel back in time, which is one thing you would tell your team to keep doing? Stop doing? Start doing? Discuss this as a team and add it as a section to your Final Project.
+
+Individually, write a paragraph reflecting on: how have your six-month or 5-year goals changed? What did you learn/accomplish in this course? If you could give yourself advice at the beginning of the semester, what would you tell yourself to keep doing, stop doing, and start doing?
+
+__Amanda:__
+
+__Chris:__
+
+__James:__
+
+__Anna:__
+>>>>>>> master
