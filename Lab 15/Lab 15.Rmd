@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ---
 title: "Lab 15"
 author: "Data Me Pls: Chris, James, Amanda, Anna"
@@ -25,24 +24,32 @@ pokemonlite <-pokemon%>%
 
 # I WANT TO BE THE VERY BEST (like no one ever was)
 
-Our main question is how to be the best (like no one ever was). Like the famous theme song says:
-" I want to be the very best,
-Like no one ever was. 
-To catch them is my real test, #Catch Rate, Base Egg Steps
-To train them is my cause! #Exp Growth
+## Main Question and Why this is Important
+Pokemon is a beloved franchise by many children and adults alike. As the franchise has grown from one video game in 1996, to now a multimedia monolith (including trading cards, movies, and a tv series), fans have been waiting in anticipation for the next game in the series, which was recently announced as Pokemon: Sword and Pokemon:Shield. Using data from the previous games (Red, Blue, Green, Yellow, Gold, Silver, Crystal, Ruby Sapphire, FireRed, LeafGreen, Emerald, Diamond, Pearl, Platinum, HeartGold, SoulSilver, Black, White, Black2, White2, X, Y, Omega Ruby, Alpha Sapphire, Sun, Moon, Ultra Sun, Ultra Moon, Let's G0 Eevee, Lets Go Pikachu), we wanted to create a list of recommendations to help become the very best (like no one ever was) in Sword and Shield.
 
-I will travel across the land, #Generation, Pokedex Number
-Searching far and wide. #Type
-Each Pokemon to understand #Classification, Happiness
-The power that's inside! #Base Total, Against_
-Pokemon! #Height, Weight
-Gotta catch em' all!"
+## Recomendations
+Based off of our individual findings, we each have come up with four statments regarding various pokemon stats on how to be the very best (like no one ever was).
 
-Taking data from the equally famous video game franchise, we are wondering how exactly a trainer can become the best (in the video games at least). Using the parameters set out in the original song (inclucding catch rate, type, power, happines, abilities, and much more), we seek to determine exactly what to do in order to be the very best.
+1.
 
+2.
 
-#Amanda (How does gender of a pokemon correlate with the quality of it?)
+3.
 
+4. Dragon and Steel Types are by far the most powerful on average and the new calculated epwr(an estimate for a pokemon's power based off of the highest attack stat and average Type effectiveness) can help estimate a pokemon's overall attack combat effectiveness. 
+
+## List of References:
+https://bulbapedia.bulbagarden.net/wiki/Base_stats
+
+https://bulbapedia.bulbagarden.net/wiki/Catch_rate
+
+https://bulbapedia.bulbagarden.net/wiki/Friendship
+
+https://bulbapedia.bulbagarden.net/wiki/Damage
+
+---
+
+# Amanda
 Is there a significant difference between base totals of pokemon types that tend to be mostly female versus types that tend to be mostly male versus types that have a 50/50 chance of being either gender?
 
 This question is important in determining how to be the most successful in the game of Pokemon because when catching a Pokemon, a player would want Pokemon with a higher base total, because this means that it overall is better in defense, attack, speed, and other important components to how good of a character it is. Therefore, I want to see if there is a relationship between the likely gender of the Pokemon and how good of a Pokemon it tends to be. This question is also interesting in general in seeing if there is a significant difference in the base totals between genders because this would exemplify that all Pokemon are not created equal.
@@ -192,83 +199,126 @@ Pokedex %>%
   ggtitle("Remaining pattern of 800th degree polynomial")
 ```
 
-Here we can see that, overall, the mean base stats for generations as a whole conclude that generation 4 possesses the strongest pokemon (in terms of overall stats). The generation with the overall weakest pokemon is generation 2. From the model fitting, we see that a linear model shows a increase in power from the pokemon at the start of the pokedex to those at the end, but when we look at the entire data, we see spikes at the beginning of the pokedex for each generation and the end of the pokedex for each generation. This means a linear model is not sufficient since it wont pick up these trends. For this reason, we also showed a 10th degree polynomial to fit the data. The model more accurately reflects the nature of the pokemon rank in the pokedex; however, when we look at the residuals for this model, we see large residuals. For this reason, we created an (impractical) 800th degree polynomial to model the pokedex. When we did this, we see the residuals are very small and dont have much of a trend at all, so we know our model accurately reflects the pokedex and the stats of those pokemon. From this analysis, we know that the pokemon at the beginning and end of the pokedex for each generation are the strongest. This would correlate to the starters and the legendaries of each generation. Overall, the legendary pokemon are stronger than the starters because, after all, they are legendary. With this analysis combined, we see that if you seek to be the very best trainer, you will want to have a team of starter and legendary pokemon from generation 4. If you seek to maximize stats, you will want a team of ALL legendary pokemon from genration 4, but based off of competitive pokemon rules, they ban legendaries, so solely based on max stats of a pokemon, you will want to use starters from generation four in their final evolutions (Torterra, Infernape, and Empoleon). If allowed to use legendaries, the data would reccomend to use legendaries such as Dialga, Palkia or Giritina. The data also conveys that pokemon colser to the end of the pokedex, but not the very end, are also have higher base stats. This is due to the fact that, in the game, pokemon that fill the end of the pokedex are encountered at the victory road right before challenging the elite four and pokemon champion, so naturally, these will be better pokemon. If you are still sticking with generation four being thr strongest, these will be pokemon such as Garchomp and Metagross-- namely pseudolegendary pokemon for their extremely high stats, but for being naturally occuring pokemon and not associated with mythical origins. 
+Here we can see that, overall, the mean base stats for generations as a whole conclude that generation 4 possesses the strongest pokemon (in terms of overall stats). The generation with the overall weakest pokemon is generation 2. From the model fitting, we see that a linear model shows a increase in power from the pokemon at the start of the pokedex to those at the end, but when we look at the entire data, we see spikes at the beginning of the pokedex for each generation and the end of the pokedex for each generation. This means a linear model is not sufficient since it wont pick up these trends. 
+
+For this reason, we also showed a 10th degree polynomial to fit the data. The model more accurately reflects the nature of the pokemon rank in the pokedex; however, when we look at the residuals for this model, we see large residuals. For this reason, we created an (impractical) 800th degree polynomial to model the pokedex. When we did this, we see the residuals are very small and dont have much of a trend at all, so we know our model accurately reflects the pokedex and the stats of those pokemon. 
+
+From this analysis, we know that the pokemon at the beginning and end of the pokedex for each generation are the strongest. This would correlate to the starters and the legendaries of each generation. Overall, the legendary pokemon are stronger than the starters because, after all, they are legendary. With this analysis combined, we see that if you seek to be the very best trainer, you will want to have a team of starter and legendary pokemon from generation 4. 
+
+If you seek to maximize stats, you will want a team of ALL legendary pokemon from genration 4, but based off of competitive pokemon rules, they ban legendaries, so solely based on max stats of a pokemon, you will want to use starters from generation four in their final evolutions (Torterra, Infernape, and Empoleon). 
+
+If allowed to use legendaries, the data would reccomend to use legendaries such as Dialga, Palkia or Giritina. The data also conveys that pokemon colser to the end of the pokedex, but not the very end, are also have higher base stats. This is due to the fact that, in the game, pokemon that fill the end of the pokedex are encountered at the victory road right before challenging the elite four and pokemon champion, so naturally, these will be better pokemon. 
+
+If you are still sticking with generation four being thr strongest, these will be pokemon such as Garchomp and Metagross-- namely pseudolegendary pokemon for their extremely high stats, but for being naturally occuring pokemon and not associated with mythical origins. 
 
 
-#James
-
-#Anna (The power that's inside!)
-```{r, eval=FALSE}
-pokemonpwr <- pokemon%>%
-  select(pokedex_number, name, hp, attack, defense, speed, sp_attack, sp_defense, base_total)
-```
-=======
----
-title: "Lab 15"
-author: "Data Me Pls: Chris, James, Amanda, Anna"
-date: "April 19, 2019"
-output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-```{r, eval=FALSE}
-library(tidyverse)
-library(dplyr)
-library(readxl)
-
-# The Whole Data
-pokemon <-read.csv(file= "pokemon.csv")
-
-# Easier to Read Data
-pokemonlite <-pokemon%>%
-  select(pokedex_number, name, type1, type2, generation, is_legendary)
-```
-
-# I WANT TO BE THE VERY BEST (like no one ever was)
-
-Our main question is how to be the best (like no one ever was). Like the famous theme song says:
-" I want to be the very best,
-Like no one ever was. 
-To catch them is my real test, #Catch Rate, Base Egg Steps
-To train them is my cause! #Exp Growth
-
-I will travel across the land, #Generation, Pokedex Number
-Searching far and wide. #Type
-Each Pokemon to understand #Classification, Happiness
-The power that's inside! #Base Total, Against_
-Pokemon! #Height, Weight
-Gotta catch em' all!"
-
-Taking data from the equally famous video game franchise, we are wondering how exactly a trainer can become the best (in the video games at least). Using the paramters set out in the original song (inclucding catch rate, type, power, happines, abilities, and much more), we seek to determine exactly what to do in order to be the very best.
-
-
-https://bulbapedia.bulbagarden.net/wiki/Base_stats
-
-https://bulbapedia.bulbagarden.net/wiki/Catch_rate
-
-https://bulbapedia.bulbagarden.net/wiki/Friendship
-
-#Amanda 
-
-#Chris
+Generation | Average Base Total
+-----------|--------------------
+1          |416.2517
+2          |413.1800
+3          |420.0222
+4          |451.1776
+5          |427.0385
+6          |437.6111
+7          |448.1625
 
 #James
 
-#Anna (The power that's inside!)
+#Anna
+My main question deals with which pokemon are the strongest in terms of total stats (base_total column) and how to predict if a certain Type (or Types) is likely to have a higher chance of having larget total stats.
+
 ```{r, eval=FALSE}
 pokemonpwr <- pokemon%>%
-  select(pokedex_number, name, hp, attack, defense, speed, sp_attack, sp_defense, base_total)
+  select(pokedex_number, type1, type2, name, hp, attack, defense, speed, sp_attack, sp_defense, base_total,is_legendary)
+
+poketype1 <- pokemonpwr%>%
+  group_by(type1)%>%
+  summarise(mean= mean(base_total), n=n(), sum=sum(base_total))
+
+poketype2 <- pokemonpwr%>%
+  group_by(type2)%>%
+  summarise(mean= mean(base_total), n=n(), sum=sum(base_total))
+
+pokeff <- pokemon%>%
+  select(name, attack, sp_attack, against_bug, against_dark, against_dragon, against_electric, against_fairy, against_fight, against_fire, against_flying, against_ghost, against_grass, against_ground, against_ice, against_normal, against_poison, against_psychic, against_rock, against_steel, against_water)%>%
+  mutate(eff= (against_bug+ against_dark+ against_dragon+ against_electric+ against_fairy+ against_fight+ against_fire+ against_flying+ against_ghost+ against_grass+ against_ground+ against_ice+ against_normal+ against_poison+ against_psychic+ against_rock+ against_steel+ against_water)/(18))
+
+pokeff2 <- pokeff%>%    # I used a recently learned function apply() to pick the highest value in a row
+  mutate(attackh= apply(pokeff[,2:22], 1, max))
+
+pokeff3 <- pokeff2%>%
+  mutate(epwr= attackh*eff) #Expected Power (for comparison, not acutall calculation)
+
+ggplot()+
+  geom_point(poketype1, mapping=aes(x=type1, y=`mean`, size=n, color="Type 1"))+
+  geom_point(poketype2, mapping=aes(x=type2, y=`mean`, size=n, color="Type 2"))+
+  labs(x= "Type", y= "Mean Base Power", title= "Mean Base Power and Type (Type 1= Red, Type 2= Blue)")+
+  theme(legend.position= "none")+
+  scale_x_discrete(labels= abbreviate)
+  scale_x_discrete(breaks=c("", "bug", "dark", "dragon", "electric", "fairy", "fighting", "fire", "flying", "ghost", "grass", "ground", "ice", "normal", "poison", "psychic", "rock", "steel", "water"))
 ```
+![](Plots/Anna's Plot.png)
+
+The plot above helps visualize the mean (or average) base power for each type (the names have been shortened). As you can see, the Dragon (drgn) and Steel (stel) Types have the highest mean base power for pokemon with either as their first or second type. We can also see that the worst types on average for base power are Bug (by a large margin) and Poison. 
+
+The top four pokemon with the highest total stats:
+
+Name      |Total Stat
+----------|----------
+Mewtwo    |780
+Rayquaza  |780
+Kyogre    |760
+Groudon   |760
+
+Top three non-legendary pokemon with the highest total stats:
+
+Name      |Total Stat
+----------|----------
+Tyranitar |700
+Salamence |700
+Metagross |700
+
+Top three first type with the highest average total stats:
+
+Type      |Average Total Stat
+----------|-------------------
+Dragon    |522.7778
+Steel     |491.5833
+Psychic   |461.2642
+
+Top three second type with the highest average total stats:
+
+Type      |Average Total Stat
+----------|-------------------
+Fighting  |522.7778
+Dragon    |497.4706
+Steel     |495.9545
+
+Top pokemon for epwr:
+
+Pokemon   |Epwr
+----------|-----------
+Heracross |220.9722
+Mewtwo    |215.5556
+Tyranitar |209.5556
+Kyurem    |203.0556
+Rayquaza  |202.5000
+
+In pokeff3, I created a new column that multiplied the highest attack value (attack or sp_attack) with an average calculation of the attack multiplier for type. This new value epwr only takes into account attack and type multipliers, but it still is a good base measurement of power vs. any pokemon of any type on average. Higher numbers for this statistic relate to overall attack power as attack is calculated by multiplying both attack/sp_attack (based on what type of move the pokemon uses) and the type modifier. I thought of multiplying the type effectivness against by the amount of pokemon of that type to get a weighted average, but decided since we do not yet know the distribution of new pokemon and their types, it would be better to not (as the ratio might change). 
+
+From this data, we can conclude that one should catch any pokemon that are Dragon and Steel type, regardless if it is the pokemon's first or second type. We can also conclude that legendary pokemon are in fact more powerful than any non-legendary pokemon. Lastly, the new column can help predict how well an older generation pokemon will do in battle, but is not an exact estimate due to other factors (e.g. level, defense, move power). 
 
 ---
 
 #Reflections on Lab 2
-As a team, restate your team's goal(s) and reflect on how well you achieved it. If you could travel back in time, which is one thing you would tell your team to keep doing? Stop doing? Start doing? Discuss this as a team and add it as a section to your Final Project.
 
-Individually, write a paragraph reflecting on: how have your six-month or 5-year goals changed? What did you learn/accomplish in this course? If you could give yourself advice at the beginning of the semester, what would you tell yourself to keep doing, stop doing, and start doing?
+__Our Team Goal:__ Our goal for the semester is to learn the basics of R programming.
+
+I think we all achieved this goal. I think we also worked very well as a team this semester and were able to get all of the labs completed and to a high caliber. 
+
+![](Plots/us.jpg)
+
+Indiviual Reflections:
 
 __Amanda:__
 
@@ -276,5 +326,4 @@ __Chris:__
 
 __James:__
 
-__Anna:__
->>>>>>> master
+__Anna:__ My six-month and 5-year goals have not changed much. I am still a poor college student with at least $10,000 in debt, so I need to pay that off. I learned about r in this calss so I can be more competitive for internships. If I could give myself advice, I would tell myself to not take Intro to Probability because I am not doing so well in this. I would also tell myself to go eat more at the C4C because I found that there is a lot of good food there in the afternoons. I would tell myself to keep hope alive for Animal Crossing, even though there has been no news.
