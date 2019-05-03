@@ -34,7 +34,7 @@ Based off of our individual findings, we each have come up with four statments r
 
 2.
 
-3.
+3. Pokemon types that are more likely to be male have significantly better base totals, meaning that in essence, they are superior to the other Pokemon. Therefore, in order to try to be the best player out there, it is recommended that the player puts an emphasis on catching these Pokemon type.
 
 4. Dragon and Steel Types are by far the most powerful on average and the new calculated epwr(an estimate for a pokemon's power based off of the highest attack stat and average Type effectiveness) can help estimate a pokemon's overall attack combat effectiveness. 
 
@@ -320,7 +320,7 @@ I think we all achieved this goal. I think we also worked very well as a team th
 
 Indiviual Reflections:
 
-__Amanda:__
+__Amanda:__ My six-month and five-year goals are still pretty much the same as the beginning of the year. I want to celebrate my graduation by travelling out of the country since I never have before, and I have no idea what I want as a career after college but I just hope that I am happy and successful. If I could give myself advice from this year, it would be to use linear models more and be more assertive about talking to professors. I would also tell myself to put myself over others sometimes and take care of myself.
 
 __Chris:__
 
