@@ -23,6 +23,7 @@ pokemonlite <-pokemon%>%
 ```
 
 # I WANT TO BE THE VERY BEST (like no one ever was)
+Data taken from https://www.kaggle.com/rounakbanik/pokemon
 
 ## Main Question and Why this is Important
 Pokemon is a beloved franchise by many children and adults alike. As the franchise has grown from one video game in 1996, to now a multimedia monolith (including trading cards, movies, and a tv series), fans have been waiting in anticipation for the next game in the series, which was recently announced as Pokemon: Sword and Pokemon:Shield. Using data from the previous games (Red, Blue, Green, Yellow, Gold, Silver, Crystal, Ruby Sapphire, FireRed, LeafGreen, Emerald, Diamond, Pearl, Platinum, HeartGold, SoulSilver, Black, White, Black2, White2, X, Y, Omega Ruby, Alpha Sapphire, Sun, Moon, Ultra Sun, Ultra Moon, Let's G0 Eevee, Lets Go Pikachu), we wanted to create a list of recommendations to help become the very best (like no one ever was) in Sword and Shield.
