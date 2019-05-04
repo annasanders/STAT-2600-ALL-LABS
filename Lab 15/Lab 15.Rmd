@@ -23,7 +23,6 @@ pokemonlite <-pokemon%>%
 ```
 
 # I WANT TO BE THE VERY BEST (like no one ever was)
-Data taken from https://www.kaggle.com/rounakbanik/pokemon
 
 ## Main Question and Why this is Important
 Pokemon is a beloved franchise by many children and adults alike. As the franchise has grown from one video game in 1996, to now a multimedia monolith (including trading cards, movies, and a tv series), fans have been waiting in anticipation for the next game in the series, which was recently announced as Pokemon: Sword and Pokemon:Shield. Using data from the previous games (Red, Blue, Green, Yellow, Gold, Silver, Crystal, Ruby Sapphire, FireRed, LeafGreen, Emerald, Diamond, Pearl, Platinum, HeartGold, SoulSilver, Black, White, Black2, White2, X, Y, Omega Ruby, Alpha Sapphire, Sun, Moon, Ultra Sun, Ultra Moon, Let's G0 Eevee, Lets Go Pikachu), we wanted to create a list of recommendations to help become the very best (like no one ever was) in Sword and Shield.
@@ -33,7 +32,7 @@ Based off of our individual findings, we each have come up with four statments r
 
 1.
 
-2.
+2. If one wants to survive a hypothetical World War III situation, it's best to choose the pokemon Latias. If Latias isn't available, it's advised to choose a pokemon that is either a dragon or flying type, with great defensive stats. 
 
 3. Pokemon types that are more likely to be male have significantly better base totals, meaning that in essence, they are superior to the other Pokemon. Therefore, in order to try to be the best player out there, it is recommended that the player puts an emphasis on catching these Pokemon type.
 
@@ -208,7 +207,7 @@ From this analysis, we know that the pokemon at the beginning and end of the pok
 
 If you seek to maximize stats, you will want a team of ALL legendary pokemon from genration 4, but based off of competitive pokemon rules, they ban legendaries, so solely based on max stats of a pokemon, you will want to use starters from generation four in their final evolutions (Torterra, Infernape, and Empoleon). 
 
-If allowed to use legendaries, the data would reccomend to use legendaries such as Dialga, Palkia or Giritina. The data also conveys that pokemon colser to the end of the pokedex, but not the very end, are also have higher base stats. This is due to the fact that, in the game, pokemon that fill the end of the pokedex are encountered at the victory road right before challenging the elite four and pokemon champion, so naturally, these will be better pokemon. 
+If allowed to use legendaries, the data would reccomend to use legendaries such as Dialga, Palkia or Giritina. The data also conveys that pokemon closer to the end of the pokedex, but not the very end, are also have higher base stats. This is due to the fact that, in the game, pokemon that fill the end of the pokedex are encountered at the victory road right before challenging the elite four and pokemon champion, so naturally, these will be better pokemon. 
 
 If you are still sticking with generation four being thr strongest, these will be pokemon such as Garchomp and Metagross-- namely pseudolegendary pokemon for their extremely high stats, but for being naturally occuring pokemon and not associated with mythical origins. 
 
@@ -224,7 +223,23 @@ Generation | Average Base Total
 7          |448.1625
 
 #James
+My analysis will be based on the question: If World War III starts, what is the best legendary pokemon to have at your side? There are many different ways and arguments that can be made for the best pokemon, but I will mostly be looking at which pokemon gives you the best chance at survival. The first thing that I believe is important is ruling out pokemon that have no base happiness. One shouldn't want a pokemon that doesn't care about them by their side. With that said, I limited my selection to pokemon with base happiness greater than 0. Now to survive this hypothetical battle, there are several categories that I will mainly focus on. They are defense, special defense, hp, and speed. Also, legendaries that are a flying or dragon type are considered important. In terms of prioritization, defense and special defense will be the most important, speed and whether they can fly are second, and hp will be the least prioritized. The reasoning behind this ranking is that one should want a legendary that can defend you and themself against anything, and one that can escape at will. The metric of this arbitrary prioritization will be given by the equation m = (defense + sp_defense) + (2/3)(speed + 100(if fly)) + (1/3)(hp). Under this ranking, the top five legendaries to use are Latias, Latios, Articuno, Regirock, and Regice. 
 
+Name     | Metric
+---------|-------
+Latias   |443.333
+Latios   |393.333
+Articuno |385.000
+Regirock |360.000
+Regice   |360.000
+
+This table is interesting because the first three can fly, but the last two can't, which implies that they have great defensive stats. I decided to look at the total defense versus speed to see if there was any correlation. 
+![](Plots/james_plot1.png)
+As one can see, there is a strong negative correlation between speed and total defense. Below are the residuals for the linear model. 
+![](Plots/james_plot2.png)
+Having established this linear relationship between defense and speed, I wanted to take a sharper look at the averages for my metric depending on whether the legendaries could fly. What I found was that the average value of the metric was 363 and 300 for pokemon that could and couldn't fly respectfully. To see if the difference of 63 was significant or not, I performed a permutation test. 
+![](Plots/james_plot3.png)
+As one can see, this difference of 63 between flying and non-flying legendaries is statistically significant. 
 #Anna
 My main question deals with which pokemon are the strongest in terms of total stats (base_total column) and how to predict if a certain Type (or Types) is likely to have a higher chance of having larget total stats.
 
@@ -325,6 +340,6 @@ __Amanda:__ My six-month and five-year goals are still pretty much the same as t
 
 __Chris:__
 
-__James:__
+__James:__ I got into graduate school! My five-year goals have stayed the same. In this class I learned a lot about R and the tidyverse. I found that all the dplyr functions to be VERY useful and now I see the strenght of R as a programming language. I have no advice for myself at the beginning of the semester. If I could tell myself something, I would say to keep working hard and don't put so much pressure on yourself.  
 
 __Anna:__ My six-month and 5-year goals have not changed much. I am still a poor college student with at least $10,000 in debt, so I need to pay that off. I learned about r in this calss so I can be more competitive for internships. If I could give myself advice, I would tell myself to not take Intro to Probability because I am not doing so well in this. I would also tell myself to go eat more at the C4C because I found that there is a lot of good food there in the afternoons. I would tell myself to keep hope alive for Animal Crossing, even though there has been no news.
